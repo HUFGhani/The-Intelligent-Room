@@ -1,0 +1,163 @@
+package controllers;
+
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import sensors.GeneralPhidSensor;
+import utils.ServerComs;
+
+import com.phidgets.InterfaceKitPhidget;
+import com.phidgets.PhidgetException;
+import com.phidgets.event.AttachEvent;
+import com.phidgets.event.AttachListener;
+import com.phidgets.event.DetachEvent;
+import com.phidgets.event.DetachListener;
+import com.phidgets.event.ErrorEvent;
+import com.phidgets.event.ErrorListener;
+import com.phidgets.event.InputChangeEvent;
+import com.phidgets.event.InputChangeListener;
+import com.phidgets.event.OutputChangeEvent;
+import com.phidgets.event.OutputChangeListener;
+import com.phidgets.event.SensorChangeEvent;
+import com.phidgets.event.SensorChangeListener;
+
+public class SensorInterfaceKit implements SensorChangeListener, InputChangeListener, AttachListener, DetachListener,
+		ErrorListener, OutputChangeListener {
+	InterfaceKitPhidget phidget = new InterfaceKitPhidget();
+	
+	int prevLightVal = 0;
+
+	public SensorInterfaceKit() throws PhidgetException {
+		try {
+			phidget.addAttachListener(this);
+			phidget.addDetachListener(this);
+			phidget.addSensorChangeListener(this);
+			phidget.addInputChangeListener(this);
+			phidget.openAny();
+
+			// Wait until InterfaceKit is attached
+			phidget.waitForAttachment();
+
+			System.out.println(phidget.getDeviceType());
+			System.out.println("Serial Number " + phidget.getSerialNumber());
+			System.out.println("Device Version " + phidget.getDeviceVersion());
+
+			int counter =0;
+			while (true) {
+				// Constant loop, pause for one second
+				Thread.sleep(1000);
+				if(counter < 60){
+					updateSensorValues();
+				}else{
+					counter = 0;
+					sendToServer();
+				}
+			}
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} finally {
+			phidget.close();
+			System.out.println("Closed and exiting...");
+		}
+
+	}
+	
+	public static void sendToServer(){
+		// Update array list of sensor objects for each sensor
+	}
+	
+	public static void updateSensorValues(){
+		// Update array list of sensor data for each sensor
+	}
+
+	public static GeneralPhidSensor getSensorValues(InterfaceKitPhidget phidget) {
+		try {
+			// 0=Motion 1=Light Sensor 2=Touch
+			HashMap map = new HashMap<>();
+			
+			
+			for (int i = 0; i < 3; i++) {
+				switch (i) {
+				case 0:
+					break;
+				case 1:
+					break;
+				case 2:
+					break;
+				default:
+					break;
+				}
+			}
+			int motionSensor = phidget.getSensorValue(0);
+			int lightSensor = phidget.getSensorValue(1);
+			int touchSensor = phidget.getSensorValue(2);
+
+		} catch (PhidgetException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
+	public static String sendToServer(GeneralPhidSensor sensor) {
+		GeneralPhidSensor sensorData = new GeneralPhidSensor(sensor);
+		ServerComs serverconnection = new ServerComs();
+
+		return serverconnection.sendGet(sensor);
+	}
+
+	public static String sendToServer(String sensorName, String sensorId, String sensorValue) {
+		GeneralPhidSensor sensor = new GeneralPhidSensor(sensorName, sensorValue, sensorId,
+				new Timestamp(System.currentTimeMillis()));
+		ServerComs serverconnection = new ServerComs();
+		return serverconnection.sendGet(sensor);
+
+	}
+
+	@Override
+	public void outputChanged(OutputChangeEvent arg0) {
+	}
+
+	@Override
+	public void error(ErrorEvent arg0) {
+	}
+
+	@Override
+	public void detached(DetachEvent arg0) {
+
+	}
+
+	@Override
+	public void attached(AttachEvent arg0) {
+	}
+
+	@Override
+	public void inputChanged(InputChangeEvent arg0) {
+	}
+
+	@Override
+	public void sensorChanged(SensorChangeEvent arg0) {
+		// If the index is 2 then the touch sensor has changed
+		if (arg0.getIndex() == 2){
+			// Create GeneralPhidSensor Object and send to server
+			GeneralPhidSensor sensor = new GeneralPhidSensor("touchSensor", String.valueOf(arg0.getValue()), "ID",
+					new Timestamp(System.currentTimeMillis()));
+			// Generate JSON
+			
+			// Create MQTT Client and send JSON to broker
+			
+		}
+	}
+
+	public static void main(String[] args) throws PhidgetException {
+		new SensorInterfaceKit();
+	}
+
+}
