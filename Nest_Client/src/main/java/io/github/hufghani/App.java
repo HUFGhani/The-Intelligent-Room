@@ -17,15 +17,13 @@ public class App {
 
         for (;;){
             try {
-                Thread.sleep(10000);
                 nest_publish.publish(nestService.getAllString());
-
+                nest_subscribe.subscribe();
+                Thread.sleep(6000);
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
 
     }
-
-
 }
