@@ -3,8 +3,13 @@ package io.github.hufghani.mqtt;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
+
 /**
  * Created by hamzaghani on 13/02/2017.
+ */
+
+/*
+TODO add the config file here
  */
 public class Nest_Subscribe implements MqttCallback{
     String topic        = "mqtt Examples";
@@ -33,9 +38,14 @@ public class Nest_Subscribe implements MqttCallback{
         System.out.println("connection has be lost");
     }
 
+    /*
+    TODO add JSON parser here when payload arrives and pass it ot the set temperature method.
+     */
+
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         System.out.println(new String(mqttMessage.getPayload()));
+
 
     }
 
