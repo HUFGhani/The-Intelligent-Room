@@ -1,4 +1,4 @@
-package io.github.hufghani.MQTT;
+package io.github.hufghani.mqtt;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
@@ -11,10 +11,10 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
  */
 public class Nest_Publish {
 
-    String topic        = "MQTT Examples";
+    String topic        = "mqtt Examples";
     int qos             = 2;
     String broker       = "tcp://localhost:1883";
-    String clientId     = "Nest";
+    String clientId     = "nest";
     MemoryPersistence persistence = new MemoryPersistence();
 
     public Nest_Publish() {

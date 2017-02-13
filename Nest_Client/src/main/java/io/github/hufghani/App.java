@@ -1,8 +1,8 @@
 package io.github.hufghani;
 
-import io.github.hufghani.MQTT.Nest_Publish;
-import io.github.hufghani.MQTT.Nest_Subscribe;
-import io.github.hufghani.Nest.NestService;
+import io.github.hufghani.mqtt.Nest_Publish;
+import io.github.hufghani.mqtt.Nest_Subscribe;
+import io.github.hufghani.nest.NestService;
 
 public class App {
 

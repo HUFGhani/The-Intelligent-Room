@@ -1,4 +1,4 @@
-package io.github.hufghani.Nest;
+package io.github.hufghani.nest;
 
 import org.codehaus.jackson.annotate.*;
 

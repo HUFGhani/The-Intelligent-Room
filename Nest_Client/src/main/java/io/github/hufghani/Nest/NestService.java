@@ -1,4 +1,4 @@
-package io.github.hufghani.Nest;
+package io.github.hufghani.nest;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
