@@ -1,4 +1,4 @@
-package io.github.hufghani;
+package io.github.hufghani.MQTT;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
