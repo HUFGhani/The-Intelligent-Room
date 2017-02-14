@@ -59,6 +59,7 @@
         </configuration>
       </plugin>
 
+
       <!-- Make this jar executable -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
