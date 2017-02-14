@@ -1,4 +1,4 @@
-package io.github.hufghani;
+package io.github.hufghani.philips.hue;
 
 import com.philips.lighting.hue.sdk.PHAccessPoint;
 import com.philips.lighting.hue.sdk.PHHueSDK;

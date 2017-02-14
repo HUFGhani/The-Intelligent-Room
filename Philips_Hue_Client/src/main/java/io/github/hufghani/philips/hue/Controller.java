@@ -1,6 +1,7 @@
-package io.github.hufghani;
+package io.github.hufghani.philips.hue;
 
 import com.philips.lighting.hue.sdk.*;
+import com.philips.lighting.hue.sdk.utilities.PHUtilities;
 import com.philips.lighting.model.*;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public class Controller {
     private Controller instance;
     private List<PHLight> allLights;
     private PHLightState lightState = new PHLightState();
+    String lightIdentifer;
 
     public Controller() {
         this.phHueSDK = PHHueSDK.getInstance();
@@ -21,7 +23,6 @@ public class Controller {
         connectToLastKnownAccessPoint();
 
     }
-
 
 
     public void findBridges() {
@@ -35,12 +36,104 @@ public class Controller {
     }
 
     private boolean connectToLastKnownAccessPoint() {
+/*        String username = HueProperties.getUsername();
+        String lastIpAddress =  HueProperties.getLastConnectedIP();
 
+        if (username==null || lastIpAddress == null) {
+            System.out.println("Missing Last Username or Last IP.  Last known connection not found.");
+            return false;
+        }
+        PHAccessPoint accessPoint = new PHAccessPoint();
+        accessPoint.setIpAddress(lastIpAddress);
+        accessPoint.setUsername(username);
+        phHueSDK.connect(accessPoint);*/
 
         return true;
     }
 
 
+    private Boolean checkRedValue(int red) {
+        if (red >= 0 && red <= 255) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private Boolean checkGreenValue(int green) {
+
+        if (green >= 0 && green <= 255) {
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private Boolean checkBlueValue(int blue) {
+
+        if (blue >= 0 && blue <= 255) {
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean checkBrighnessValue(int bri) {
+
+        if (bri >= 0 && bri <= 255) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean checkSaturationValue(int bri) {
+
+        if (bri >= 0 && bri <= 255) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public void setLight(int red, int green, int blue, int bri, int sat, Boolean isOnorOff) {
+        PHBridge bridge = phHueSDK.getSelectedBridge();
+        allLights = bridge.getResourceCache().getAllLights();
+        lightIdentifer = allLights.get(0).getIdentifier();
+
+        if (checkRedValue(red) == true &&
+                checkGreenValue(green) == true &&
+                checkBlueValue(blue) == true &&
+                checkBrighnessValue(bri) == true &&
+                checkSaturationValue(sat) == true &&
+                isOnorOff == true ) {
+
+            lightState.setOn(isOnorOff);
+            float xy[] = PHUtilities.calculateXYFromRGB(red, green, blue, null);
+            lightState.setX(xy[0]);
+            lightState.setY(xy[1]);
+            lightState.setBrightness(bri);
+            lightState.setSaturation(sat);
+
+        }else if(isOnorOff == false){
+            lightState.setOn(isOnorOff);
+        }
+        phHueSDK.getSelectedBridge().updateLightState(lightIdentifer, lightState, null);    // null is passed here as we are not interested in the response from the Bridge.
+    }
+
+
+    public String getStatus(){
+        String json = null;
+
+        boolean onOff = lightState.isOn();
+
+
+
+        return json;
+    }
 
     private PHSDKListener listener = new PHSDKListener() {
 
@@ -108,7 +201,6 @@ public class Controller {
             }
         }
     };
-
 
 
 }
