@@ -11,7 +11,7 @@ import java.io.IOException;
 public class HueProperties {
 
     private static String fileDirPath = "/etc/home-automation/ha.config";
-    static HueConfig hueConfig;
+    static HueConfigProperties hueConfigProperties;
 
 
     public HueProperties() {
@@ -19,20 +19,20 @@ public class HueProperties {
     }
 
     public static String getUsername() {
-        return hueConfig.getUsersname();
+        return hueConfigProperties.getUsersname();
     }
 
     public static void storeUsername(String username) {
-        hueConfig.setUsersname(username);
+        hueConfigProperties.setUsersname(username);
         saveProperties();
     }
 
     public static String getLastConnectedIP() {
-        return hueConfig.getHueLightIP();
+        return hueConfigProperties.getHueLightIP();
     }
 
     public static void storeLastIPAddress(String ipAddress) {
-        hueConfig.setHueLightIP(ipAddress);
+        hueConfigProperties.setHueLightIP(ipAddress);
         saveProperties();
     }
 
@@ -40,7 +40,7 @@ public class HueProperties {
         ObjectMapper mapper = new ObjectMapper();
         try {
             if (new File(fileDirPath).exists()) {
-                  hueConfig = mapper.readValue(new File(fileDirPath), HueConfig.class);
+                  hueConfigProperties = mapper.readValue(new File(fileDirPath), HueConfigProperties.class);
             }else{
                 saveProperties();
             }
@@ -53,7 +53,7 @@ public class HueProperties {
         ObjectMapper mapper = new ObjectMapper();
         try {
             if (new File(fileDirPath).exists()) {
-                mapper.writerWithDefaultPrettyPrinter().writeValue(new File(fileDirPath), HueConfig.class);
+                mapper.writerWithDefaultPrettyPrinter().writeValue(new File(fileDirPath), HueConfigProperties.class);
             }
         } catch (IOException e) {
             e.printStackTrace();
