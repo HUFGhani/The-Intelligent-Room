@@ -3,6 +3,7 @@ package io.github.hufghani.philips.hue;
 import com.philips.lighting.hue.sdk.*;
 import com.philips.lighting.hue.sdk.utilities.PHUtilities;
 import com.philips.lighting.model.*;
+import io.github.hufghani.philips.hue.properties.HueProperties;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
@@ -43,7 +44,7 @@ public class Controller {
     }
 
     private boolean connectToLastKnownAccessPoint() {
-/*        String username = HueProperties.getUsername();
+      String username = HueProperties.getUsername();
         String lastIpAddress =  HueProperties.getLastConnectedIP();
 
         if (username==null || lastIpAddress == null) {
@@ -53,7 +54,7 @@ public class Controller {
         PHAccessPoint accessPoint = new PHAccessPoint();
         accessPoint.setIpAddress(lastIpAddress);
         accessPoint.setUsername(username);
-        phHueSDK.connect(accessPoint);*/
+        phHueSDK.connect(accessPoint);
 
         return true;
     }
@@ -150,18 +151,14 @@ public class Controller {
 
         @Override
         public void onBridgeConnected(PHBridge bridge, String username) {
+
             phHueSDK.setSelectedBridge(bridge);
             phHueSDK.enableHeartbeat(bridge, PHHueSDK.HB_INTERVAL);
 
             String lastIpAddress = bridge.getResourceCache().getBridgeConfiguration().getIpAddress();
-           /* HueProperties.storeUsername(username);
+            HueProperties.storeUsername(username);
             HueProperties.storeLastIPAddress(lastIpAddress);
             HueProperties.saveProperties();
-.
-            System.out.println(lastIpAddress);
-            System.out.println(username);
-
-            LetStart();*/
 
         }
 
