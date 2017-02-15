@@ -3,7 +3,9 @@ package io.github.hufghani.philips.hue;
 import com.philips.lighting.hue.sdk.*;
 import com.philips.lighting.hue.sdk.utilities.PHUtilities;
 import com.philips.lighting.model.*;
+import org.codehaus.jackson.map.ObjectMapper;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -15,15 +17,20 @@ public class Controller {
     private List<PHLight> allLights;
     private PHLightState lightState = new PHLightState();
     String lightIdentifer;
+    ObjectMapper mapper = new ObjectMapper();
+
 
     public Controller() {
         this.phHueSDK = PHHueSDK.getInstance();
         this.instance = this;
 
-        connectToLastKnownAccessPoint();
+        if (!connectToLastKnownAccessPoint()){
+            findBridges();
+        }else{
+            connectToLastKnownAccessPoint();
+        }
 
     }
-
 
     public void findBridges() {
         phHueSDK = PHHueSDK.getInstance();
@@ -53,63 +60,36 @@ public class Controller {
 
 
     private Boolean checkRedValue(int red) {
-        if (red >= 0 && red <= 255) {
-            return true;
-        } else {
-            return false;
-        }
+        return red >= 0 && red <= 255;
     }
 
     private Boolean checkGreenValue(int green) {
-
-        if (green >= 0 && green <= 255) {
-
-            return true;
-        } else {
-            return false;
-        }
+        return green >= 0 && green <= 255;
     }
 
     private Boolean checkBlueValue(int blue) {
-
-        if (blue >= 0 && blue <= 255) {
-
-            return true;
-        } else {
-            return false;
-        }
+        return blue >= 0 && blue <= 255;
     }
 
     private boolean checkBrighnessValue(int bri) {
-
-        if (bri >= 0 && bri <= 255) {
-            return true;
-        } else {
-            return false;
-        }
+        return bri >= 0 && bri <= 255;
     }
 
-    private boolean checkSaturationValue(int bri) {
-
-        if (bri >= 0 && bri <= 255) {
-            return true;
-        } else {
-            return false;
-        }
+    private boolean checkSaturationValue(int sat) {
+        return sat >= 0 && sat <= 255;
     }
-
 
     public void setLight(int red, int green, int blue, int bri, int sat, Boolean isOnorOff) {
         PHBridge bridge = phHueSDK.getSelectedBridge();
         allLights = bridge.getResourceCache().getAllLights();
         lightIdentifer = allLights.get(0).getIdentifier();
 
-        if (checkRedValue(red) == true &&
-                checkGreenValue(green) == true &&
-                checkBlueValue(blue) == true &&
-                checkBrighnessValue(bri) == true &&
-                checkSaturationValue(sat) == true &&
-                isOnorOff == true ) {
+        if (checkRedValue(red) &&
+                checkGreenValue(green) &&
+                checkBlueValue(blue) &&
+                checkBrighnessValue(bri) &&
+                checkSaturationValue(sat) &&
+                isOnorOff) {
 
             lightState.setOn(isOnorOff);
             float xy[] = PHUtilities.calculateXYFromRGB(red, green, blue, null);
@@ -118,21 +98,39 @@ public class Controller {
             lightState.setBrightness(bri);
             lightState.setSaturation(sat);
 
-        }else if(isOnorOff == false){
+        } else if (isOnorOff == false) {
             lightState.setOn(isOnorOff);
         }
-        phHueSDK.getSelectedBridge().updateLightState(lightIdentifer, lightState, null);    // null is passed here as we are not interested in the response from the Bridge.
+        phHueSDK.getSelectedBridge().updateLightState(lightIdentifer, lightState, null);
+        // null is passed here as we are not interested in the response from the Bridge.
     }
 
 
-    public String getStatus(){
-        String json = null;
-
-        boolean onOff = lightState.isOn();
-
-
-
-        return json;
+    public String getStatus() {
+        String jsonInString = null;
+        float xy[] = new float[]{lightState.getX(), lightState.getY()};
+        int rgb = PHUtilities.colorFromXY(xy, PHLight.PHLightColorMode.COLORMODE_XY.getValue());
+        int red = (rgb >> 16) & 0xFF;
+        int green = (rgb >> 8) & 0xFF;
+        int blue = (rgb >> 0) & 0xFF;
+        try {
+            PhilipsHue philipsHue = new PhilipsHue();
+            Light light = new Light();
+            Colour colour = new Colour();
+            philipsHue.setLight(light);
+            light.setOnOff(lightState.isOn());
+            light.setBrighness(lightState.getBrightness());
+            light.setSaturation(lightState.getSaturation());
+            light.setColour(colour);
+            colour.setRed(red);
+            colour.setGreen(green);
+            colour.setBlue(blue);
+            jsonInString = mapper.writeValueAsString(philipsHue);
+            System.out.println(jsonInString);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return jsonInString;
     }
 
     private PHSDKListener listener = new PHSDKListener() {
@@ -147,7 +145,6 @@ public class Controller {
             // Start the Pushlink Authentication.
 
             phHueSDK.startPushlinkAuthentication(accessPoint);
-
 
         }
 
@@ -201,7 +198,6 @@ public class Controller {
             }
         }
     };
-
 
 }
 
