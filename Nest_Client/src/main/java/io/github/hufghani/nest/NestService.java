@@ -51,7 +51,7 @@ public class NestService {
         return nestThermostat.toString();
     }
 
-    public void setNestTemputure(int temputure) {
+    public void setNestTemputure(double temputure) {
         try {
             WebResource webResource = client.resource(baseURL + "/thermostats/" + device
                     + "/target_temperature_c?auth=" + auth);

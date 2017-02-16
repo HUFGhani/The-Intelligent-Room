@@ -1,5 +1,6 @@
 package io.github.hufghani.mqtt;
 
+import org.codehaus.jettison.json.JSONObject;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
@@ -17,6 +18,13 @@ public class Nest_Subscribe implements MqttCallback{
     String broker       = "tcp://localhost:1883";
     String clientId     = "nest";
     MemoryPersistence persistence = new MemoryPersistence();
+
+    private double temperature;
+
+    public double getTemperature() {
+        return temperature;
+    }
+
     public Nest_Subscribe() {
     super();
     }
@@ -44,9 +52,9 @@ public class Nest_Subscribe implements MqttCallback{
 
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
-        System.out.println(new String(mqttMessage.getPayload()));
-
-
+        String jsonData = new String(mqttMessage.getPayload());
+        JSONObject obj = new JSONObject(jsonData);
+        temperature = obj.getDouble("target_temperature_c");
     }
 
     @Override

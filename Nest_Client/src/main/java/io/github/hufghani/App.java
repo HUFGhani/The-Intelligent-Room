@@ -19,6 +19,7 @@ public class App {
             try {
                 nest_publish.publish(nestService.getAllString());
                 nest_subscribe.subscribe();
+                nestService.setNestTemputure(nest_subscribe.getTemperature());
                 Thread.sleep(6000);
             }catch (Exception e){
                 e.printStackTrace();
