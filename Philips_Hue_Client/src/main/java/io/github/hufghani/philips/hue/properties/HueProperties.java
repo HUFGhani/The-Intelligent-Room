@@ -18,6 +18,11 @@ public class HueProperties {
         super();
     }
 
+
+    public static String getHouseID() {
+        return hueConfigProperties.getHouseID();
+    }
+
     public static String getUsername() {
         return hueConfigProperties.getUsersname();
     }

@@ -22,6 +22,8 @@ public class App
 
         PhilipsHue_Publish philipsHue_Publish = new PhilipsHue_Publish();
         PhilipsHue_Subscribe philipsHue_subscribe = new PhilipsHue_Subscribe();
+        philipsHue_subscribe.setHouseID(HueProperties.getHouseID());
+        philipsHue_Publish.setHouseID(HueProperties.getHouseID());
 
         for (;;){
             try {

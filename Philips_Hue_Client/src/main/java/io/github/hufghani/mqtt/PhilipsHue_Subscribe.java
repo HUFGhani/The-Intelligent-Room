@@ -13,6 +13,7 @@ TODO need to talk about which topic we would like to use
  */
 public class PhilipsHue_Subscribe implements MqttCallback {
     String topic        = "mqtt Examples";
+    String houseID;
     int qos             = 2;
     String broker       = "tcp://localhost:1883";
     String clientId     = "nest";
@@ -43,6 +44,11 @@ public class PhilipsHue_Subscribe implements MqttCallback {
 
     public Boolean getOnOff() {
         return onOff;
+    }
+
+    public PhilipsHue_Subscribe setHouseID(String houseID) {
+        this.houseID = houseID;
+        return this;
     }
 
     public PhilipsHue_Subscribe() {

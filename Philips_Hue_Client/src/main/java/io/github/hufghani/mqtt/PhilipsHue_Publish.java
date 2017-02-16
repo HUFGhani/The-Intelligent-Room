@@ -15,6 +15,7 @@ TODO need to talk about which topic we would like to use
  */
 public class PhilipsHue_Publish {
     String topic        = "mqtt Examples";
+    String houseID;
     int qos             = 2;
     String broker       = "tcp://localhost:1883";
     String clientId     = "nest";
@@ -22,6 +23,11 @@ public class PhilipsHue_Publish {
 
     public PhilipsHue_Publish() {
         super();
+    }
+
+    public PhilipsHue_Publish setHouseID(String houseID) {
+        this.houseID = houseID;
+        return this;
     }
 
     public void publish(String jsonPayload){
