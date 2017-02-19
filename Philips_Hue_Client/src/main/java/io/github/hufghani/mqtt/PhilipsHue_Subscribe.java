@@ -12,11 +12,10 @@ import org.json.hue.JSONObject;
 TODO need to talk about which topic we would like to use
  */
 public class PhilipsHue_Subscribe implements MqttCallback {
-    String topic        = "mqtt Examples";
-    String houseID;
+    String topic;
     int qos             = 2;
     String broker       = "tcp://localhost:1883";
-    String clientId     = "nest";
+    String clientId     = "hue";
     MemoryPersistence persistence = new MemoryPersistence();
 
     private int red,green,blue, brighness ,saturation;
@@ -46,8 +45,12 @@ public class PhilipsHue_Subscribe implements MqttCallback {
         return onOff;
     }
 
-    public PhilipsHue_Subscribe setHouseID(String houseID) {
-        this.houseID = houseID;
+    public String getTopic() {
+        return topic;
+    }
+
+    public PhilipsHue_Subscribe setTopic(String topic) {
+        this.topic = topic;
         return this;
     }
 
@@ -58,10 +61,10 @@ public class PhilipsHue_Subscribe implements MqttCallback {
     public void subscribe(){
         try {
             MqttClient client = new MqttClient(broker, clientId, persistence);
-            MqttConnectOptions conn = new MqttConnectOptions();
-            conn.setCleanSession(true);
-            client.connect(conn);
-            client.subscribe(topic,qos);
+            MqttConnectOptions connOpts = new MqttConnectOptions();
+            client.setCallback(this);
+            client.connect(connOpts);
+            client.subscribe(getTopic());
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -69,7 +72,7 @@ public class PhilipsHue_Subscribe implements MqttCallback {
 
     @Override
     public void connectionLost(Throwable throwable) {
-        System.out.println("connection has be lost");
+
     }
 
     /*

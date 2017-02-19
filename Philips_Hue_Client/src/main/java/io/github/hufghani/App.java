@@ -19,11 +19,10 @@ public class App
         PHHueSDK hueSDK = PHHueSDK.create();
         Controller controller = new Controller();
         hueSDK.getNotificationManager().registerSDKListener(controller.getListener());
-
         PhilipsHue_Publish philipsHue_Publish = new PhilipsHue_Publish();
         PhilipsHue_Subscribe philipsHue_subscribe = new PhilipsHue_Subscribe();
-        philipsHue_subscribe.setHouseID(HueProperties.getHouseID());
-        philipsHue_Publish.setHouseID(HueProperties.getHouseID());
+        philipsHue_subscribe.setTopic(HueProperties.getHouseID());
+        philipsHue_Publish.setTopic(HueProperties.getHouseID());
 
         for (;;){
             try {
