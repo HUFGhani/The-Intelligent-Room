@@ -12,17 +12,19 @@ public class App {
     }
 
     public App() {
+        NestProperties nestProperties = new NestProperties();
         NestService nestService = new NestService();
         Nest_Publish nest_publish = new Nest_Publish();
         Nest_Subscribe nest_subscribe = new Nest_Subscribe();
-        NestProperties.loadProperties();
-        nest_publish.setHouseID(NestProperties.getHouseID());
+        nest_publish.setTopic(nestProperties.getHouseID());
+        nest_subscribe.setTopic(nestProperties.getHouseID());
+
         for (;;){
             try {
                 nest_publish.publish(nestService.getAllString());
                 nest_subscribe.subscribe();
                 nestService.setNestTemputure(nest_subscribe.getTemperature());
-                Thread.sleep(6000);
+                Thread.sleep(10000);
             }catch (Exception e){
                 e.printStackTrace();
             }

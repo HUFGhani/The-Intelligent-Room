@@ -13,7 +13,8 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 TODO add the config file here
  */
 public class Nest_Subscribe implements MqttCallback{
-    String topic        = "mqtt Examples";
+
+    String topic;
     int qos             = 2;
     String broker       = "tcp://localhost:1883";
     String clientId     = "nest";
@@ -21,9 +22,6 @@ public class Nest_Subscribe implements MqttCallback{
 
     private double temperature;
 
-    public double getTemperature() {
-        return temperature;
-    }
 
     public Nest_Subscribe() {
     super();
@@ -32,10 +30,11 @@ public class Nest_Subscribe implements MqttCallback{
     public void subscribe(){
         try {
             MqttClient client = new MqttClient(broker, clientId, persistence);
-            MqttConnectOptions conn = new MqttConnectOptions();
-            conn.setCleanSession(true);
-            client.connect(conn);
-            client.subscribe(topic,qos);
+            MqttConnectOptions connOpts = new MqttConnectOptions();
+            client.setCallback(this);
+            client.connect(connOpts);
+            client.subscribe(getTopic());
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -43,7 +42,7 @@ public class Nest_Subscribe implements MqttCallback{
 
     @Override
     public void connectionLost(Throwable throwable) {
-        System.out.println("connection has be lost");
+
     }
 
     /*
@@ -54,11 +53,29 @@ public class Nest_Subscribe implements MqttCallback{
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         String jsonData = new String(mqttMessage.getPayload());
         JSONObject obj = new JSONObject(jsonData);
-        temperature = obj.getDouble("target_temperature_c");
+        setTemperature(obj.getDouble("target_temperature_c"));
     }
 
     @Override
     public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
 
+    }
+
+    public double getTemperature() {
+        return temperature;
+    }
+
+    public Nest_Subscribe setTemperature(double temperature) {
+        this.temperature = temperature;
+        return this;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public Nest_Subscribe setTopic(String topic) {
+        this.topic = topic;
+        return this;
     }
 }

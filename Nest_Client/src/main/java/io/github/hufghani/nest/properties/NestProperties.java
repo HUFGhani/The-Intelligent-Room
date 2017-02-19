@@ -13,7 +13,7 @@ public class NestProperties {
     static NestConfigProperties nestConfigProperties;
 
     public NestProperties() {
-        super();
+        loadProperties();
     }
 
     public static String getHouseID() {

@@ -37,7 +37,7 @@ public class NestService {
                         + response.getStatus());
             }
             String stingJson = response.getEntity(String.class);
-             nestThermostat = mapper.readValue(stingJson, NestThermostat.class);
+            nestThermostat = mapper.readValue(stingJson, NestThermostat.class);
 
         } catch (JsonGenerationException e) {
             e.printStackTrace();
@@ -52,17 +52,27 @@ public class NestService {
     }
 
     public void setNestTemputure(double temputure) {
-        try {
-            WebResource webResource = client.resource(baseURL + "/thermostats/" + device
-                    + "/target_temperature_c?auth=" + auth);
-            ClientResponse response = webResource.type(MediaType.TEXT_PLAIN_TYPE)
-                    .put(ClientResponse.class, String.valueOf(temputure));
-            if (response.getStatus() != 200) {
-                throw new RuntimeException("Failed : HTTP error code : "
-                        + response.getStatus());
+        double temp = 0;
+        if (temp == temputure) {
+            System.out.println("it the same");
+        } else {
+            if (temputure > 0 && temputure >= 9 && temp != temputure) {
+                System.out.println(temputure);
+                System.out.println("!@£££££££!£!@£@!£@!£@!£@!£!@£");
+                temp = temputure;
+                try {
+                    WebResource webResource = client.resource(baseURL + "thermostats/" + device
+                            + "/target_temperature_c?auth=" + auth);
+                    ClientResponse response = webResource.type(MediaType.TEXT_PLAIN_TYPE)
+                            .put(ClientResponse.class, String.valueOf(temputure));
+                    if (response.getStatus() != 200) {
+                        throw new RuntimeException("Failed : HTTP error code : "
+                                + response.getStatus());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-        }catch (Exception e){
-            e.printStackTrace();
         }
     }
 }

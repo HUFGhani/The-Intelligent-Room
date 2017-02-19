@@ -15,8 +15,7 @@ TODO add the config file here
  */
 public class Nest_Publish {
 
-    String topic        = "mqtt Examples";
-    String houseID;
+    String topic;
     int qos             = 2;
     String broker       = "tcp://localhost:1883";
     String clientId     = "nest";
@@ -27,8 +26,12 @@ public class Nest_Publish {
     }
 
 
-    public Nest_Publish setHouseID(String houseID) {
-        this.houseID = houseID;
+    public String getTopic() {
+        return topic;
+    }
+
+    public Nest_Publish setTopic(String topic) {
+        this.topic = topic;
         return this;
     }
 
@@ -40,7 +43,7 @@ public class Nest_Publish {
             client.connect(conn);
             MqttMessage message = new MqttMessage(jsonPayload.getBytes());
             message.setQos(qos);
-            client.publish(topic,message);
+            client.publish(getTopic(),message);
             client.disconnect();
         }catch (MqttException e){
             e.printStackTrace();
