@@ -83,13 +83,17 @@ public class PhilipsHue_Subscribe implements MqttCallback {
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         String jsonData = new String(mqttMessage.getPayload());
         JSONObject obj = new JSONObject(jsonData);
-        onOff = obj.getBoolean("on/off");
-        JSONObject colour = obj.getJSONObject("colour");
+        JSONObject light = obj.getJSONObject("light");
+        String name = light.getString("name");
+        onOff = light.getBoolean("on/off");
+        JSONObject colour = light.getJSONObject("colour");
         red = colour.getInt("red");
         green = colour.getInt("green");
         blue = colour.getInt("blue");
-        brighness = obj.getInt("brighness");
-        saturation = obj.getInt("Saturation");
+        brighness = light.getInt("brighness");
+        saturation = light.getInt("Saturation");
+
+        System.out.println(name);
     }
 
     @Override
