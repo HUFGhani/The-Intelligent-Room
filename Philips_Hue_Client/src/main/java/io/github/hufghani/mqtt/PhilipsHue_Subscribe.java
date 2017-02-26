@@ -5,11 +5,7 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.json.hue.JSONObject;
 
 /**
- * Created by hamzaghani on 16/02/2017.
- */
-
-/*
-TODO need to talk about which topic we would like to use
+ * Created by hamzaghani on 26/02/2017.
  */
 public class PhilipsHue_Subscribe implements MqttCallback {
     String topic;
@@ -18,8 +14,8 @@ public class PhilipsHue_Subscribe implements MqttCallback {
     String clientId     = "hue";
     MemoryPersistence persistence = new MemoryPersistence();
 
-    private int red,green,blue, brighness ,saturation;
-    private Boolean onOff;
+    private int red = 255 ,green = 255,blue = 255, brighness= 254 ,saturation =254;
+    private Boolean onOff = true;
 
     public int getRed() {
         return red;
@@ -64,7 +60,7 @@ public class PhilipsHue_Subscribe implements MqttCallback {
             MqttConnectOptions connOpts = new MqttConnectOptions();
             client.setCallback(this);
             client.connect(connOpts);
-            client.subscribe(getTopic());
+            client.subscribe(getTopic()+"/test");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -75,9 +71,7 @@ public class PhilipsHue_Subscribe implements MqttCallback {
 
     }
 
-    /*
-    TODO add JSON parser here when payload arrives and pass it ot the set temperature method.
-     */
+
 
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
@@ -93,7 +87,7 @@ public class PhilipsHue_Subscribe implements MqttCallback {
         brighness = light.getInt("brighness");
         saturation = light.getInt("Saturation");
 
-        System.out.println(name);
+
     }
 
     @Override

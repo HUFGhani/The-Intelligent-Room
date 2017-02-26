@@ -29,7 +29,7 @@ public class HueProperties {
 
     public static void storeUsername(String username) {
         hueConfigProperties.setUsersname(username);
-        saveProperties();
+        //saveProperties();
     }
 
     public static String getLastConnectedIP() {
@@ -38,7 +38,7 @@ public class HueProperties {
 
     public static void storeLastIPAddress(String ipAddress) {
         hueConfigProperties.setHueLightIP(ipAddress);
-        saveProperties();
+        //saveProperties();
     }
 
     public static void loadProperties(){
@@ -47,14 +47,14 @@ public class HueProperties {
             if (new File(fileDirPath).exists()) {
                   hueConfigProperties = mapper.readValue(new File(fileDirPath), HueConfigProperties.class);
             }else{
-                saveProperties();
+               // saveProperties();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void saveProperties(){
+   /* public static void saveProperties(){
         ObjectMapper mapper = new ObjectMapper();
         try {
             if (new File(fileDirPath).exists()) {
@@ -63,7 +63,7 @@ public class HueProperties {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 
 
