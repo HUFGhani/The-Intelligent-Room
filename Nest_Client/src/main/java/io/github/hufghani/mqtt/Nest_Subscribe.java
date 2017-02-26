@@ -6,12 +6,11 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 
 /**
- * Created by hamzaghani on 13/02/2017.
+ * @author Hamza Ghani on 13/02/2017.
+ * 
  */
 
-/*
-TODO add the config file here
- */
+
 public class Nest_Subscribe implements MqttCallback{
 
     String topic;

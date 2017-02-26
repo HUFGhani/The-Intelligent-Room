@@ -21,10 +21,10 @@ public class App {
 
         for (;;){
             try {
+                Thread.sleep(60000);
                 nest_publish.publish(nestService.getAllString());
                 nest_subscribe.subscribe();
                 nestService.setNestTemputure(nest_subscribe.getTemperature());
-                Thread.sleep(10000);
             }catch (Exception e){
                 e.printStackTrace();
             }
