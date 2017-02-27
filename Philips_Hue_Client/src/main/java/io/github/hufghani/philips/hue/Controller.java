@@ -125,10 +125,12 @@ public class Controller implements PHSDKListener {
     @Override
     public void onConnectionResumed(PHBridge phBridge) {
         bridge = phBridge;
-        phHueSDK.getLastHeartbeat().put(bridge.getResourceCache().getBridgeConfiguration().getIpAddress(), System.currentTimeMillis());
+        phHueSDK.getLastHeartbeat().put(bridge.getResourceCache().getBridgeConfiguration().getIpAddress(),
+                System.currentTimeMillis());
         for (int i = 0; i < phHueSDK.getDisconnectedAccessPoint().size(); i++) {
 
-            if (phHueSDK.getDisconnectedAccessPoint().get(i).getIpAddress().equals(bridge.getResourceCache().getBridgeConfiguration().getIpAddress())) {
+            if (phHueSDK.getDisconnectedAccessPoint().get(i).getIpAddress().equals(bridge.getResourceCache()
+                    .getBridgeConfiguration().getIpAddress())) {
                 phHueSDK.getDisconnectedAccessPoint().remove(i);
             }
         }
