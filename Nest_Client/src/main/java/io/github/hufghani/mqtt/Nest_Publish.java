@@ -43,7 +43,7 @@ public class Nest_Publish {
             client.connect(conn);
             MqttMessage message = new MqttMessage(jsonPayload.getBytes());
             message.setQos(qos);
-            client.publish(getTopic(),message);
+            client.publish(getTopic()+"/actuator/nest/status",message);
             client.disconnect();
         }catch (MqttException e){
             e.printStackTrace();

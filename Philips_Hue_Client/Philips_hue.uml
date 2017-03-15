@@ -2,71 +2,12 @@
 <Diagram>
   <ID>JAVA</ID>
   <OriginalElement />
-  <nodes>
-    <node x="1318.6354322929806" y="870.222389409961">io.github.hufghani.philips.hue.properties.HueConfigProperties</node>
-    <node x="188.71590909090912" y="614.0">io.github.hufghani.philips.hue.AccessPointList</node>
-    <node x="613.7159090909091" y="257.0">io.github.hufghani.philips.hue.Light</node>
-    <node x="696.7159090909091" y="1227.0">io.github.hufghani.App</node>
-    <node x="996.0" y="870.0">io.github.hufghani.mqtt.PhilipsHue_Publish</node>
-    <node x="0.0" y="771.0">io.github.hufghani.mqtt.PhilipsHue_Subscribe</node>
-    <node x="1324.7031484394709" y="549.2633685188171">io.github.hufghani.philips.hue.properties.HueProperties</node>
-    <node x="703.2159090909091" y="0.0">io.github.hufghani.philips.hue.Colour</node>
-    <node x="573.7159090909091" y="558.0">io.github.hufghani.philips.hue.PhilipsHue</node>
-    <node x="464.0" y="771.0">io.github.hufghani.philips.hue.Controller</node>
-  </nodes>
+  <nodes />
   <notes />
-  <edges>
-    <edge source="io.github.hufghani.philips.hue.Controller" target="io.github.hufghani.philips.hue.AccessPointList">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="io.github.hufghani.philips.hue.Controller" target="io.github.hufghani.philips.hue.Colour">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="io.github.hufghani.App" target="io.github.hufghani.mqtt.PhilipsHue_Publish">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="io.github.hufghani.philips.hue.Controller" target="io.github.hufghani.philips.hue.Light">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="io.github.hufghani.philips.hue.PhilipsHue" target="io.github.hufghani.philips.hue.Light">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="io.github.hufghani.App" target="io.github.hufghani.philips.hue.Controller">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="io.github.hufghani.philips.hue.Controller" target="io.github.hufghani.philips.hue.PhilipsHue">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="io.github.hufghani.App" target="io.github.hufghani.mqtt.PhilipsHue_Subscribe">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="io.github.hufghani.philips.hue.properties.HueProperties" target="io.github.hufghani.philips.hue.properties.HueConfigProperties">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="io.github.hufghani.philips.hue.Light" target="io.github.hufghani.philips.hue.Colour">
-      <point x="0.0" y="0.0" />
-      <point x="0.0" y="0.0" />
-    </edge>
-  </edges>
-  <settings layout="Hierarchic Group" zoom="0.3045198597793819" x="1267.4005675231506" y="653.2514083778335" />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.0" x="0.0" y="0.0" />
   <SelectedNodes />
-  <Categories>
-    <Category>Inner Classes</Category>
-    <Category>Properties</Category>
-    <Category>Methods</Category>
-    <Category>Constructors</Category>
-    <Category>Fields</Category>
-  </Categories>
+  <Categories />
   <SCOPE>All</SCOPE>
-  <VISIBILITY>private</VISIBILITY>
 </Diagram>
 
