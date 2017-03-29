@@ -161,6 +161,8 @@ public class ThermostatElements implements Serializable {
     private String lastConnection;
     @JsonProperty("hvac_state")
     private String hvacState;
+    @JsonProperty("automated")
+    private boolean automated;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -181,7 +183,7 @@ public class ThermostatElements implements Serializable {
                               String structureId, boolean fanTimerActive, String fanTimerTimeout, long fanTimerDuration,
                               String previousHvacMode, String hvacMode, String timeToTarget, String timeToTargetTraining,
                               String whereName, String label, String nameLong, boolean isOnline, String lastConnection,
-                              String hvacState, Map<String, Object> additionalProperties) {
+                              String hvacState, Map<String, Object> additionalProperties, boolean automated) {
         this.humidity = humidity;
         this.locale = locale;
         this.temperatureScale = temperatureScale;
@@ -232,6 +234,7 @@ public class ThermostatElements implements Serializable {
         this.lastConnection = lastConnection;
         this.hvacState = hvacState;
         this.additionalProperties = additionalProperties;
+        this.automated =automated;
     }
 
     @JsonProperty("humidity")
@@ -724,6 +727,15 @@ public class ThermostatElements implements Serializable {
         this.hvacState = hvacState;
     }
 
+    @JsonProperty("automated")
+    public boolean isAutomated() {
+        return automated;
+    }
+
+    @JsonProperty("automated")
+    public void setAutomated(boolean automated) {
+        this.automated = automated;
+    }
 
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
@@ -789,5 +801,12 @@ public class ThermostatElements implements Serializable {
                 ", hvacState='" + hvacState + '\'' +
                 ", additionalProperties=" + additionalProperties +
                 '}';
+    }
+
+    public String getStatus(){
+        return "{ " +
+                "targetTemperatureC:"+targetTemperatureC+","
+                +"automated:"+automated+
+                "}";
     }
 }

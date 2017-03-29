@@ -20,6 +20,7 @@ public class Nest_Subscribe implements MqttCallback{
     MemoryPersistence persistence = new MemoryPersistence();
 
     private double temperature;
+    private boolean automated;
 
 
     public Nest_Subscribe() {
@@ -53,6 +54,7 @@ public class Nest_Subscribe implements MqttCallback{
         String jsonData = new String(mqttMessage.getPayload());
         JSONObject obj = new JSONObject(jsonData);
         setTemperature(obj.getDouble("target_temperature_c"));
+        setautomated(obj.getBoolean("automated"));
     }
 
     @Override
@@ -69,6 +71,15 @@ public class Nest_Subscribe implements MqttCallback{
         return this;
     }
 
+
+    public boolean getautomated() {
+        return automated;
+    }
+
+    public Nest_Subscribe setautomated(boolean automated) {
+        this.automated = automated;
+        return this;
+    }
     public String getTopic() {
         return topic;
     }

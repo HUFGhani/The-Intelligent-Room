@@ -48,7 +48,7 @@ public class NestService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return String.valueOf(nestThermostat.getThermostats().getThermostatElements().getTargetTemperatureC());
+        return String.valueOf(nestThermostat.getThermostats().getThermostatElements().getStatus());
     }
 
     public void setNestTemputure(double temputure) {
