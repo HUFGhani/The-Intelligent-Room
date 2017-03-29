@@ -48,7 +48,7 @@ public class NestService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return nestThermostat.toString();
+        return String.valueOf(nestThermostat.getThermostats().getThermostatElements().getTargetTemperatureC());
     }
 
     public void setNestTemputure(double temputure) {
@@ -58,7 +58,6 @@ public class NestService {
         } else {
             if (temputure > 0 && temputure >= 9 && temp != temputure) {
                 System.out.println(temputure);
-                System.out.println("!@£££££££!£!@£@!£@!£@!£@!£!@£");
                 temp = temputure;
                 try {
                     WebResource webResource = client.resource(baseURL + "thermostats/" + device
