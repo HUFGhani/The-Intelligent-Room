@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public interface PhidSensor {
 
-	public void setSensorLastUpdate(Timestamp time);
+	public void setSensorLastUpdate(long time);
 
 	public void setSensorValue(int sensorValue);
 
@@ -14,7 +14,7 @@ public interface PhidSensor {
 	
 	public void setSensorPort(int sensorPort);
 
-	public Timestamp getSensorLastUpdate();
+	public long getSensorLastUpdate();
 	
 	public String getSensorType();
 

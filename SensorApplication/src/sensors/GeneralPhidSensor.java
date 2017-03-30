@@ -1,22 +1,23 @@
 package sensors;
 
-import java.sql.Timestamp;
 
 public class GeneralPhidSensor implements PhidSensor {
-	private String sensorName, sensorId, sensorType;
-	private Timestamp updateTimestamp;
+
+
+	private String sensorName, sensorId, sensorMethodType;
+	private long updateTimestamp;
 	private int sensorPort, sensorValue;
 
 	public GeneralPhidSensor(){}
 	
-	public GeneralPhidSensor(String sensorName, int sensorValue, String sensorId, Timestamp updateTimestamp,
+	public GeneralPhidSensor(String sensorName, int sensorValue, String sensorId, long updateTimestamp,
 			int sensorPort, String sensorType) {
 		this.sensorId = sensorId;
 		this.sensorName = sensorName;
 		this.sensorValue = sensorValue;
 		this.updateTimestamp = updateTimestamp;
 		this.sensorPort = sensorPort;
-		this.sensorType = sensorType;
+		this.sensorMethodType = sensorType;
 	}
 
 	public GeneralPhidSensor(GeneralPhidSensor sensor) {
@@ -25,9 +26,17 @@ public class GeneralPhidSensor implements PhidSensor {
 		this.sensorValue = sensor.getSensorValue();
 		this.updateTimestamp = sensor.getSensorLastUpdate();
 		this.sensorPort = sensor.getSensorPort();
-		this.sensorType = sensor.getSensorType();
+		this.sensorMethodType = sensor.getSensorType();
 	}
 
+	public String getSensorMethodType() {
+		return sensorMethodType;
+	}
+
+	public void setSensorMethodType(String sensorMethodType) {
+		this.sensorMethodType = sensorMethodType;
+	}
+	
 	public int getSensorPort() {
 		return sensorPort;
 	}
@@ -36,16 +45,16 @@ public class GeneralPhidSensor implements PhidSensor {
 		this.sensorPort = sensorPort;
 	}
 
-	public Timestamp getUpdateTimestamp() {
+	public long getUpdateTimestamp() {
 		return updateTimestamp;
 	}
 
-	public void setUpdateTimestamp(Timestamp updateTimestamp) {
+	public void setUpdateTimestamp(long updateTimestamp) {
 		this.updateTimestamp = updateTimestamp;
 	}
 
 	public String getSensorType() {
-		return sensorType;
+		return sensorMethodType;
 	}
 
 	public void setSensorName(String sensorName) {
@@ -53,7 +62,7 @@ public class GeneralPhidSensor implements PhidSensor {
 	}
 
 	@Override
-	public void setSensorLastUpdate(Timestamp updateTime) {
+	public void setSensorLastUpdate(long updateTime) {
 		this.updateTimestamp = updateTime;
 	}
 
@@ -75,7 +84,7 @@ public class GeneralPhidSensor implements PhidSensor {
 	}
 
 	@Override
-	public Timestamp getSensorLastUpdate() {
+	public long getSensorLastUpdate() {
 		return this.updateTimestamp;
 	}
 
