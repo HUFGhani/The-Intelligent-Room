@@ -7,18 +7,21 @@ import com.google.gson.annotations.SerializedName;
 public class Light implements Serializable {
 
 	@SerializedName("name")
-	private String name;
+	private String name = null;
 	@SerializedName("on/off")
-	private boolean onOff;
+	private boolean onOff = true;
 	@SerializedName("colour")
-	private Colour colour;
+	private Colour colour = null;
 	@SerializedName("brightness")
-	private int brightness;
+	private int brightness = 0;
 	@SerializedName("saturation")
-	private int saturation;
+	private int saturation = 0;
 	private boolean automated = true;
 
 	private final static long serialVersionUID = 4897633775422404008L;
+
+	public Light() {
+	}
 
 	public Light(Light light) {
 		this.name = light.getName();
@@ -135,7 +138,5 @@ public class Light implements Serializable {
 			return false;
 		return true;
 	}
-
-
 
 }

@@ -5,19 +5,26 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+
+import com.google.gson.Gson;
+
 import heating.Nest;
 import heating.TemperaturePref;
 import heating.TmpActionMethod;
 import lighting.Colour;
+import lighting.Hue;
 import lighting.Light;
 import lighting.LightActionMethod;
 import lighting.LightPref;
 import utils.DataFormatUtilities;
+import utils.MqttUtils;
 import utils.PahoClientSub;
+import utils.ServerComs;
 import utils.User;
 
 public class AutomatedPreferences extends PahoClientSub {
@@ -31,12 +38,11 @@ public class AutomatedPreferences extends PahoClientSub {
 	private PahoClientSub sub = null;
 	private PahoClientSub prefSub = null;
 
-
 	public AutomatedPreferences(String houseId) {
 		super(serverURI, "InHouseSub");
 		this.houseId = houseId;
 		setTopic(houseId + "/+/inHouse");
-		System.out.println("TEST: AutomatedPreferences created");
+		System.out.println(">>>AP_LOG: AutomatedPreferences created");
 	}
 
 	/**
@@ -47,30 +53,57 @@ public class AutomatedPreferences extends PahoClientSub {
 		this.messages.put(topic.toString(), message.toString());
 		this.message = message.toString();
 
+		System.out.println(">>>AP_LOG: AUTOPREF INHOUSE MSG ARR START....................");
+		System.out.println(">>>AP_LOG: " + topic + ": " + message.toString());
+
 		// Get list of users in the house
 		getUsersList();
 
-		if (!users.isEmpty()) {
-			lightPref(users);
+		// for test - REMOVE AFTER
+		System.out.println(">>>AP_LOG: USERS IN HOUSE");
+		for (int i = 0; i < users.size(); i++) {
+			System.out.println(users.get(i).toString());
 		}
 
-		if (lightActionMethodClient != null && !users.isEmpty()) {
+		if (lightActionMethodClient != null && users != null && !users.isEmpty()) {
+			System.out.println(">>>AP_LOG: lightActionMethodClient not null, initialising ..........");
 			lightActionMethodClient.setLightPref(lightPref(users));
+			System.out.println(">>>AP_LOG: lightActionMethodClient created");
+
+		} else if (lightActionMethodClient != null) {
+			System.out.println(">>>AP_LOG:  users null");
+			// Turn hue off
+			ServerComs.turnHueOff(houseId);
+
+		} else {
+			System.out.println(">>>AP_LOG: lightActionMethodClient or users null");
+
 		}
 
-		if (tmpActionMethodClient != null && !users.isEmpty()) {
+		if (tmpActionMethodClient != null && users != null && !users.isEmpty()) {
 			// Set heat pref
+			System.out.println(">>>AP_LOG: tmpActionMethodClient not null, initialising..........");
 			tmpActionMethodClient.setTemperaturePref(tmpPref(users));
+			System.out.println(">>>AP_LOG: tmpActionMethodClient created");
+
+		} else if (tmpActionMethodClient != null) {
+			System.out.println(">>>AP_LOG:  users null");
+			// Turn nest off
+			ServerComs.turnNestOff(houseId);
+	
+		} else {
+
+			System.out.println(">>>AP_LOG: tmpActionMethodClient null");
 		}
+		System.out.println(">>>AP_LOG: MSG ARR END....................");
 
 	}
 
 	private void getUsersList() {
 		if (prefSub == null) {
-			System.out.println("prefSub null");
+			System.out.println(">>>AP_LOG: prefSub null, initialising ..........");
 			prefSub = new PahoClientSub("tcp://localhost:1883", "userPrefs");
-			System.out.println("TEST: PrefSub created");
-
+			System.out.println(">>>AP_LOG: prefSub created");
 		}
 
 		usersInHouse = usersInHouse(houseId);
@@ -82,8 +115,9 @@ public class AutomatedPreferences extends PahoClientSub {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			users.add(DataFormatUtilities.jsonToUser(prefSub.getMessage()));
-
+			if (prefSub.getMessage() != null) {
+				users.add(DataFormatUtilities.jsonToUser(prefSub.getMessage()));
+			}
 		}
 
 	}
@@ -112,21 +146,41 @@ public class AutomatedPreferences extends PahoClientSub {
 				}
 			}
 		}
+		System.out.println(">>>AP_LOG: USERS IN HOUSE CHECK: " + users.toString());
+		System.out.println(">>>AP_LOG: RETURNING IDS: " + userIds.toString());
+
 		return userIds;
 	}
 
 	public void addLightActionMethod() {
 		// create light action method
+		System.out.println(">>>AP_LOG: initialising LightActionMethod ..........  ");
 		lightActionMethodClient = new LightActionMethod(houseId, "lightAction");
-		if (users != null)
+		System.out.println(">>>AP_LOG: lightActionMethod created");
+
+		System.out.println(">>>AP_LOG: CURR lightActionMethod MESSAGE:  " + lightActionMethodClient.getMessage());
+		if (users != null && !users.isEmpty()) {
 			lightActionMethodClient.setLightPref(lightPref(users));
+		} else {
+			System.out.println(">>>AP_LOG: USERS LIST EMPTY, LIGHT PREF NOT SET.");
+
+		}
+
 	}
 
 	public void addTempActionMethod() {
 		// create heat action method
+		System.out.println(">>>AP_LOG: initialising TmpActionMethod ..........  ");
 		tmpActionMethodClient = new TmpActionMethod(houseId, "tmpAction");
-		if (users != null)
+		System.out.println(">>>AP_LOG: TempActionMethod created ");
+		
+		System.out.println(">>>AP_LOG: TA CURR MSG: " + tmpActionMethodClient.getMessage());
+		if (users != null && !users.isEmpty()){
 			tmpActionMethodClient.setTemperaturePref(tmpPref(users));
+		}else {
+				System.out.println(">>>AP_LOG: USERS LIST EMPTY, TEMP PREF NOT SET.");
+
+			}
 	}
 
 	/**
@@ -142,6 +196,7 @@ public class AutomatedPreferences extends PahoClientSub {
 		} catch (MqttException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	/**
@@ -187,18 +242,24 @@ public class AutomatedPreferences extends PahoClientSub {
 				red = users.get(i).getLightPref().getLight().getColour().getRed();
 				blue = users.get(i).getLightPref().getLight().getColour().getBlue();
 				green = users.get(i).getLightPref().getLight().getColour().getGreen();
-				
+
 			}
 
 			// determine which method has highest priority
 
 			if (prevLightPriority == 0 || prevLightPriority > lightPriority) {
+				prevLightPriority = users.get(i).getLightPref().getActionPriority();
 				lightActionMethod = users.get(i).getLightPref().getActionMethod();
 				currActionPriority = users.get(i).getLightPref().getActionPriority();
 
 			}
 
 		}
+		// FOR TEST REMOVE AFTER
+		System.out.println("Setting pref: "
+				+ new LightPref(new Light(name, onOff, new Colour(red, green, blue), lightBright, lightSat, automated),
+						lightActionMethod, currActionPriority).toString());
+
 		return new LightPref(new Light(name, onOff, new Colour(red, green, blue), lightBright, lightSat, automated),
 				lightActionMethod, currActionPriority);
 
@@ -223,12 +284,17 @@ public class AutomatedPreferences extends PahoClientSub {
 			}
 
 			// determine which method has highest priority
+
 			if (prevTmpPriority == 0 || prevTmpPriority > tempPriority) {
+				prevTmpPriority = users.get(i).getTmpPref().getActionPriority();
 				tmpActionMethod = users.get(i).getTmpPref().getActionMethod();
 				currPriority = users.get(i).getTmpPref().getActionPriority();
 			}
 
 		}
+
+		System.out.println("Setting tmp  pref: "
+				+ new TemperaturePref(new Nest(temp, true), tmpActionMethod, currPriority).toString());
 
 		return new TemperaturePref(new Nest(temp, true), tmpActionMethod, currPriority);
 

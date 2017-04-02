@@ -14,6 +14,7 @@ public class Hue implements Serializable {
 
 	private final static long serialVersionUID = 1283432260452140043L;
 
+
 	public Hue(Light light) {
 		this.light = new Light(light);
 	}

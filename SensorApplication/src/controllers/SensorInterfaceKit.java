@@ -41,6 +41,7 @@ import com.phidgets.event.SensorChangeListener;
 public class SensorInterfaceKit implements SensorChangeListener, InputChangeListener, AttachListener, DetachListener,
 		ErrorListener, OutputChangeListener {
 	InterfaceKitPhidget phidget = new InterfaceKitPhidget();
+
 	private ArrayList<GeneralPhidSensor> sensors = null;
 	private HashMap<String, Integer> sensorValues;
 	private String houseId;
@@ -66,9 +67,9 @@ public class SensorInterfaceKit implements SensorChangeListener, InputChangeList
 			phidget.waitForAttachment();
 
 			// Print debug information
-			System.out.println(phidget.getDeviceType());
-			System.out.println("Serial Number " + phidget.getSerialNumber());
-			System.out.println("Device Version " + phidget.getDeviceVersion());
+			System.out.println(">>STARTUP_LOG:" + phidget.getDeviceType());
+			System.out.println(">>STARTUP_LOG: Serial Number " + phidget.getSerialNumber());
+			System.out.println(">>STARTUP_LOG: Device Version " + phidget.getDeviceVersion());
 
 			// Initialise counter and HasMap for gathering sensor data
 			int secondCounter = 0;
@@ -84,33 +85,51 @@ public class SensorInterfaceKit implements SensorChangeListener, InputChangeList
 				// Constant loop, pause for one second
 				Thread.sleep(1000);
 				if (houseId == null) {
-					System.out.println("CONFIG FILE NOT FOUND");
+					System.out.println(">>STARTUP_LOG: CONFIG FILE NOT FOUND");
+					houseId = getHouseId();
 				} else {
 					if (sensors == null) {
 						// Initialise sensor ArrayList
 						sensors = getSensors(houseId);
-					} 
+						System.out.println(
+								">>STARTUP_LOG: CONFIG FILE FOUND, SENSORS IN CONFIGURATION -\n" + sensors.toString());
+						for (int i = 0; i < sensors.size(); i++) {
+							if (sensors.get(i).getSensorType().equals("average")) {
+								ServerComs.sendToServer(sensors.get(i),
+										phidget.getSensorValue(sensors.get(i).getSensorValue()), houseId);
 
-					 if (prefs == null) {
-					 prefs = new AutomatedPreferences("testID123");
-					 try {
-					 Thread.sleep(1000);
-					 } catch (InterruptedException e) {
-					 e.printStackTrace();
-					 }
-					 //prefs.addLightActionMethod();
-					 prefs.addTempActionMethod();					
-					 }
+							}
+						}
+
+					}
+
+					if (prefs == null) {
+						System.out.println(">>STARTUP_LOG: SETTING UP HUE / NEST START...............");
+						prefs = new AutomatedPreferences("testID123");
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						ServerComs.turnHueOff(houseId);
+						ServerComs.turnNestOff(houseId);
+						prefs.addLightActionMethod();
+						prefs.addTempActionMethod();
+			
+						System.out.println(">>STARTUP_LOG: SETTING UP HUE / NEST FINISH...............");
+
+					}
 
 					if (secondCounter < 60) {
 						updateSensorValues(secondCounter);
 						secondCounter++;
-
 					} else {
 						ServerComs.sendToServer(sensors, sensorValues, houseId);
 						secondCounter = 0;
 						sensorValues = new HashMap();
-						// Initialise sensor ArrayList
+
+						// Initialise sensor ArrayList to check if new sensors
+						// have been added
 						sensors = getSensors(houseId);
 					}
 
@@ -180,7 +199,8 @@ public class SensorInterfaceKit implements SensorChangeListener, InputChangeList
 			// 0=Motion 1=Light Sensor 2=Touch
 			for (int i = 0; i < sensors.size(); i++) {
 				if (sensors.get(i).getSensorType().equals("average")) {
-					sensorValues.put(sensors.get(i).getSensorName() + secondCounter, phidget.getSensorRawValue(i));
+					sensorValues.put(sensors.get(i).getSensorName() + secondCounter,
+							phidget.getSensorValue(sensors.get(i).getSensorPort()));
 				}
 			}
 		} catch (PhidgetException e) {

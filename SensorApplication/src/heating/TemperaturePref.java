@@ -49,4 +49,40 @@ public class TemperaturePref {
 				+ "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((actionMethod == null) ? 0 : actionMethod.hashCode());
+		result = prime * result + actionPriority;
+		result = prime * result + ((nest == null) ? 0 : nest.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TemperaturePref other = (TemperaturePref) obj;
+		if (actionMethod == null) {
+			if (other.actionMethod != null)
+				return false;
+		} else if (!actionMethod.equals(other.actionMethod))
+			return false;
+		if (actionPriority != other.actionPriority)
+			return false;
+		if (nest == null) {
+			if (other.nest != null)
+				return false;
+		} else if (!nest.equals(other.nest))
+			return false;
+		return true;
+	}
+
+
+
 }
