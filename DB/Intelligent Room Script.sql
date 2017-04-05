@@ -1,3 +1,15 @@
+Drop Table PhilipsHue;
+Drop Table LocationAutomation;
+Drop Table AutomationActionLighting;
+Drop Table LocationChangeType;
+Drop Table actionType;
+Drop Table actionHeating;
+Drop Table sensorValues;
+Drop Table sensors;
+Drop Table nest;
+Drop Table users;
+Drop Table house;
+
 CREATE TABLE house(
 HouseId int NOT NULL auto_increment, 
 housePass varchar(255),
@@ -16,7 +28,7 @@ Priority integer(2),
 Email varbinary(80) unique,
 HouseId Int,
 PRIMARY KEY (UserID),
-FOREIGN KEY (HouseId) REFERENCES House(HouseId)
+FOREIGN KEY (HouseId) REFERENCES House(HouseId)	
 );
 
 CREATE TABLE nest(
