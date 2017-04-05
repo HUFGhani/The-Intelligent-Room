@@ -13,7 +13,7 @@ public class Tester {
 	}
 
 	public static void main(String[] args) {
-		projectDAO dao = new projectDAO();
+		ProjectDAO dao = new ProjectDAO();
 		ArrayList<Sensor> allSensors = dao.getSensors(1);
 
 //		for (int i=0;i<allSensors.size(); i++){

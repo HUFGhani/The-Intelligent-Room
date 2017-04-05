@@ -1,29 +1,11 @@
 package com.nickr.IoT.userDAO;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.nickr.IoT.user.model.*;
+
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
-import com.nickr.IoT.user.model.Colour;
-import com.nickr.IoT.user.model.HeatingPreference;
-import com.nickr.IoT.user.model.HouseConfiguration;
-import com.nickr.IoT.user.model.Hue;
-import com.nickr.IoT.user.model.Light;
-import com.nickr.IoT.user.model.LightingPreference;
-import com.nickr.IoT.user.model.Location;
-import com.nickr.IoT.user.model.LogInRegisterResponse;
-import com.nickr.IoT.user.model.Nest;
-import com.nickr.IoT.user.model.RegistrationRequest;
-import com.nickr.IoT.user.model.Sensor;
-import com.nickr.IoT.user.model.UserPreference;
-
-public class projectDAO {
+public class ProjectDAO {
 
 	Connection conn = null;
 	Statement stmt = null;
@@ -340,7 +322,7 @@ public void insertSensors(Sensor s){
 }
 		
 
-	public projectDAO() {
+	public ProjectDAO() {
 		// TODO Auto-generated constructor stub
 	}
 
