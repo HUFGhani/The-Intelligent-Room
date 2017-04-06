@@ -30,17 +30,33 @@ public class Light implements Serializable{
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
+    @JsonProperty("automated")
+    private boolean automated;
+
+
+    public boolean isAutomated() {
+        return automated;
+    }
+
+    public Light setAutomated(boolean automated) {
+        this.automated = automated;
+        return this;
+    }
+
+
+
     public Light() {
         super();
     }
 
-    public Light(String name, boolean onOff, Colour colour, int brighness, int saturation) {
+    public Light(String name, boolean onOff, Colour colour, int brighness, int saturation,boolean automated) {
         super();
         this.name = name;
         this.onOff = onOff;
         this.colour = colour;
         this.brighness = brighness;
         this.saturation = saturation;
+        this.automated = automated;
     }
 
     @JsonProperty("name")
@@ -111,6 +127,7 @@ public class Light implements Serializable{
                 ", colour=" + colour +
                 ", brighness=" + brighness +
                 ", saturation=" + saturation +
+                ", automated=" + automated +
                 '}';
     }
 }

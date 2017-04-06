@@ -20,7 +20,7 @@ public class Nest_Subscribe implements MqttCallback{
     MemoryPersistence persistence = new MemoryPersistence();
 
     private double temperature;
-    private boolean automated;
+    private boolean automated = true;
 
 
     public Nest_Subscribe() {

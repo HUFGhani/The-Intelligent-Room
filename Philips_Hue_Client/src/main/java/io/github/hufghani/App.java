@@ -28,7 +28,7 @@ public class App
 
                 controller.setLight(philipsHue_subscribe.getRed(),philipsHue_subscribe.getGreen(),
                         philipsHue_subscribe.getBlue(),philipsHue_subscribe.getBrighness(),
-                        philipsHue_subscribe.getSaturation(),philipsHue_subscribe.getOnOff());
+                        philipsHue_subscribe.getSaturation(),philipsHue_subscribe.getOnOff(),philipsHue_subscribe.isAutomated());
                 Thread.sleep(1000);
             }catch (Exception e){
                 e.printStackTrace();

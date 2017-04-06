@@ -15,7 +15,13 @@ public class PhilipsHue_Subscribe implements MqttCallback {
     MemoryPersistence persistence = new MemoryPersistence();
 
     private int red = 255 ,green = 255,blue = 255, brighness= 254 ,saturation =254;
-    private Boolean onOff = true;
+    private boolean onOff = true;
+
+    public boolean isAutomated() {
+        return automated;
+    }
+
+    private boolean automated = false;
 
     public int getRed() {
         return red;
@@ -86,6 +92,7 @@ public class PhilipsHue_Subscribe implements MqttCallback {
         blue = colour.getInt("blue");
         brighness = light.getInt("brighness");
         saturation = light.getInt("Saturation");
+        automated = light.getBoolean("automated");
 
 
     }

@@ -20,6 +20,7 @@ public class Controller implements PHSDKListener {
     String lightIdentifer;
     List<PHLight> allLights;
     private  ObjectMapper mapper = new ObjectMapper();
+    private Boolean automated;
 
     public Controller( ) {
         super();
@@ -27,7 +28,7 @@ public class Controller implements PHSDKListener {
         startDiscovery();
         try{
             Thread.sleep(5000);
-            setLight(255,255,255,254,254, true);
+            setLight(255,255,255,254,254, true, true);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -169,8 +170,8 @@ public class Controller implements PHSDKListener {
         }
     }
 
-    public void setLight(int red, int green, int blue, int bri, int sat, Boolean isOnorOff) {
-
+    public void setLight(int red, int green, int blue, int bri, int sat, Boolean isOnorOff,Boolean automated) {
+        this.automated = automated;
         bridge = phHueSDK.getSelectedBridge();
         allLights = bridge.getResourceCache().getAllLights();
         lightIdentifer = allLights.get(0).getIdentifier();
@@ -236,6 +237,7 @@ public class Controller implements PHSDKListener {
                 colour.setRed(red+1);
                 colour.setGreen(green+1);
                 colour.setBlue(blue+1);
+                light.setAutomated(automated);
                 jsonInString = mapper.writeValueAsString(philipsHue);
             }catch (Exception e){
                 e.printStackTrace();

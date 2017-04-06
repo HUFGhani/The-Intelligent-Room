@@ -59,7 +59,8 @@ import java.util.Map;
         "name_long",
         "is_online",
         "last_connection",
-        "hvac_state"
+        "hvac_state",
+        "automated"
 })
 
 public class ThermostatElements implements Serializable {

@@ -21,6 +21,7 @@ public class NestService {
     String auth = "c.qOL8PQR370XkE3F2oQbSSIwBENrVMYN1DhAQJRpmxDnuzd23e2Z0Ru4fsUKgzc20pHbBkhumPXp9qgwNUJuNJXSeif7By" +
             "D2SpcHRiEoX2sNecb7SvwmK3d1X91JGwJxRxMl2fTvDa3m3aa1W";
     String device ="0KD654moZP0wgM2qlRxQxFcNidHWg5j2";
+    private boolean getautomated;
 
 
     public NestService() {
@@ -48,10 +49,12 @@ public class NestService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        nestThermostat.getThermostats().getThermostatElements().setAutomated(getautomated);
         return String.valueOf(nestThermostat.getThermostats().getThermostatElements().getStatus());
     }
 
-    public void setNestTemputure(double temputure) {
+    public void setNestTemputure(double temputure, boolean getautomated) {
+        this.getautomated = getautomated;
         double temp = 0;
         if (temp == temputure) {
             System.out.println("it the same");
