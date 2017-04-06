@@ -60,8 +60,6 @@ public class ServerComs {
 	
 	public static void turnNestOff(String houseId){
 		Nest nest = new Nest();
-		nest.setTarget_temperature_c(0);
-
 		MqttUtils.mqttPublish(new Gson().toJson(nest), houseId + "/actuator/nest");
 	}
 	

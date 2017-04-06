@@ -13,9 +13,9 @@ public class Light implements Serializable {
 	@SerializedName("colour")
 	private Colour colour = null;
 	@SerializedName("brightness")
-	private int brightness = 0;
+	private int brightness = 254;
 	@SerializedName("saturation")
-	private int saturation = 0;
+	private int saturation = 254;
 	private boolean automated = true;
 
 	private final static long serialVersionUID = 4897633775422404008L;

@@ -1,10 +1,8 @@
 package lighting;
 
 import java.util.HashMap;
-
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-
 import utils.DataFormatUtilities;
 import utils.PahoClientSub;
 

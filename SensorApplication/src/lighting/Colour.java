@@ -1,7 +1,7 @@
 package lighting;
 
 public class Colour {
-	private int red, green, blue;
+	private int red = 254, green = 254, blue= 254;
 
 	public Colour() {
 
