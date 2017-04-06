@@ -50,6 +50,8 @@ public class NestService {
             e.printStackTrace();
         }
         nestThermostat.getThermostats().getThermostatElements().setAutomated(getautomated);
+
+
         return String.valueOf(nestThermostat.getThermostats().getThermostatElements().getStatus());
     }
 

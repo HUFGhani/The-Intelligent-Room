@@ -806,8 +806,8 @@ public class ThermostatElements implements Serializable {
 
     public String getStatus(){
         return "{ " +
-                "targetTemperatureC:"+targetTemperatureC+","
-                +"automated:"+automated+
+                "\"target_temperature_c\":"+targetTemperatureC+","
+                +"\"automated\":"+automated+
                 "}";
     }
 }
