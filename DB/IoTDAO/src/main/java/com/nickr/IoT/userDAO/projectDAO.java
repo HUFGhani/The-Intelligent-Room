@@ -5,7 +5,7 @@ import com.nickr.IoT.user.model.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ProjectDAO {
+public class projectDAO {
 
 	Connection conn = null;
 	Statement stmt = null;
@@ -322,7 +322,7 @@ public void insertSensors(Sensor s){
 }
 		
 
-	public ProjectDAO() {
+	public projectDAO() {
 		// TODO Auto-generated constructor stub
 	}
 
