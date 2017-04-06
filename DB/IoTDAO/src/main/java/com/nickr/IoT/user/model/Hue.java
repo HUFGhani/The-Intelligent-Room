@@ -1,5 +1,6 @@
 package com.nickr.IoT.user.model;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -31,4 +32,7 @@ public class Hue implements Serializable
 		HomeId = homeId;
 	}
 
+    public String toString() {
+        return new Gson().toJson(this);
+    }
 }
