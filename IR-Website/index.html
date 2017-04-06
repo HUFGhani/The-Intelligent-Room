@@ -88,9 +88,7 @@ document.getElementById("output").innerHTML = items;
 function subhue() {
 var items;
 $.getJSON( "subscribehue.php", function( data ) {
-$.each(data.light, function (i, value) {
-
- });
+items = data.light.colour.red;
  console.log(items);
 });
 }

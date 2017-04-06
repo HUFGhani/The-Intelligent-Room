@@ -2,7 +2,7 @@ package com.nickr.IoT.MQTT;
 
 import com.google.gson.Gson;
 import com.nickr.IoT.user.model.Hue;
-import com.nickr.IoT.userDAO.ProjectDAO;
+import com.nickr.IoT.userDAO.projectDAO;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
@@ -17,7 +17,7 @@ public class HueMQTT implements MqttCallback{
     String clientId     = "hue";
     MemoryPersistence persistence = new MemoryPersistence();
     Gson gson = new Gson();
-    ProjectDAO projectDAO = new ProjectDAO();
+    com.nickr.IoT.userDAO.projectDAO projectDAO = new projectDAO();
 
 
     public HueMQTT() {
@@ -45,8 +45,11 @@ public class HueMQTT implements MqttCallback{
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         String jsonData = new String(mqttMessage.getPayload());
+      System.out.println(jsonData + "£££££££££££");
         Hue hue = gson.fromJson(jsonData, Hue.class);
-        projectDAO.InsertPhilipsHue(hue);
+        System.out.println(hue.getLight().isOnOff() + "!!!!!!!!!!!!!!!!!!!!!1");
+
+//        projectDAO.InsertPhilipsHue(hue);
 
     }
 

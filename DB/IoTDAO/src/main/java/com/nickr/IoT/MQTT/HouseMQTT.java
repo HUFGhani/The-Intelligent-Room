@@ -1,7 +1,7 @@
 package com.nickr.IoT.MQTT;
 
 import com.google.gson.Gson;
-import com.nickr.IoT.userDAO.ProjectDAO;
+import com.nickr.IoT.userDAO.projectDAO;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
@@ -16,7 +16,7 @@ public class HouseMQTT implements MqttCallback {
     String clientId     = "hue";
     MemoryPersistence persistence = new MemoryPersistence();
     Gson gson = new Gson();
-    ProjectDAO projectDAO = new ProjectDAO();
+    com.nickr.IoT.userDAO.projectDAO projectDAO = new projectDAO();
 
 
     public HouseMQTT() {
