@@ -17,7 +17,7 @@ public class PhilipsHue_Publish {
     private String topic;
     private int qos             = 2;
     private String broker       = "tcp://localhost:1883";
-    private String clientId     = "nest";
+    private String clientId     = "hue_status";
     private MemoryPersistence persistence = new MemoryPersistence();
 
     public PhilipsHue_Publish() {
@@ -44,7 +44,7 @@ public class PhilipsHue_Publish {
             message.setQos(qos);
             message.setRetained(true);
             client.publish(getTopic()+"/actuator/hue/status",message);
-            client.disconnect();
+//            client.disconnect();
         }catch (MqttException e){
             e.printStackTrace();
         }

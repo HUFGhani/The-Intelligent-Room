@@ -2,49 +2,88 @@ package io.github.hufghani.mqtt;
 
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-import org.json.hue.JSONObject;
+import org.json.JSONObject;
+
 
 /**
- * Created by hamzaghani on 26/02/2017.
+ * Created by hamzaghani on 06/04/2017.
  */
 public class PhilipsHue_Subscribe implements MqttCallback {
-    String topic;
-    int qos             = 2;
-    String broker       = "tcp://localhost:1883";
-    String clientId     = "hue";
+
+    private String topic;
+    private int qos             = 2;
+    private String broker       = "tcp://localhost:1883";
+    private String clientId     = "hue";
     MemoryPersistence persistence = new MemoryPersistence();
+    int red ,green, blue, saturation, brightness;
+    boolean automated = true , onoff = true;
 
-    private int red = 255 ,green = 255,blue = 255, brighness= 254 ,saturation =254;
-    private boolean onOff = true;
-
-    public boolean isAutomated() {
-        return automated;
+    public PhilipsHue_Subscribe() {
+        super();
     }
 
-    private boolean automated = false;
 
     public int getRed() {
         return red;
+    }
+
+    public PhilipsHue_Subscribe setRed(int red) {
+        this.red = red;
+        return this;
     }
 
     public int getGreen() {
         return green;
     }
 
+    public PhilipsHue_Subscribe setGreen(int green) {
+        this.green = green;
+        return this;
+    }
+
     public int getBlue() {
         return blue;
     }
 
-    public int getBrighness() {
-        return brighness;
+    public PhilipsHue_Subscribe setBlue(int blue) {
+        this.blue = blue;
+        return this;
     }
 
     public int getSaturation() {
         return saturation;
     }
 
-    public Boolean getOnOff() {
-        return onOff;
+    public PhilipsHue_Subscribe setSaturation(int saturation) {
+        this.saturation = saturation;
+        return this;
+    }
+
+    public int getBrightness() {
+        return brightness;
+    }
+
+    public PhilipsHue_Subscribe setBrightness(int brightness) {
+        this.brightness = brightness;
+        return this;
+    }
+
+    public boolean isAutomated() {
+        return automated;
+    }
+
+    public PhilipsHue_Subscribe setAutomated(boolean automated) {
+        this.automated = automated;
+        return this;
+    }
+
+    public boolean isOnoff() {
+        return onoff;
+    }
+
+    public PhilipsHue_Subscribe setOnoff(boolean onoff) {
+        this.onoff = onoff;
+        return this;
     }
 
     public String getTopic() {
@@ -56,11 +95,7 @@ public class PhilipsHue_Subscribe implements MqttCallback {
         return this;
     }
 
-    public PhilipsHue_Subscribe() {
-        super();
-    }
-
-    public void subscribe(){
+    public void subscribe() {
         try {
             MqttClient client = new MqttClient(broker, clientId, persistence);
             MqttConnectOptions connOpts = new MqttConnectOptions();
@@ -77,22 +112,21 @@ public class PhilipsHue_Subscribe implements MqttCallback {
 
     }
 
-
-
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         String jsonData = new String(mqttMessage.getPayload());
         JSONObject obj = new JSONObject(jsonData);
         JSONObject light = obj.getJSONObject("light");
         String name = light.getString("name");
-        onOff = light.getBoolean("on/off");
+        setOnoff(light.getBoolean("on/off"));
         JSONObject colour = light.getJSONObject("colour");
-        red = colour.getInt("red");
-        green = colour.getInt("green");
-        blue = colour.getInt("blue");
-        brighness = light.getInt("brighness");
-        saturation = light.getInt("Saturation");
-        automated = light.getBoolean("automated");
+        setRed(colour.getInt("red"));
+        setGreen(colour.getInt("green"));
+        setBlue(colour.getInt("blue"));
+        setBrightness(light.getInt("brightness"));
+        setSaturation(light.getInt("Saturation"));
+        setAutomated(light.getBoolean("automated"));
+
 
 
     }
@@ -101,4 +135,6 @@ public class PhilipsHue_Subscribe implements MqttCallback {
     public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
 
     }
+
+
 }

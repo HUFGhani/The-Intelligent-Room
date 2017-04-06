@@ -23,8 +23,8 @@ public class Light implements Serializable{
     private boolean onOff;
     @JsonProperty("colour")
     private Colour colour;
-    @JsonProperty("brighness")
-    private int brighness;
+    @JsonProperty("brightness")
+    private int brightness;
     @JsonProperty("Saturation")
     private int saturation;
     @JsonIgnore
@@ -49,12 +49,12 @@ public class Light implements Serializable{
         super();
     }
 
-    public Light(String name, boolean onOff, Colour colour, int brighness, int saturation,boolean automated) {
+    public Light(String name, boolean onOff, Colour colour, int brightness, int saturation,boolean automated) {
         super();
         this.name = name;
         this.onOff = onOff;
         this.colour = colour;
-        this.brighness = brighness;
+        this.brightness = brightness;
         this.saturation = saturation;
         this.automated = automated;
     }
@@ -89,14 +89,14 @@ public class Light implements Serializable{
         this.colour = colour;
     }
 
-    @JsonProperty("brighness")
-    public int getBrighness() {
-        return brighness;
+    @JsonProperty("brightness")
+    public int getBrightness() {
+        return brightness;
     }
 
-    @JsonProperty("brighness")
-    public void setBrighness(int brighness) {
-        this.brighness = brighness;
+    @JsonProperty("brightness")
+    public void setBrightness(int brighness) {
+        this.brightness = brighness;
     }
 
     @JsonProperty("Saturation")
@@ -125,7 +125,7 @@ public class Light implements Serializable{
                 "name='" + name + '\'' +
                 ", onOff=" + onOff +
                 ", colour=" + colour +
-                ", brighness=" + brighness +
+                ", brightness=" + brightness +
                 ", saturation=" + saturation +
                 ", automated=" + automated +
                 '}';
