@@ -1,12 +1,8 @@
 package lighting;
 
 import java.util.HashMap;
-import java.util.List;
-
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-
 import com.google.gson.Gson;
-
 import sensors.GeneralPhidSensor;
 import utils.DataFormatUtilities;
 import utils.House;

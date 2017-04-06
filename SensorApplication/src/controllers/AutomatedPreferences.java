@@ -10,19 +10,14 @@ import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-
-import com.google.gson.Gson;
-
 import heating.Nest;
 import heating.TemperaturePref;
 import heating.TmpActionMethod;
 import lighting.Colour;
-import lighting.Hue;
 import lighting.Light;
 import lighting.LightActionMethod;
 import lighting.LightPref;
 import utils.DataFormatUtilities;
-import utils.MqttUtils;
 import utils.PahoClientSub;
 import utils.ServerComs;
 import utils.User;

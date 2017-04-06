@@ -1,7 +1,7 @@
 package heating;
 
 public class Nest {
-	private double target_temperature_c;
+	private double target_temperature_c = 9.0;
 	private boolean automated = true;
 
 	public Nest(Nest nest) {
