@@ -1,5 +1,7 @@
 package com.nickr.IoT.user.model;
 
+import com.google.gson.Gson;
+
 import java.sql.Date;
 
 public class Nest {
@@ -43,4 +45,9 @@ public class Nest {
 	public void setAutomaticStatus(Boolean automaticStatus) {
 		this.automaticStatus = automaticStatus;
 	}
+
+	public String toString() {
+		return new Gson().toJson(this);
+	}
 }
+

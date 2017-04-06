@@ -1,6 +1,7 @@
 package com.nickr.IoT.userDAO;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.nickr.IoT.user.model.RegistrationRequest;
 import com.nickr.IoT.user.model.Sensor;
@@ -34,9 +35,9 @@ public class Tester {
 //		oneCourse = cdao.getCourse("Programming");
 //		System.out.println("DEBUG: Grabbing just one course " +oneCourse.toString());
 //		
-//		course testCourse = new course("636H1211", "test", 30, 12, "Martyn Amos");
-//		int result = cdao.insertcourse(testCourse);
+//		Sensor testSensor = new Sensor(1, "test", "location", 2, 16/02/12, 3 );
+//		int result = dao.insertSensors(testSensor);
 //		System.out.println(result);
-		
+//
 	}
 }

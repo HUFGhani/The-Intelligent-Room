@@ -14,6 +14,7 @@ public class Hue implements Serializable
     private final static long serialVersionUID = 1283432260452140043L;
     private int HomeId;
 
+
     public Light getLight() {
         return light;
     }
