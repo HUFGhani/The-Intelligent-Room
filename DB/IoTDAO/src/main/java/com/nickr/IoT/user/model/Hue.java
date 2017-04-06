@@ -32,7 +32,7 @@ public class Hue implements Serializable
 		HomeId = homeId;
 	}
 
-    public String toString() {
-        return new Gson().toJson(this);
+    public Hue getHue(String jsonStr) {
+        return new Gson().fromJson(jsonStr, Hue.class);
     }
 }
