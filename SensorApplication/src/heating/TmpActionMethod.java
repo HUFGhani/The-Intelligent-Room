@@ -33,6 +33,8 @@ public class TmpActionMethod extends PahoClientSub {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		System.out.println(">>>>TA_LOG nest added ");
+
 		if (nest.getMessage() != null) {
 			System.out.println(">>>>TA_LOG nest message not null");
 			currTemp = new Nest(DataFormatUtilities.jsonToNest(nest.getMessage()));
@@ -119,11 +121,10 @@ public class TmpActionMethod extends PahoClientSub {
 		return false;
 	}
 
-	public House getHouseConfig() {
-		if (house == null)
-			return house = MqttUtils.getHouseConfiguration(this.houseId);
-
-		return house;
+	private void getHouseConfig() {
+		if (house == null) 
+			this.house = MqttUtils.getHouseConfiguration(this.houseId);
+	
 	}
 
 	@Override

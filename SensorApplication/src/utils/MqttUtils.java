@@ -19,11 +19,13 @@ public class MqttUtils {
 
 		try {
 			Thread.sleep(100);
+		
 			house = DataFormatUtilities.jsonToHouse(sub.getMessage());
 			sub.destroy();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		System.out.println(house.toString());
 		return house;
 	}
 
@@ -33,6 +35,7 @@ public class MqttUtils {
 	 * @param topic
 	 */
 	public static void mqttPublish(String pubMessage, String topic) {
+		System.out.println("PUBLISH: topic- " + topic + " msg- " + pubMessage );
 		try {
 			MqttClient client = new MqttClient("tcp://localhost:1883", topic);
 			client.connect();

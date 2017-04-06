@@ -105,7 +105,7 @@ public class SensorInterfaceKit implements SensorChangeListener, InputChangeList
 
 					if (prefs == null) {
 						System.out.println(">>STARTUP_LOG: SETTING UP HUE / NEST START...............");
-						prefs = new AutomatedPreferences("testID123");
+						prefs = new AutomatedPreferences(houseId);
 						try {
 							Thread.sleep(1000);
 						} catch (InterruptedException e) {
@@ -113,7 +113,7 @@ public class SensorInterfaceKit implements SensorChangeListener, InputChangeList
 						}
 						ServerComs.turnHueOff(houseId);
 						ServerComs.turnNestOff(houseId);
-						prefs.addLightActionMethod();
+						//prefs.addLightActionMethod();
 						prefs.addTempActionMethod();
 			
 						System.out.println(">>STARTUP_LOG: SETTING UP HUE / NEST FINISH...............");
