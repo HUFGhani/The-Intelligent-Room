@@ -47,7 +47,7 @@ public class LightActionMethod extends PahoClientSub {
 		// Check newLightPref against current Phillips hue status
 		System.out.println(">>>>LA_LOG: LIGHT ACTION START");
 		System.out.println(">>>>LA_LOG: LIGHT PREF - \n" + newlightPref.toString());
-		
+
 		if (newlightPref != null) {
 			switch (newlightPref.getActionMethod()) {
 			case "location":
@@ -67,7 +67,7 @@ public class LightActionMethod extends PahoClientSub {
 				break;
 			case "motion":
 				System.out.println("MOTION");
-		
+
 				// check motion if update in last min turn on.
 				if (currLight.isAutomated() && !newlightPref.getLight().equals(currLight)
 						&& motionDetected(3600000, sensor)) {
@@ -77,7 +77,8 @@ public class LightActionMethod extends PahoClientSub {
 					MqttUtils.mqttPublish(new Gson().toJson(new Hue(newlightPref.getLight())), topic);
 
 				} else {
-					if (!motionDetected(3600000, sensor) && currLight.isAutomated() && !newlightPref.getLight().equals(currLight)) {
+					if (!motionDetected(3600000, sensor) && currLight.isAutomated()
+							&& !newlightPref.getLight().equals(currLight)) {
 						ServerComs.turnHueOff(houseId);
 					}
 					System.out.println("MOT:NO ACTION TAKEN");
@@ -94,8 +95,9 @@ public class LightActionMethod extends PahoClientSub {
 					MqttUtils.mqttPublish(new Gson().toJson(new Hue(newlightPref.getLight())), topic);
 
 				} else {
-					
-					if (!lightValueCheck(5, sensor) && currLight.isAutomated() && !newlightPref.getLight().equals(currLight)) {
+
+					if (!lightValueCheck(5, sensor) && currLight.isAutomated()
+							&& !newlightPref.getLight().equals(currLight)) {
 						ServerComs.turnHueOff(houseId);
 					}
 					System.out.println("LIG:NO ACTION TAKEN");
@@ -122,7 +124,13 @@ public class LightActionMethod extends PahoClientSub {
 
 		} else if (this.light == null || light.getActionMethod() != this.light.getActionMethod()) {
 			getHouseConfig();
+			
 			System.out.println(">>>>LA_LOG: motion or light action method.");
+			if (house == null) {
+				System.out.println("HOUSE NULL");
+			} else {
+				System.out.println("HOUSE NOT NULL");
+			}
 			for (GeneralPhidSensor generalPhidSensor : house.getSensors()) {
 				System.out.println("LA_LOG: LOOP sensor type: " + generalPhidSensor.getSensorName() + " Action method: "
 						+ light.getActionMethod());
@@ -199,11 +207,11 @@ public class LightActionMethod extends PahoClientSub {
 
 	}
 
-	public House getHouseConfig() {
-		if (house == null)
-			return house = MqttUtils.getHouseConfiguration(this.houseId);
-
-		return house;
+	
+	private void getHouseConfig() {
+		if (house == null) 
+			this.house = MqttUtils.getHouseConfiguration(this.houseId);
+	
 	}
 
 	@Override
