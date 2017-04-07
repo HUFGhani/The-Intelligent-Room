@@ -75,39 +75,9 @@
     </div>
   </div>
 </div>
-<script>
-function subNest() {
-var items;
-$.getJSON( "subscribe.php", function( data ) {
-items = data.target_temperature_c;
-document.getElementById("output").innerHTML = items;
-});
-}
-
-
-function subhue() {
-var items;
-$.getJSON( "subscribehue.php", function( data ) {
-items = data.light.colour.red;
- console.log(items);
-});
-}
-
-function pubNest() {
-  var temperature = document.getElementById("temperature").value;
-  var message = '{"target_temperature_c":' + temperature + ', "automated":true}';
-  $.ajax({
-    url: 'publish.php',
-    type: 'POST',
-    data: {'message': message},
-    dataType: 'json',
-    timeout: 20000
-  });
-}
-</script>
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
 
