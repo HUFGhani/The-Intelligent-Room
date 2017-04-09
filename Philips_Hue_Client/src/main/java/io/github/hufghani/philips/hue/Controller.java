@@ -25,7 +25,13 @@ public class Controller implements PHSDKListener {
     public Controller( ) {
         super();
         phHueSDK = PHHueSDK.getInstance();
-        startDiscovery();
+        try {
+            startDiscovery();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            connectToLastKnownAccessPoint();
+        }
         try{
             Thread.sleep(5000);
             setLight(255,255,255,254,254, true, true);
@@ -234,9 +240,9 @@ public class Controller implements PHSDKListener {
                 light.setBrightness(state.getBrightness());
                 light.setSaturation(state.getSaturation());
                 light.setColour(colour);
-                colour.setRed(red+1);
-                colour.setGreen(green+1);
-                colour.setBlue(blue+1);
+                colour.setRed(red);
+                colour.setGreen(green);
+                colour.setBlue(blue);
                 light.setAutomated(automated);
                 jsonInString = mapper.writeValueAsString(philipsHue);
             }catch (Exception e){
