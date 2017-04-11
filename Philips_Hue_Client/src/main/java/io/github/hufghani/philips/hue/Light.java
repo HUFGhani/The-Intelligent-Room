@@ -25,7 +25,7 @@ public class Light implements Serializable{
     private Colour colour;
     @JsonProperty("brightness")
     private int brightness;
-    @JsonProperty("Saturation")
+    @JsonProperty("saturation")
     private int saturation;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
