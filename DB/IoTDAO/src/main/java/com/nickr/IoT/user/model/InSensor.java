@@ -19,7 +19,7 @@ public class InSensor {
     private String sensorMethodType;
     @SerializedName("updateTimestamp")
     @Expose
-    private Integer updateTimestamp;
+    private Long updateTimestamp;
     @SerializedName("sensorPort")
     @Expose
     private Integer sensorPort;
@@ -51,11 +51,11 @@ public class InSensor {
         this.sensorMethodType = sensorMethodType;
     }
 
-    public Integer getUpdateTimestamp() {
+    public Long getUpdateTimestamp() {
         return updateTimestamp;
     }
 
-    public void setUpdateTimestamp(Integer updateTimestamp) {
+    public void setUpdateTimestamp(Long updateTimestamp) {
         this.updateTimestamp = updateTimestamp;
     }
 

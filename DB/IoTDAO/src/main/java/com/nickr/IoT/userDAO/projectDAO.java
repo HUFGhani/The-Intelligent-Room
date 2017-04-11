@@ -151,9 +151,9 @@ public class projectDAO {
 	private Sensor getNextSensor(ResultSet resultSet) {
 		Sensor sensor = null;
 		try {
-			sensor = new Sensor(resultSet.getInt("SensorID"), resultSet.getString("SensorName"),
+			sensor = new Sensor(resultSet.getString("SensorID"), resultSet.getString("SensorName"),
 					resultSet.getString("SensorMethod"), resultSet.getInt("PortNumber"),
-					resultSet.getDate("TimeInserted"), resultSet.getInt("SensorValue"));
+					resultSet.getLong("TimeInserted"), resultSet.getInt("SensorValue"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -291,23 +291,27 @@ public void insertSensors(Sensor s) {
 
     try {
 
-        String Mysql = String.format("Insert Into sensors (SensorId, SensorName, SensorMethod, PortNumber, TimeInserted)"
-                        + "VALUES (%d, \"%s\", \"%s\", %d, \"%s\", \"%s\")"
+        String Mysql = String.format("(Insert Into sensors (SensorId, SensorName, SensorMethod, PortNumber, TimeInserted)"
+                        + "VALUES (\"%s\", \"%s\", \"%s\", %d, \"%s\")"
                         + " ON DUPLICATE KEY UPDATE "
                         + " SensorName = VALUES(SensorName),"
                         + " SensorMethod = VALUES(SensorMethod),"
                         + " PortNumber = VALUES(PortNumber),"
-                        + " TimeInserted = VALUES(TimeInserted);",
-                s.getSensorId(), s.getSensorName(),
-                s.getSensorMethodType(), s.getSensorPort(), s.getUpdateTimestamp());
-        ptmt.executeUpdate(Mysql);
+                        + " TimeInserted = VALUES(TimeInserted);");
+                openConnection();
+                ptmt = conn.prepareStatement(Mysql);
+                ptmt.setString(1, s.getSensorId());
+                ptmt.setString(2, s.getSensorName());
+                ptmt.setString(3, s.getSensorMethodType());
+                ptmt.setInt(4, s.getSensorPort());
+                ptmt.setLong(5, s.getUpdateTimestamp());
+                ptmt.executeUpdate(Mysql);
 
         String Value = "Insert into sensorValue(SensorValue, SensorID) values (?,?);";
-        openConnection();
         ptmt = conn.prepareStatement(Value);
         ptmt.setInt(1, s.getSensorValue());
-        ptmt.setInt(2, s.getSensorId());
-        ptmt.executeUpdate();
+        ptmt.setString(2, s.getSensorId());
+        ptmt.executeUpdate(Value);
 
 
     } catch (SQLException e) {
