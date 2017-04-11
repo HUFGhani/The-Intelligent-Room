@@ -12,6 +12,7 @@ HouseId int NOT NULL auto_increment,
 housePass varchar(255),
 Latitude double,
 Longitude double,
+QR varchar(30),
 PRIMARY KEY (HouseID)
 );
 
@@ -41,20 +42,23 @@ FOREIGN KEY (HouseId) REFERENCES House(HouseId)
 
 
 CREATE TABLE sensors(
-SensorID varchar(30) NOT NULL, 
+SensorID Int NOT NULL, 
 SensorName varchar(30),
 SensorMethod varchar(20),
 PortNumber integer(2),
 SensorPriority integer(2),
-TimeInserted Bigint,
+TimeInserted TimeStamp default current_timestamp,
 HouseID Int NOT NULL,
 PRIMARY KEY (SensorID, HouseID),
 FOREIGN KEY (HouseID) REFERENCES House(HouseID)
 );
 
 CREATE TABLE sensorValues(
+SensorValueID Int auto_increment,
 SensorValue Integer(3),
-SensorID varchar(30), 
+TimeInserted TimeStamp default current_timestamp,
+SensorID Int, 
+PRIMARY KEY (SensorValueID),
 FOREIGN KEY (SensorID) REFERENCES sensors(SensorID)
 );
 		

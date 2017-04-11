@@ -10,15 +10,15 @@ import java.util.Map;
  * Created by hamzaghani on 16/02/2017.
  */
 @JsonPropertyOrder({
-        "houseID",
+        "houseId",
         "usersname",
         "hueLightIP"
 })
 
 public class NestConfigProperties implements Serializable {
 
-    @JsonProperty("houseID")
-    private String houseID;
+    @JsonProperty("houseId")
+    private String houseId;
     @JsonProperty("usersname")
     private String usersname;
     @JsonProperty("hueLightIP")
@@ -30,21 +30,21 @@ public class NestConfigProperties implements Serializable {
         super();
     }
 
-    public NestConfigProperties(String houseID, String usersname, String hueLightIP) {
+    public NestConfigProperties(String houseId, String usersname, String hueLightIP) {
         super();
-        this.houseID = houseID;
+        this.houseId = houseId;
         this.usersname = usersname;
         this.hueLightIP = hueLightIP;
     }
 
-    @JsonProperty("houseID")
-    public String getHouseID() {
-        return houseID;
+    @JsonProperty("houseId")
+    public String getHouseId() {
+        return houseId;
     }
 
-    @JsonProperty("houseID")
-    public void setHouseID(String houseID) {
-        this.houseID = houseID;
+    @JsonProperty("houseId")
+    public void setHouseId(String houseId) {
+        this.houseId = houseId;
     }
 
     @JsonProperty("usersname")
@@ -80,7 +80,7 @@ public class NestConfigProperties implements Serializable {
     @Override
     public String toString() {
         return "{" +
-                "houseID='" + houseID + '\'' +
+                "houseId='" + houseId + '\'' +
                 ", usersname='" + usersname + '\'' +
                 ", hueLightIP='" + hueLightIP + '\'' +
                 '}';

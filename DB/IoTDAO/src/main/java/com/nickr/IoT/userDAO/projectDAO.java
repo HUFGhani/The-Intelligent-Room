@@ -291,23 +291,22 @@ public void insertSensors(Sensor s) {
 
     try {
 
-        String Mysql = String.format("(Insert Into sensors (SensorId, SensorName, SensorMethod, PortNumber, TimeInserted)"
-                        + "VALUES (\"%s\", \"%s\", \"%s\", %d, \"%s\")"
+
+        String Mysql = String.format("Insert Into sensors (SensorId, SensorName, SensorMethod, PortNumber, TimeInserted, HouseID)"
+                        + "VALUES (\"%s\", \"%s\", \"%s\", %d, \"%s\", %d)"
                         + " ON DUPLICATE KEY UPDATE "
                         + " SensorName = VALUES(SensorName),"
                         + " SensorMethod = VALUES(SensorMethod),"
                         + " PortNumber = VALUES(PortNumber),"
-                        + " TimeInserted = VALUES(TimeInserted);");
-                openConnection();
-                ptmt = conn.prepareStatement(Mysql);
-                ptmt.setString(1, s.getSensorId());
-                ptmt.setString(2, s.getSensorName());
-                ptmt.setString(3, s.getSensorMethodType());
-                ptmt.setInt(4, s.getSensorPort());
-                ptmt.setLong(5, s.getUpdateTimestamp());
-                ptmt.executeUpdate(Mysql);
+                        + " TimeInserted = VALUES(TimeInserted),"
+                        + " HouseID = VALUES(HouseID)",
+                s.getSensorId(), s.getSensorName(), s.getSensorMethodType(), s.getSensorPort(), s.getUpdateTimestamp(), 1);
 
-        String Value = "Insert into sensorValue(SensorValue, SensorID) values (?,?);";
+        openConnection();
+        ptmt = conn.prepareStatement(Mysql);
+        ptmt.executeUpdate(Mysql);
+
+        String Value = "Insert into sensorValues(SensorValue, SensorID) values (?,?);";
         ptmt = conn.prepareStatement(Value);
         ptmt.setInt(1, s.getSensorValue());
         ptmt.setString(2, s.getSensorId());
