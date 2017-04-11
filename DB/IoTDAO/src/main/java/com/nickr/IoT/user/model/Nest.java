@@ -1,53 +1,30 @@
 package com.nickr.IoT.user.model;
 
-import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-import java.sql.Date;
+public class Nest{
+    @SerializedName("target_temperature_c")
+    @Expose
+    private Integer targetTemperatureC;
+    @SerializedName("automated")
+    @Expose
+    private Boolean automated;
 
-public class Nest {
-	
-	private int temperature;
-	private Date lastUpdated;
-	private Boolean automaticStatus;
-	private int HomeID;
-	
-	
-	public int getHomeID() {
-		return HomeID;
-	}
+    public Integer getTargetTemperatureC() {
+        return targetTemperatureC;
+    }
 
-	public void setHomeID(int homeID) {
-		HomeID = homeID;
-	}
+    public void setTargetTemperatureC(Integer targetTemperatureC) {
+        this.targetTemperatureC = targetTemperatureC;
+    }
 
-	public Nest(int temperature, Date lastUpdated, Boolean automaticStatus) {
-		super();
-		this.temperature = temperature;
-		this.lastUpdated = lastUpdated;
-		this.automaticStatus = automaticStatus;
-	}
-	
-	public int getTemperature() {
-		return temperature;
-	}
-	public void setTemperature(int temperature) {
-		this.temperature = temperature;
-	}
-	public Date getLastUpdated() {
-		return lastUpdated;
-	}
-	public void setLastUpdated(Date lastUpdated) {
-		this.lastUpdated = lastUpdated;
-	}
-	public Boolean getAutomaticStatus() {
-		return automaticStatus;
-	}
-	public void setAutomaticStatus(Boolean automaticStatus) {
-		this.automaticStatus = automaticStatus;
-	}
+    public Boolean getAutomated() {
+        return automated;
+    }
 
-	public String toString() {
-		return new Gson().toJson(this);
-	}
+    public void setAutomated(Boolean automated) {
+        this.automated = automated;
+    }
+
 }
-
