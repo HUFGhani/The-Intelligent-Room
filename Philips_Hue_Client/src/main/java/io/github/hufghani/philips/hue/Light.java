@@ -95,8 +95,8 @@ public class Light implements Serializable{
     }
 
     @JsonProperty("brightness")
-    public void setBrightness(int brighness) {
-        this.brightness = brighness;
+    public void setBrightness(int brightness) {
+        this.brightness = brightness;
     }
 
     @JsonProperty("saturation")

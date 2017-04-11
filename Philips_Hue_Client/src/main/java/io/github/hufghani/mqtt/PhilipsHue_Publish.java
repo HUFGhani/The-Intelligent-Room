@@ -44,6 +44,8 @@ public class PhilipsHue_Publish {
             message.setQos(qos);
             message.setRetained(true);
             client.publish(getTopic()+"/actuator/hue/status",message);
+            System.out.println("publish"+getTopic()+"/actuator/hue");
+            System.out.println("publish" + message);
 //            client.disconnect();
         }catch (MqttException e){
             e.printStackTrace();

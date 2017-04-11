@@ -102,6 +102,7 @@ public class PhilipsHue_Subscribe implements MqttCallback {
             client.setCallback(this);
             client.connect(connOpts);
             client.subscribe(getTopic()+"/actuator/hue");
+            System.out.println("subscribe"+getTopic()+"/actuator/hue");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -126,7 +127,7 @@ public class PhilipsHue_Subscribe implements MqttCallback {
         setBrightness(light.getInt("brightness"));
         setSaturation(light.getInt("saturation"));
         setAutomated(light.getBoolean("automated"));
-
+        System.out.println("Subscribe"+jsonData);
     }
 
     @Override
