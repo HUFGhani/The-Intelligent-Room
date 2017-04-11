@@ -124,7 +124,7 @@ public class PhilipsHue_Subscribe implements MqttCallback {
         setGreen(colour.getInt("green"));
         setBlue(colour.getInt("blue"));
         setBrightness(light.getInt("brightness"));
-        setSaturation(light.getInt("Saturation"));
+        setSaturation(light.getInt("saturation"));
         setAutomated(light.getBoolean("automated"));
 
     }

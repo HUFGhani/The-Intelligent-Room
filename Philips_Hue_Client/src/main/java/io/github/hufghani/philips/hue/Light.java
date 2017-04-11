@@ -99,12 +99,12 @@ public class Light implements Serializable{
         this.brightness = brighness;
     }
 
-    @JsonProperty("Saturation")
+    @JsonProperty("saturation")
     public int getSaturation() {
         return saturation;
     }
 
-    @JsonProperty("Saturation")
+    @JsonProperty("saturation")
     public void setSaturation(int saturation) {
         this.saturation = saturation;
     }
