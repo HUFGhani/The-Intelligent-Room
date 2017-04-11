@@ -17,7 +17,7 @@ public class NestProperties {
     }
 
     public static String getHouseID() {
-        return nestConfigProperties.getHouseID();
+        return nestConfigProperties.getHouseId();
     }
 
 

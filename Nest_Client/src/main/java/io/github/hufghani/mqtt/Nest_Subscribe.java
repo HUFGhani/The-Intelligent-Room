@@ -35,7 +35,7 @@ public class Nest_Subscribe implements MqttCallback{
             client.setCallback(this);
             client.connect(connOpts);
             client.subscribe(getTopic()+"/actuator/nest");
-
+            System.out.println(getTopic()+"/actuator/nest");
         }catch (Exception e){
             e.printStackTrace();
         }
