@@ -14,7 +14,7 @@ import java.util.Map;
         "on/off",
         "colour",
         "brighness",
-        "Saturation"
+        "saturation"
 })
 public class Light implements Serializable{
     @JsonProperty("name")
