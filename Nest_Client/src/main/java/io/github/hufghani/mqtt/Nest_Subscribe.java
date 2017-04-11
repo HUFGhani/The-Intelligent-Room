@@ -1,8 +1,9 @@
 package io.github.hufghani.mqtt;
 
-import org.codehaus.jettison.json.JSONObject;
+
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.json.JSONObject;
 
 
 /**
@@ -55,6 +56,8 @@ public class Nest_Subscribe implements MqttCallback{
         JSONObject obj = new JSONObject(jsonData);
         setTemperature(obj.getDouble("target_temperature_c"));
         setautomated(obj.getBoolean("automated"));
+
+
     }
 
     @Override
