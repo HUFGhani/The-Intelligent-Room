@@ -32,7 +32,7 @@ function sendHue() {
 // called when the client connects
 function onConnectHuePub() {
     // Once a connection has been made, make a subscription and send a message.
-    console.log("onConnect nest pub");
+    console.log("onConnect hue pub");
     message = new Paho.MQTT.Message(json);
     message.destinationName = "houseID123/actuator/hue";
     client.send(message);

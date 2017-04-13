@@ -31,6 +31,6 @@ function getHue() {
         document.getElementById("routput").innerHTML= suboutput.light.colour.red;
         document.getElementById("goutput").innerHTML= suboutput.light.colour.green;
         document.getElementById("boutput").innerHTML= suboutput.light.colour.blue;
-        document.getElementById("broutput").innerHTML= suboutput.light.brighness;
-        //document.getElementById("satoutput").innerHTML= suboutput.light.Saturation;
+        document.getElementById("broutput").innerHTML= suboutput.light.brightness;
+        document.getElementById("satoutput").innerHTML= suboutput.light.saturation;
 }
