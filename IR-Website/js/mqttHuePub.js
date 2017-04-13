@@ -1,6 +1,3 @@
-/**
- * Created by hamzaghani on 07/04/2017.
- */
 
 // Create a client instance
 var json;

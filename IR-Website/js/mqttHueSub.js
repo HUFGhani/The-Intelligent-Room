@@ -1,6 +1,4 @@
-/**
- * Created by hamzaghani on 07/04/2017.
- */
+
 function getHue() {
 
         client = new Paho.MQTT.Client("localhost", 1884, "clientId");

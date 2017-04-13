@@ -1,11 +1,12 @@
-/**
- * Created by hamzaghani on 07/04/2017.
- */
-
 // Create a client instance
 var nestInput;
 function sendNest() {
-    nestInput = document.getElementById("temperature").value;
+    var temp = document.getElementById("temperature").value;
+    var auto = true
+    
+    nestInput = "{\"target_temperature_c\":" + temp + ", ";
+    nestInput+= "\"automated\":" + auto + "}";
+  
     client = new Paho.MQTT.Client("localhost", 1884, "clientId1");
 // connect the client
     client.connect({onSuccess: onConnectNestPub});
