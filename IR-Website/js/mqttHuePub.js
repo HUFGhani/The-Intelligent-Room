@@ -7,7 +7,7 @@ function sendHue() {
     var blue = document.getElementById("blue").value;
     var sat = document.getElementById("sat").value;
     var bri = document.getElementById("bri").value;
-    var auto = true
+    var auto = document.getElementById("automationHue").value;
 
     json = "{\"light:{";
     json+= "\"name\":\"test\",";
@@ -16,7 +16,7 @@ function sendHue() {
     json+= "\"red\":"+ red +",";
     json+= "\"green\":" + green + ",";
     json+="\"blue\":" + blue +"},";
-    json+="\"Saturation\":" + sat +",";
+    json+="\"saturation\":" + sat +",";
     json+= "\"brightness\":" + bri + ",";
     json+= "\"automated\":" + auto + "}}";
 
@@ -34,3 +34,12 @@ function onConnectHuePub() {
     message.destinationName = "houseID123/actuator/hue";
     client.send(message);
 }
+
+$("#automationHue").on('change', function() {
+                      if ($(this).is(':checked')) {
+                        $(this).attr('value', 'true');
+                      } else {
+                        $(this).attr('value', 'false');
+                      }
+
+                    });

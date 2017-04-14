@@ -2,7 +2,8 @@
 var nestInput;
 function sendNest() {
     var temp = document.getElementById("temperature").value;
-    var auto = true
+    var auto = document.getElementById("automation").value;
+    
     
     nestInput = "{\"target_temperature_c\":" + temp + ", ";
     nestInput+= "\"automated\":" + auto + "}";
@@ -20,3 +21,12 @@ function onConnectNestPub() {
     message.destinationName = "houseID123/actuator/nest";
     client.send(message);
 }
+
+$("#automation").on('change', function() {
+                      if ($(this).is(':checked')) {
+                        $(this).attr('value', 'true');
+                      } else {
+                        $(this).attr('value', 'false');
+                      }
+
+                    });
