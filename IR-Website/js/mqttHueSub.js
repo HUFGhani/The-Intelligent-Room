@@ -1,4 +1,4 @@
-
+var suboutput;
 function getHue() {
 
         client = new Paho.MQTT.Client("localhost", 1884, "clientId");

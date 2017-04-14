@@ -1,4 +1,4 @@
-
+var suboutput;
 function getUser() {
 
         client = new Paho.MQTT.Client("localhost", 1884, "clientId");
@@ -9,10 +9,10 @@ function getUser() {
         client.connect({onSuccess: onConnectUsersub});
     }
 
-    function onConnectHuesub() {
+    function onConnectUsersub() {
         // Once a connection has been made, make a subscription and send a message.
         console.log("Connect user sub");
-        client.subscribe("houseID123/userID1/preference");
+        client.subscribe("houseID123/user1/preference");
     }
 
 // called when the client loses its connection
@@ -24,8 +24,8 @@ function getUser() {
 
 // called when a message arrives
     function onMessageArrivedUserSub(message) {
-        var temp = message.payloadString;
-        suboutput = JSON.parse(temp);
+        var pref = message.payloadString;
+        suboutput = JSON.parse(pref);
         document.getElementById("fName").innerHTML= suboutput.firstName.;
         document.getElementById("lName").innerHTML= suboutput.lastName;
         document.getElementById("priority").innerHTML= suboutput.priority;
