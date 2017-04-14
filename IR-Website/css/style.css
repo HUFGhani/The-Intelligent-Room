@@ -1,0 +1,23 @@
+
+#briSlider .slider-selection {
+	background: #fd00fd;
+}
+
+
+#satSlider .slider-selection {
+	background: #fd00fd;
+}
+
+html {
+  overflow: hidden;
+  height: 100%;
+}
+body {
+  overflow: auto;
+  height: 100%;
+}
+
+/* unset bs3 setting */
+.modal-open {
+ overflow: auto; 
+}

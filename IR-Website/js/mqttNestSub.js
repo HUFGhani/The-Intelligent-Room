@@ -1,4 +1,3 @@
-
 var suboutput;
 client = new Paho.MQTT.Client("localhost",1884, "clientId");
 function getNest() {
@@ -22,11 +21,10 @@ function onConnectionLostNestsub(responseObject) {
         console.log("onConnectionLost:"+responseObject.errorMessage);
     }
 }
+
 // called when a message arrives
 function onMessageArrivedNestSub(message) {
     var temp = message.payloadString;
     suboutput = JSON.parse(temp);
     document.getElementById("output").innerHTML= suboutput.target_temperature_c;
 }
-
-

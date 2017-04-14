@@ -10,6 +10,7 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.3/css/bootstrap-slider.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -23,10 +24,8 @@
     </head>
   <body>
       
-     
-      
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" onclick="getNest();" data-target="#myModal">
-    nest
+    Nest
   </button>
 
   <!-- Modal -->
@@ -59,7 +58,7 @@
 
   <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" onclick="getHue();" data-target="#myModal1">
-  philips
+  Hue
 </button>
 
 <!-- Modal -->
@@ -68,55 +67,82 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Philips Hue</h4>
-                <script type="text/javascript" 
-                     src="js/colorpicker.js">
-                </script>
-                <style type="text/css">
-                  #picker { width: 220px; height: 200px }
-                  #slide { width: 60px; height: 200px }
-                </style>
-          <div class ="row">
-            <div class ="col-xs-6" id="picker"></div>
-            <div class ="col-xs-6" id="slide"></div>          
-          </div>
+        <h4 class="modal-title" id="myModalLabel">Choose Color</h4>
+               
       </div>
       <div class="modal-body">
-
-          <script type="text/javascript">
-                  ColorPicker(
-                    document.getElementById('slide'),
-                    document.getElementById('picker'),
-                    function(hex, hsv, rgb) {
-                      document.body.style.backgroundColor = hex;
-                      document.getElementById('rgb').innerHTML = 'rgb(' + rgb.r.toFixed() + ',' + rgb.g.toFixed() + ',' + rgb.b.toFixed() + ')';
-                      document.getElementById('R').innerHTML = 'R(' + rgb.r.toFixed() + ')';
-                      document.getElementById('G').innerHTML = 'G(' + rgb.g.toFixed() + ')';
-                      document.getElementById('B').innerHTML = 'B(' + rgb.b.toFixed() + ')';
-                    });
-                </script>
-          
-           <li><label>RGB:</label><span id="rgb">(255,0,0)</span></li>
+        <script type="text/javascript" src="js/colorpicker.js"></script>
+        <style type="text/css">
+              #picker { width: 220px; height: 200px }
+              #slide { width: 60px; height: 200px }
+        </style>
+        <div class ="row">
+            <div class ="col-xs-6" id="picker"></div>
+            <div class ="col-xs-6" id="slide"></div>          
+        </div>
+        <script type="text/javascript">
+          ColorPicker(
+            document.getElementById('slide'),
+            document.getElementById('picker'),
+            function(hex, hsv, rgb) {
+              document.body.style.backgroundColor = hex;
+//              document.getElementById('rgb').innerHTML = 'rgb(' + rgb.r.toFixed() + ',' + rgb.g.toFixed() + ',' + rgb.b.toFixed() + ')';
+              document.getElementById('red').innerHTML = rgb.r.toFixed();
+              document.getElementById('green').innerHTML = rgb.g.toFixed();
+              document.getElementById('blue').innerHTML = rgb.b.toFixed();
+            });
+        </script>
+        <div>
+            <h4>Brightness</h4><input id="briNew" data-slider-id='briSlider' type="text" data-slider-min="0" data-slider-max="255" data-slider-step="5" data-slider-value="200"/>        
+        </div>
+          <hr>
+          <div>
+            <h4>Saturation</h4><input id="satNew" data-slider-id='satSlider' type="text" data-slider-min="0" data-slider-max="255" data-slider-step="5" data-slider-value="155"/>        
+        </div>
+          <hr>
+          <h4>Current Settings</h4>
+          <div class="row">
+            <div class="col-md-6"></div>
+                Red:   <label id="routput"></label><br>
+                Green: <label id="goutput"></label><br>
+                Blue:  <label id="boutput"></label><br>
+                Brightness: <label id="brioutput"></label><br>
+                Saturation: <label id="satoutput"></label>
+          </div>
+      <hr>
+<!--
+          <li><label>RGB:</label><span id="rgb">(255,0,0)</span></li>
            <li><label>R:</label><span id="R">(255,0,0)</span></li>
            <li><label>G:</label><span id="G">(255,0,0)</span></li>
            <li><label>B:</label><span id="B">(255,0,0)</span></li>
+-->
+
+          <h4>New Settings</h4>
+          <div class="row">
+            <div class="col-md-6"></div>
+                Red:   <label id="red"></label><br>
+                Green: <label id="green"></label><br>
+                Blue:  <label id="blue"></label><br>
+                <span id="briNewCurrentSliderValLabel">Brightness: <label id="briNewVal"></label></span><br>
+                <span id="satNewCurrentSliderValLabel">Saturation: <label id="satNewVal"></label></span>
+          </div>
           
+<!--
         <p>red:</p>
-        <p id="routput"></p>
-        <input id="red">
+        <input type="text" name="red "id="red">
         <p>green:</p>
-        <p id="goutput"></p>
-        <input id="green">
+        <input type="text" name="green" id="green">
         <p>blue:</p>
-        <p id="boutput"></p>
-        <input id="blue">
+        <input type="text" name="blue" id="blue">
         <p>bri:</p>
-        <p id="brioutput"></p>
-        <input id="bri">
+        <input type="text" name="briNew" id="bri">
+-->
+<!--
         <p>sat:</p>
-        <p id="satoutput"></p>
-        <input id="sat">
+        <input type="text"id="sat">
+-->
       </div>
+        
         <div class="checkbox">
           <label>
             <input id="automationHue" type="checkbox" data-toggle="toggle">
@@ -132,10 +158,10 @@
 </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+      <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.3/bootstrap-slider.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
   
     <script src="js/script.js" type="text/javascript"></script>

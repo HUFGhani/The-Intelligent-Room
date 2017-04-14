@@ -2,11 +2,11 @@
 // Create a client instance
 var json;
 function sendHue() {
-    var red = document.getElementById("red").value;
-    var green = document.getElementById("green").value;
-    var blue = document.getElementById("blue").value;
-    var sat = document.getElementById("sat").value;
-    var bri = document.getElementById("bri").value;
+    var red = document.getElementById('red').innerHTML;
+    var green = document.getElementById("green").innerHTML;
+    var blue = document.getElementById("blue").innerHTML;
+    var bri = document.getElementById("briNew").value;
+    var sat = document.getElementById("satNew").value;
     var auto = document.getElementById("automationHue").value;
 
     json = "{\"light:{";
@@ -16,8 +16,8 @@ function sendHue() {
     json+= "\"red\":"+ red +",";
     json+= "\"green\":" + green + ",";
     json+="\"blue\":" + blue +"},";
-    json+="\"saturation\":" + sat +",";
     json+= "\"brightness\":" + bri + ",";
+    json+="\"saturation\":" + sat +",";
     json+= "\"automated\":" + auto + "}}";
 
 
