@@ -8,6 +8,10 @@
 	background: #fd00fd;
 }
 
+#tempSlider .slider-selection {
+	background: #fd00fd;
+}
+
 html {
   overflow: hidden;
   height: 100%;

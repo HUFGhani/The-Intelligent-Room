@@ -1,7 +1,7 @@
 // Create a client instance
 var nestInput;
 function sendNest() {
-    var temp = document.getElementById("temperature").value;
+    var temp = document.getElementById("tempNew").value;
     var auto = document.getElementById("automation").value;
     
     
