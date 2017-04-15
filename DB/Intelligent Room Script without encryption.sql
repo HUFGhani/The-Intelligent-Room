@@ -41,7 +41,7 @@ FOREIGN KEY (HouseId) REFERENCES House(HouseId)
 
 
 CREATE TABLE sensors(
-SensorID varchar(30) NOT NULL, 
+SensorID int NOT NULL, 
 SensorName varchar(30),
 SensorMethod varchar(20),
 PortNumber integer(2),
@@ -54,7 +54,7 @@ FOREIGN KEY (HouseID) REFERENCES House(HouseID)
 
 CREATE TABLE sensorValues(
 SensorValue Integer(3),
-SensorID varchar(30), 
+SensorID int, 
 FOREIGN KEY (SensorID) REFERENCES sensors(SensorID)
 );
 		
