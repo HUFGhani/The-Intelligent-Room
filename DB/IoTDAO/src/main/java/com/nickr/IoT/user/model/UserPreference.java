@@ -1,31 +1,37 @@
+
 package com.nickr.IoT.user.model;
 
-
-import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class UserPreference {
+    public UserPreference(int userId, String firstName, String lastName, int priority, LightPref lightPref, TmpPref tmpPref) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.priority = priority;
+        this.lightPref = lightPref;
+        this.tmpPref = tmpPref;
+    }
+
+    @SerializedName("userId")
+    @Expose
     private int userId;
+    @SerializedName("firstName")
+    @Expose
     private String firstName;
+    @SerializedName("lastName")
+    @Expose
     private String lastName;
+    @SerializedName("priority")
+    @Expose
     private int priority;
-
-    public UserPreference(int userId, String firstName, String lastName, int priority,
-			LightingPreference lightingPreference, HeatingPreference heatingPreference) {
-		super();
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.priority = priority;
-		this.lightingPreference = lightingPreference;
-		this.heatingPreference = heatingPreference;
-	}
-
-	@SerializedName("lightPref")
-    public LightingPreference lightingPreference;
-
+    @SerializedName("lightPref")
+    @Expose
+    private LightPref lightPref;
     @SerializedName("tmpPref")
-    public HeatingPreference heatingPreference;
+    @Expose
+    private TmpPref tmpPref;
 
     public int getUserId() {
         return userId;
@@ -59,8 +65,20 @@ public class UserPreference {
         this.priority = priority;
     }
 
-    @Override
-    public String toString() {
-        return new Gson().toJson(this);
+    public LightPref getLightPref() {
+        return lightPref;
     }
+
+    public void setLightPref(LightPref lightPref) {
+        this.lightPref = lightPref;
+    }
+
+    public TmpPref getTmpPref() {
+        return tmpPref;
+    }
+
+    public void setTmpPref(TmpPref tmpPref) {
+        this.tmpPref = tmpPref;
+    }
+
 }

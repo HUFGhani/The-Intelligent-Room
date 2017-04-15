@@ -54,7 +54,7 @@ public class projectDAO {
 		openConnection();
 		// Create select statement and execute it
 		try {
-			String selectSQL = "Select u.UserID, u.Firstname, u.Lastname, u.Priority, u.HouseId, pl.Brightness, pl.Saturation, pl.Red, pl.Blue, pl.Green, pl.actionMethod as 'LightingActionMethod', pl.actionPriority as 'LightingActionPriority', pt.TargetTemp, pt.actionMethod as 'TempActionHeating', pt.actionPriority as 'TempActionPriority' "
+			String selectSQL = "Select u.UserID, u.Firstname, u.Lastname, u.Priority, u.HouseId, pl.Lightname, pl.Brightness, pl.Saturation, pl.Red, pl.Blue, pl.Green, pl.actionMethod as 'LightingActionMethod', pl.actionPriority as 'LightingActionPriority', pt.TargetTemp, pt.actionMethod as 'TempActionMethod', pt.actionPriority as 'TempActionPriority' "
 					+ "From users u " + "inner join PrefLighting pl on u.UserID = pl.UserID "
 					+ "inner join PrefTemp pt on u.UserID = pt.UserID " + "Where u.Email = '" + email
 					+ "' and u.UserPassword = '" + password + "' ";
@@ -63,11 +63,18 @@ public class projectDAO {
 			while (resultSet.next()) {
 				preference = new UserPreference(resultSet.getInt("UserID"), resultSet.getString("Firstname"),
 						resultSet.getString("Lastname"), resultSet.getInt("Priority"),
-						new LightingPreference(resultSet.getInt("Red"), resultSet.getInt("Green"), resultSet.getInt("Blue"),
-								resultSet.getInt("Saturation"), resultSet.getInt("Brightness"),
+						new LightPref(
+								new Light(
+										resultSet.getString("Lightname"),
+								new Colour(resultSet.getInt("Red"), resultSet.getInt("Green"), resultSet.getInt("Blue")),
+										resultSet.getInt("Saturation"), resultSet.getInt("Brightness")),
 								resultSet.getString("LightingActionMethod"), resultSet.getInt("LightingActionPriority")),
-						new HeatingPreference(resultSet.getInt("TargetTemp"), resultSet.getString("TempActionHeating"),
-								resultSet.getInt("TempActionPriority")));
+						new TmpPref(
+								new Nest(resultSet.getInt("TargetTemp")),
+								resultSet.getString("TempActionMethod"),
+								resultSet.getInt("TempActionPriority")
+						));
+
 			}
 
 			// Retrieve the results
@@ -229,13 +236,13 @@ public class projectDAO {
 			   openConnection();
 			   ptmt = conn.prepareStatement(Mysql);
 			   ptmt.setString(1, h.getLight().getName());
-			   ptmt.setString(2, h.getLight().getBrightness());
-			   ptmt.setString(3, h.getLight().getSaturation());
-			   ptmt.setString(4, h.getLight().getColour().getRed());
-			   ptmt.setString(5, h.getLight().getColour().getBlue());
-			   ptmt.setString(6, h.getLight().getColour().getGreen());
-			   ptmt.setBoolean(7, h.getLight().isOnOff());
-			   ptmt.setBoolean(8, h.getLight().isAutomaticStatus());
+			   ptmt.setInt(2, h.getLight().getBrightness());
+			   ptmt.setInt(3, h.getLight().getSaturation());
+			   ptmt.setInt(4, h.getLight().getColour().getRed());
+			   ptmt.setInt(5, h.getLight().getColour().getBlue());
+			   ptmt.setInt(6, h.getLight().getColour().getGreen());
+			   ptmt.setBoolean(7, h.isOnOff());
+			   ptmt.setBoolean(8, h.getAutomaticStatus());
 			   ptmt.setString(9, "houseID123");
 			   ptmt.executeUpdate();					   
 			 		   			   			   
@@ -265,7 +272,7 @@ public class projectDAO {
 		   ptmt = conn.prepareStatement(Mysql);
 		   ptmt.setInt(1, n.getTargetTemperatureC());
 		   ptmt.setDate(2,ourJavaDateObject );
-		   ptmt.setBoolean(3, n.getAutomated());
+		   ptmt.setBoolean(3, n.getAutomaticStatus());
 		   ptmt.setString(4, "houseID123");
 		   ptmt.executeUpdate();					   
 		 		   			   			   
@@ -334,17 +341,18 @@ public void insertSensors(Sensor s) {
     public void InsertLightPreference(LightPref Light){
 
         try{
-            String Mysql = "Insert into PrefLighting(Brightness, Saturation, Red, Blue, Green, actionMethod, actionPriority, UserID) values (?,?,?,?,?,?,?,?);";
+            String Mysql = "Insert into PrefLighting(Lightname, Brightness, Saturation, Red, Blue, Green, actionMethod, actionPriority, UserID) values (?,?,?,?,?,?,?,?,?);";
             openConnection();
             ptmt = conn.prepareStatement(Mysql);
-            ptmt.setString(1, Light.getBrightness());
-            ptmt.setString(2, Light.getSaturation());
-            ptmt.setString(3, Light.getColour().getRed());
-            ptmt.setString(4, Light.getColour().getBlue());
-            ptmt.setString(5, Light.getColour().getGreen());
-            ptmt.setString(6, Light.getActionMethod());
-            ptmt.setString(7, Light.getActionPriority());
-            ptmt.setInt(8, 1);
+            ptmt.setString(1, Light.getLight().getName());
+            ptmt.setInt(2, Light.getLight().getBrightness());
+            ptmt.setInt(3, Light.getLight().getSaturation());
+            ptmt.setInt(4, Light.getLight().getColour().getRed());
+            ptmt.setInt(5, Light.getLight().getColour().getBlue());
+            ptmt.setInt(6, Light.getLight().getColour().getGreen());
+            ptmt.setString(7, Light.getActionMethod());
+            ptmt.setInt(8, Light.getActionPriority());
+            ptmt.setInt(9, 1);
             ptmt.executeUpdate();
 
         }	catch (SQLException e) {

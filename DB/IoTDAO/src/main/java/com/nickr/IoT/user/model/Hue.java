@@ -8,13 +8,39 @@ import java.io.Serializable;
 
 public class Hue implements Serializable
 {
+    private final static long serialVersionUID = 1283432260452140043L;
 
     @SerializedName("light")
     @Expose
     private Light light;
-    private final static long serialVersionUID = 1283432260452140043L;
+
     private String HomeId;
 
+    @SerializedName("on/off")
+    @Expose
+    private boolean isOnOff;
+
+    @SerializedName("automated")
+    @Expose
+    private boolean automaticStatus;
+
+
+
+    public Boolean isOnOff() {
+        return isOnOff;
+    }
+
+    public void setOnOff(Boolean onOff) {
+        isOnOff = onOff;
+    }
+
+    public Boolean getAutomaticStatus() {
+        return automaticStatus;
+    }
+
+    public void setAutomaticStatus(Boolean automaticStatus) {
+        this.automaticStatus = automaticStatus;
+    }
 
     public Light getLight() {
         return light;

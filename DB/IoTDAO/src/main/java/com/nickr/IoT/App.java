@@ -44,30 +44,31 @@ public class App {
 
 // TEST STATEMENTS
 
-//       String jsonData = "{\"light\":{\"name\":test2,\"on/off\":true,\"colour\":{\"red\":5,\"green\":255,\"blue\":6},\"brightness\":255,\"Saturation\":255,\"automated\":false}}";
+//       String jsonData = "{\"light\":{\"name\":test4,\"on/off\":true,\"colour\":{\"red\":5,\"green\":255,\"blue\":6},\"brightness\":255,\"Saturation\":255,\"automated\":true}}";
 //       Hue Hue = gson.fromJson(jsonData, Hue.class);
-//       System.out.println(Hue.getLight().getName() + " " + Hue.getLight().isOnOff() + " " + Hue.getLight().getColour().getRed() + " " +
+//       System.out.println(Hue.getLight().getName() + " " + Hue.isOnOff() + " " + Hue.getLight().getColour().getRed() + " " +
 //                Hue.getLight().getColour().getGreen() + " " + Hue.getLight().getColour().getBlue() + " " +
-//                Hue.getLight().getBrightness() + " " + Hue.getLight().getSaturation() + " " + Hue.getLight().isAutomaticStatus());
+//                Hue.getLight().getBrightness() + " " + Hue.getLight().getSaturation() + " " + Hue.getAutomaticStatus());
 //       projectDAO.InsertPhilipsHue(Hue);
 
 
-//        String jsonData = "{\"target_temperature_c\":20, \"automated\":false}";
+//        String jsonData = "{\"target_temperature_c\":26, \"automated\":false}";
 //        Nest nest = gson.fromJson(jsonData, Nest.class);
-//        System.out.println(nest.getTargetTemperatureC() + " " + nest.getAutomated());
+//        System.out.println(nest.getTargetTemperatureC() + " " + nest.getAutomaticStatus());
 //        projectDAO.InsertNest(nest);
 
-        String jsonData = "{\"sensorName\":touchSensor,\"sensorId\":1,\"sensorMethodType\":onChanged,\"updateTimestamp\":20171203,\"sensorPort\":1,\"sensorValue\":511}";
-        Sensor sensor = gson.fromJson(jsonData, Sensor.class);
-        System.out.println(sensor.getSensorName() + " " + sensor.getSensorId() + " "  + sensor.getSensorMethodType() + " " + sensor.getUpdateTimestamp() + " " + sensor.getSensorPort() + " " + sensor.getSensorValue());
-        projectDAO.insertSensors(sensor);
+//        String jsonData = "{\"sensorName\":touchSensor,\"sensorId\":1,\"sensorMethodType\":average,\"updateTimestamp\":20171203,\"sensorPort\":1,\"sensorValue\":520}";
+//        Sensor sensor = gson.fromJson(jsonData, Sensor.class);
+//        System.out.println(sensor.getSensorName() + " " + sensor.getSensorId() + " "  + sensor.getSensorMethodType() + " " + sensor.getUpdateTimestamp() + " " + sensor.getSensorPort() + " " + sensor.getSensorValue());
+//        projectDAO.insertSensors(sensor);
 
-//          String jsonData = "{\"colour\":{\"red\":255,\"green\":255,\"blue\":230},\"saturation\":3,\"brightness\":10,\"actionMethod\":location,\"actionPriority\":3}";
+
+//          String jsonData = "{\"light\":{\"name\":\"bulb4\",\"colour\":{\"red\":0,\"green\":0,\"blue\":150},\"Saturation\":200,\"brightness\":200},\"actionMethod\":\"location\",\"actionPriority\":2}";
 //          LightPref Lpref = gson.fromJson(jsonData, LightPref.class);
-//          System.out.println(Lpref.getColour().getRed() + " " + Lpref.getColour().getGreen() + " " + Lpref.getColour().getBlue() + " " + Lpref.getSaturation() + " " + Lpref.getBrightness() + " " + Lpref.getActionMethod() + " " + Lpref.getActionPriority());
+//          System.out.println(Lpref.getLight().getName()+ " " + Lpref.getLight().getColour().getRed() + " " + Lpref.getLight().getColour().getGreen() + " " + Lpref.getLight().getColour().getBlue() + " " + Lpref.getLight().getSaturation() + " " + Lpref.getLight().getBrightness() + " " + Lpref.getActionMethod() + " " + Lpref.getActionPriority());
 //          projectDAO.InsertLightPreference(Lpref);
 
-//          String jsonData = "{\"target_temperature_c\":40,\"actionMethod\":Location,\"actionPriority\":2}";
+//          String jsonData = "{\"target_temperature_c\":26,\"actionMethod\":Location,\"actionPriority\":3}";
 //          HeatingPreference Hpref = gson.fromJson(jsonData, HeatingPreference.class);
 //          System.out.println(Hpref.getTargetTemp() + " " + Hpref.getAutomationType() + " " + Hpref.getActionPriority());
 //          projectDAO.InsertHeatPreference(Hpref);
