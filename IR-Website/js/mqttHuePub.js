@@ -22,7 +22,7 @@ function sendHue() {
 
 
     //client = new Paho.MQTT.Client("localhost", 1884, "clientId1");
-    client = new Paho.MQTT.Client("ec2-52-56-203-226.eu-west-2.compute.amazonaws.com", 1884, "clientId1");
+    client = new Paho.MQTT.Client("ec2-52-56-203-226.eu-west-2.compute.amazonaws.com", 1884, "clientIdHuePub");
 // connect the client
     client.connect({onSuccess: onConnectHuePub});
 }
@@ -33,6 +33,7 @@ function onConnectHuePub() {
     console.log("onConnect hue pub");
     message = new Paho.MQTT.Message(json);
     message.destinationName = "houseID123/actuator/hue";
+    message.retained(true);
     client.send(message);
 }
 
