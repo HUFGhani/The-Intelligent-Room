@@ -13,7 +13,7 @@ public class Hue implements Serializable
     @Expose
     private Light light;
     private final static long serialVersionUID = 1283432260452140043L;
-    private int HomeId;
+    private String HomeId;
 
 
     public Light getLight() {
@@ -24,11 +24,11 @@ public class Hue implements Serializable
         this.light = light;
     }
 
-	public int getHomeId() {
+	public String getHomeId() {
 		return HomeId;
 	}
 
-	public void setHomeId(int homeId) {
+	public void setHomeId(String homeId) {
 		HomeId = homeId;
 	}
 

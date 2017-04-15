@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 public class HouseConfiguration {
-    private int houseId;
+    private String houseId;
     private ArrayList<Sensor> sensors;
     private boolean hasNest;
     private boolean hasLights;
@@ -17,11 +17,11 @@ public class HouseConfiguration {
     	
     }
     
-    public int getHouseId() {
+    public String getHouseId() {
         return houseId;
     }
 
-    public void setHouseId(int houseId) {
+    public void setHouseId(String houseId) {
         this.houseId = houseId;
     }
 
