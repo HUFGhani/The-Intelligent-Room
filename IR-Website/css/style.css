@@ -12,6 +12,34 @@
 	background: #fd00fd;
 }
 
+
+#redSlider .slider-selection {
+	background: #fd00fd;
+}
+
+
+#greenSlider .slider-selection {
+	background: #fd00fd;
+}
+
+#blueSlider .slider-selection {
+	background: #fd00fd;
+}
+
+
+#satEditSlider .slider-selection {
+	background: #fd00fd;
+}
+
+
+#briEditSlider .slider-selection {
+	background: #fd00fd;
+}
+
+#tempEditSlider .slider-selection {
+	background: #fd00fd;
+}
+
 html {
   overflow: hidden;
   height: 100%;
