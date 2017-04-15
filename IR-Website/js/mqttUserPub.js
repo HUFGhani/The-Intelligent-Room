@@ -17,7 +17,7 @@ function sendUser() {
     var tactp     = document.getElementById("tempActPriorityPrefEdit").value;
     
     
-    json = "{\"userId\":\"user1\",";
+    json = "{\"userId\":\"1\",";
     json+= "\"firstName\":" + first +",";
     json+= "\"lastName\":" + last +",";
     json+= "\"priority\":" + prio +",";
