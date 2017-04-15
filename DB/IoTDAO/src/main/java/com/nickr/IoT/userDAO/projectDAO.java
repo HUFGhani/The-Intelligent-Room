@@ -105,7 +105,7 @@ public class projectDAO {
 			ResultSet resultSet = stmt.executeQuery(selectSQL);
 			
 			while (resultSet.next()) {
-				configuration.setHouseId(resultSet.getInt("HouseID"));
+				configuration.setHouseId(resultSet.getString("HouseID"));
 				Location location = new Location(
 						resultSet.getDouble("Latitude"),
 						resultSet.getDouble("Longitude")
@@ -125,7 +125,7 @@ public class projectDAO {
 		return configuration;
 	}
 
-	public ArrayList<Sensor> getSensors(int houseId) {
+	public ArrayList<Sensor> getSensors(String houseId) {
 		ArrayList<Sensor> allSensors = new ArrayList<>();
 
 		String selectSQL = "Select s.SensorID, s.SensorName, s.SensorMethod, s.TimeInserted, s.PortNumber, sv.SensorValue "
@@ -151,7 +151,7 @@ public class projectDAO {
 	private Sensor getNextSensor(ResultSet resultSet) {
 		Sensor sensor = null;
 		try {
-			sensor = new Sensor(resultSet.getString("SensorID"), resultSet.getString("SensorName"),
+			sensor = new Sensor(resultSet.getInt("SensorID"), resultSet.getString("SensorName"),
 					resultSet.getString("SensorMethod"), resultSet.getInt("PortNumber"),
 					resultSet.getLong("TimeInserted"), resultSet.getInt("SensorValue"));
 		} catch (SQLException e) {
@@ -161,7 +161,7 @@ public class projectDAO {
 		return sensor;
 	}
 
-	public int getHouseId(String email, String password) {
+	public String getHouseId(String email, String password) {
 
 		String selectSQL = "Select HouseID " + "From users u " + "Where u.Email = '" + email
 				+ "' and u.UserPassword = '" + password + "' ";
@@ -171,14 +171,14 @@ public class projectDAO {
 			ResultSet resultSet = stmt.executeQuery(selectSQL);	
 			
 			while (resultSet.next()) {
-				return resultSet.getInt("HouseID");
+				return resultSet.getString("HouseID");
 			}
 			stmt.close();
 			closeConnection();
 		} catch (SQLException se) {
 			System.out.println(se);
 		}
-		return 0;
+		return "0";
 	}
 	
 	
@@ -236,7 +236,7 @@ public class projectDAO {
 			   ptmt.setString(6, h.getLight().getColour().getGreen());
 			   ptmt.setBoolean(7, h.getLight().isOnOff());
 			   ptmt.setBoolean(8, h.getLight().isAutomaticStatus());
-			   ptmt.setInt(9, 1);
+			   ptmt.setString(9, "houseID123");
 			   ptmt.executeUpdate();					   
 			 		   			   			   
 		}	catch (SQLException e) {
@@ -266,7 +266,7 @@ public class projectDAO {
 		   ptmt.setInt(1, n.getTargetTemperatureC());
 		   ptmt.setDate(2,ourJavaDateObject );
 		   ptmt.setBoolean(3, n.getAutomated());
-		   ptmt.setInt(4, 2);
+		   ptmt.setString(4, "houseID123");
 		   ptmt.executeUpdate();					   
 		 		   			   			   
 	}	catch (SQLException e) {
@@ -293,24 +293,25 @@ public void insertSensors(Sensor s) {
 
 
         String Mysql = String.format("Insert Into sensors (SensorId, SensorName, SensorMethod, PortNumber, TimeInserted, HouseID)"
-                        + "VALUES (\"%s\", \"%s\", \"%s\", %d, \"%s\", %d)"
+                        + "VALUES (%d, \"%s\", \"%s\", %d, \"%s\", \"%s\")"
                         + " ON DUPLICATE KEY UPDATE "
                         + " SensorName = VALUES(SensorName),"
                         + " SensorMethod = VALUES(SensorMethod),"
                         + " PortNumber = VALUES(PortNumber),"
                         + " TimeInserted = VALUES(TimeInserted),"
                         + " HouseID = VALUES(HouseID)",
-                s.getSensorId(), s.getSensorName(), s.getSensorMethodType(), s.getSensorPort(), s.getUpdateTimestamp(), 1);
+                s.getSensorId(), s.getSensorName(), s.getSensorMethodType(), s.getSensorPort(), s.getUpdateTimestamp(), "houseID123");
 
         openConnection();
         ptmt = conn.prepareStatement(Mysql);
-        ptmt.executeUpdate(Mysql);
+        ptmt.executeUpdate();
 
         String Value = "Insert into sensorValues(SensorValue, SensorID) values (?,?)";
         ptmt = conn.prepareStatement(Value);
         ptmt.setInt(1, s.getSensorValue());
-        ptmt.setString(2, s.getSensorId());
-        ptmt.executeUpdate(Value);
+        ptmt.setInt(2, s.getSensorId());
+        System.out.println(ptmt.toString());
+        ptmt.executeUpdate();
 
 
     } catch (SQLException e) {

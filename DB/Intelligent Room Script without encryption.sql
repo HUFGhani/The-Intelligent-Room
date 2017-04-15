@@ -8,7 +8,7 @@ Drop Table if exists users;
 Drop Table if exists house;
 
 CREATE TABLE house(
-HouseId int NOT NULL auto_increment, 
+HouseId varchar(20) NOT NULL, 
 housePass varchar(255),
 Latitude double,
 Longitude double,
@@ -23,9 +23,9 @@ Lastname varchar(30),
 Firstname varchar(30),
 Priority integer(2),
 Email varchar(80) unique,
-HouseId Int,
+HouseId varchar(20),
 PRIMARY KEY (UserID),
-FOREIGN KEY (HouseId) REFERENCES House(HouseId)	
+FOREIGN KEY (HouseId) REFERENCES house(HouseId)	
 );
 
 
@@ -34,27 +34,27 @@ NestId Int NOT NULL auto_increment,
 Temperature integer(2), 
 Lastupdated timeStamp default current_timestamp,
 automaticStatus boolean, 
-HouseId Int, 
+HouseId varchar(20), 
 PRIMARY KEY (NestId), 
 FOREIGN KEY (HouseId) REFERENCES House(HouseId)
 );
 
 
 CREATE TABLE sensors(
-SensorID varchar(30) NOT NULL, 
+SensorID int NOT NULL, 
 SensorName varchar(30),
 SensorMethod varchar(20),
 PortNumber integer(2),
 SensorPriority integer(2),
 TimeInserted Bigint,
-HouseID Int NOT NULL,
+HouseID varchar(20) NOT NULL,
 PRIMARY KEY (SensorID, HouseID),
 FOREIGN KEY (HouseID) REFERENCES House(HouseID)
 );
 
 CREATE TABLE sensorValues(
 SensorValue Integer(3),
-SensorID varchar(30), 
+SensorID int, 
 FOREIGN KEY (SensorID) REFERENCES sensors(SensorID)
 );
 		
@@ -69,7 +69,7 @@ Blue integer(3),
 Green integer(3), 
 Power boolean, 
 AutomaticStatus boolean, 
-HouseId Int, 
+HouseId varchar(20), 
 PRIMARY KEY (Id),
 FOREIGN KEY (HouseId) REFERENCES house(HouseId)
 );
