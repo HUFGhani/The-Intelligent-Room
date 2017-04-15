@@ -57,7 +57,7 @@ public class App {
 //        System.out.println(nest.getTargetTemperatureC() + " " + nest.getAutomated());
 //        projectDAO.InsertNest(nest);
 
-        String jsonData = "{\"sensorName\":motionSensor,\"sensorId\":id1,\"sensorMethodType\":onChanged,\"updateTimestamp\":20171203,\"sensorPort\":1,\"sensorValue\":511}";
+        String jsonData = "{\"sensorName\":touchSensor,\"sensorId\":1,\"sensorMethodType\":onChanged,\"updateTimestamp\":20171203,\"sensorPort\":1,\"sensorValue\":511}";
         Sensor sensor = gson.fromJson(jsonData, Sensor.class);
         System.out.println(sensor.getSensorName() + " " + sensor.getSensorId() + " "  + sensor.getSensorMethodType() + " " + sensor.getUpdateTimestamp() + " " + sensor.getSensorPort() + " " + sensor.getSensorValue());
         projectDAO.insertSensors(sensor);

@@ -151,7 +151,7 @@ public class projectDAO {
 	private Sensor getNextSensor(ResultSet resultSet) {
 		Sensor sensor = null;
 		try {
-			sensor = new Sensor(resultSet.getString("SensorID"), resultSet.getString("SensorName"),
+			sensor = new Sensor(resultSet.getInt("SensorID"), resultSet.getString("SensorName"),
 					resultSet.getString("SensorMethod"), resultSet.getInt("PortNumber"),
 					resultSet.getLong("TimeInserted"), resultSet.getInt("SensorValue"));
 		} catch (SQLException e) {
@@ -293,7 +293,7 @@ public void insertSensors(Sensor s) {
 
 
         String Mysql = String.format("Insert Into sensors (SensorId, SensorName, SensorMethod, PortNumber, TimeInserted, HouseID)"
-                        + "VALUES (\"%s\", \"%s\", \"%s\", %d, \"%s\", %d)"
+                        + "VALUES (%d, \"%s\", \"%s\", %d, \"%s\", %d)"
                         + " ON DUPLICATE KEY UPDATE "
                         + " SensorName = VALUES(SensorName),"
                         + " SensorMethod = VALUES(SensorMethod),"
@@ -304,13 +304,14 @@ public void insertSensors(Sensor s) {
 
         openConnection();
         ptmt = conn.prepareStatement(Mysql);
-        ptmt.executeUpdate(Mysql);
+        ptmt.executeUpdate();
 
         String Value = "Insert into sensorValues(SensorValue, SensorID) values (?,?)";
         ptmt = conn.prepareStatement(Value);
         ptmt.setInt(1, s.getSensorValue());
-        ptmt.setString(2, s.getSensorId());
-        ptmt.executeUpdate(Value);
+        ptmt.setInt(2, s.getSensorId());
+        System.out.println(ptmt.toString());
+        ptmt.executeUpdate();
 
 
     } catch (SQLException e) {

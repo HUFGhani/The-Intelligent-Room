@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Sensor {
 
-		private String sensorId;
+		private int sensorId;
 		private String sensorName;
 		private String sensorMethodType; 
 		private int sensorPort; 
@@ -24,7 +24,7 @@ public class Sensor {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Sensor(String sensorId, String sensorName, String sensorMethodType, int sensorPort,
+	public Sensor(int sensorId, String sensorName, String sensorMethodType, int sensorPort,
 			Long updateTimestamp, int sensorValue) {
 		super();
 		this.sensorId = sensorId;
@@ -35,11 +35,11 @@ public class Sensor {
 		this.sensorValue = sensorValue;
 	}
 
-	public String getSensorId() {
+	public int getSensorId() {
 		return sensorId;
 	}
 
-	public void setSensorId(String sensorId) {
+	public void setSensorId(int sensorId) {
 		this.sensorId = sensorId;
 	}
 
