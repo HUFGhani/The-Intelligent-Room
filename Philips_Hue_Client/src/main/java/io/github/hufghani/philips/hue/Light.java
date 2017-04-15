@@ -14,7 +14,7 @@ import java.util.Map;
         "on/off",
         "colour",
         "brighness",
-        "Saturation"
+        "saturation"
 })
 public class Light implements Serializable{
     @JsonProperty("name")
@@ -25,7 +25,7 @@ public class Light implements Serializable{
     private Colour colour;
     @JsonProperty("brightness")
     private int brightness;
-    @JsonProperty("Saturation")
+    @JsonProperty("saturation")
     private int saturation;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
@@ -95,16 +95,16 @@ public class Light implements Serializable{
     }
 
     @JsonProperty("brightness")
-    public void setBrightness(int brighness) {
-        this.brightness = brighness;
+    public void setBrightness(int brightness) {
+        this.brightness = brightness;
     }
 
-    @JsonProperty("Saturation")
+    @JsonProperty("saturation")
     public int getSaturation() {
         return saturation;
     }
 
-    @JsonProperty("Saturation")
+    @JsonProperty("saturation")
     public void setSaturation(int saturation) {
         this.saturation = saturation;
     }

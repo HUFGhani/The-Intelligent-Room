@@ -21,11 +21,18 @@ public class Controller implements PHSDKListener {
     List<PHLight> allLights;
     private  ObjectMapper mapper = new ObjectMapper();
     private Boolean automated;
+    int r = 0,g = 0,b = 0,br = 0, sa = 0;
 
     public Controller( ) {
         super();
         phHueSDK = PHHueSDK.getInstance();
-        startDiscovery();
+        try {
+            startDiscovery();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            connectToLastKnownAccessPoint();
+        }
         try{
             Thread.sleep(5000);
             setLight(255,255,255,254,254, true, true);
@@ -176,7 +183,7 @@ public class Controller implements PHSDKListener {
         allLights = bridge.getResourceCache().getAllLights();
         lightIdentifer = allLights.get(0).getIdentifier();
         PHLightState lightState = new PHLightState();
-        int r = 0,g = 0,b = 0,br = 0, sa = 0;
+//        int r = 0,g = 0,b = 0,br = 0, sa = 0;
         boolean on = false;
         if (r != red && g != green && b != blue || br != bri || sa != sat || on != isOnorOff) {
             if (checkRedValue(red) &&
@@ -216,13 +223,13 @@ public class Controller implements PHSDKListener {
 
         String jsonInString = null;
         for (PHLight hue : allLights) {
-            PHLightState state = hue.getLastKnownLightState();
-
-            float xy[] = new float[]{state.getX(), state.getY()};
-            int rgb = PHUtilities.colorFromXY(xy, PHLight.PHLightColorMode.COLORMODE_XY.getValue());
-            int red = (rgb >> 16) & 0xFF;
-            int green = (rgb >> 8) & 0xFF;
-            int blue = (rgb >> 0) & 0xFF;
+         PHLightState state = hue.getLastKnownLightState();
+//
+//            float xy[] = new float[]{state.getX(), state.getY()};
+//            int rgb = PHUtilities.colorFromXY(xy, PHLight.PHLightColorMode.COLORMODE_XY.getValue());
+//            int red = (rgb >> 16) & 0xFF;
+//            int green = (rgb >> 8) & 0xFF;
+//            int blue = (rgb >> 0) & 0xFF;
 
             try {
                 PhilipsHue philipsHue = new PhilipsHue();
@@ -234,9 +241,9 @@ public class Controller implements PHSDKListener {
                 light.setBrightness(state.getBrightness());
                 light.setSaturation(state.getSaturation());
                 light.setColour(colour);
-                colour.setRed(red+1);
-                colour.setGreen(green+1);
-                colour.setBlue(blue+1);
+                colour.setRed(r);
+                colour.setGreen(g);
+                colour.setBlue(b);
                 light.setAutomated(automated);
                 jsonInString = mapper.writeValueAsString(philipsHue);
             }catch (Exception e){

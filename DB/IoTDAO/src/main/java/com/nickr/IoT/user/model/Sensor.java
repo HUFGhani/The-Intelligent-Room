@@ -4,20 +4,28 @@ import java.util.Date;
 
 public class Sensor {
 
-		private int sensorId;
+		private String sensorId;
 		private String sensorName;
 		private String sensorMethodType; 
 		private int sensorPort; 
-		private Date updateTimestamp;
-		private int sensorValue; 
-		
-			
+		private Long updateTimestamp;
+		private int sensorValue;
+//		private int sensorValueID;
+
+//	public int getSensorValueID() {
+//		return sensorValueID;
+//	}
+
+//	public void setSensorValueID(int sensorValueID) {
+//		this.sensorValueID = sensorValueID;
+//	}
+
 	public Sensor() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Sensor(int sensorId, String sensorName, String sensorMethodType, int sensorPort,
-			Date updateTimestamp, int sensorValue) {
+	public Sensor(String sensorId, String sensorName, String sensorMethodType, int sensorPort,
+			Long updateTimestamp, int sensorValue) {
 		super();
 		this.sensorId = sensorId;
 		this.sensorName = sensorName;
@@ -27,11 +35,11 @@ public class Sensor {
 		this.sensorValue = sensorValue;
 	}
 
-	public int getSensorId() {
+	public String getSensorId() {
 		return sensorId;
 	}
 
-	public void setSensorId(int sensorId) {
+	public void setSensorId(String sensorId) {
 		this.sensorId = sensorId;
 	}
 
@@ -60,11 +68,11 @@ public class Sensor {
 	}
 
 
-	public Date getUpdateTimestamp() {
+	public Long getUpdateTimestamp() {
 		return updateTimestamp;
 	}
 
-	public void setUpdateTimestamp(Date updateTimestamp) {
+	public void setUpdateTimestamp(Long updateTimestamp) {
 		this.updateTimestamp = updateTimestamp;
 	}
 

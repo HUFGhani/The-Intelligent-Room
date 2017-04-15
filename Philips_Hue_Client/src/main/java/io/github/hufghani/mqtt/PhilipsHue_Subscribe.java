@@ -15,7 +15,7 @@ public class PhilipsHue_Subscribe implements MqttCallback {
     private String broker       = "tcp://localhost:1883";
     private String clientId     = "hue";
     MemoryPersistence persistence = new MemoryPersistence();
-    int red ,green, blue, saturation, brightness;
+    int red=255 ,green= 255, blue = 255, saturation =254, brightness =254;
     boolean automated = true , onoff = true;
 
     public PhilipsHue_Subscribe() {
@@ -102,6 +102,7 @@ public class PhilipsHue_Subscribe implements MqttCallback {
             client.setCallback(this);
             client.connect(connOpts);
             client.subscribe(getTopic()+"/actuator/hue");
+            System.out.println("subscribe"+getTopic()+"/actuator/hue");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -124,9 +125,9 @@ public class PhilipsHue_Subscribe implements MqttCallback {
         setGreen(colour.getInt("green"));
         setBlue(colour.getInt("blue"));
         setBrightness(light.getInt("brightness"));
-        setSaturation(light.getInt("Saturation"));
+        setSaturation(light.getInt("saturation"));
         setAutomated(light.getBoolean("automated"));
-
+        System.out.println("Subscribe"+jsonData);
     }
 
     @Override

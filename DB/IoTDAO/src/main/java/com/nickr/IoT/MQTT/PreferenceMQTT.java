@@ -46,7 +46,7 @@ public class PreferenceMQTT implements MqttCallback {
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         String jsonData = new String(mqttMessage.getPayload());
         PreferenceBase preferenceBase = gson.fromJson(jsonData, PreferenceBase.class);
-//        projectDAO.insertSensors(sensor);
+//       projectDAO;
 
     }
 

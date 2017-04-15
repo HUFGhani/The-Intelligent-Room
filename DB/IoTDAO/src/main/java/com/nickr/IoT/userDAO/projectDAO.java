@@ -3,7 +3,12 @@ package com.nickr.IoT.userDAO;
 import com.nickr.IoT.user.model.*;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+
+import static javafx.scene.input.KeyCode.L;
 
 public class projectDAO {
 
@@ -12,6 +17,8 @@ public class projectDAO {
 	PreparedStatement ptmt = null;
 	public static final String userid = "robertsn";
 	public static final String userpass = "ensteLas6";
+	Calendar calendar = Calendar.getInstance();
+	java.sql.Date ourJavaDateObject = new java.sql.Date(calendar.getTime().getTime());
 
 	private void openConnection() {
 		// loading jdbc driver for mysql
@@ -144,9 +151,9 @@ public class projectDAO {
 	private Sensor getNextSensor(ResultSet resultSet) {
 		Sensor sensor = null;
 		try {
-			sensor = new Sensor(resultSet.getInt("SensorID"), resultSet.getString("SensorName"),
+			sensor = new Sensor(resultSet.getString("SensorID"), resultSet.getString("SensorName"),
 					resultSet.getString("SensorMethod"), resultSet.getInt("PortNumber"),
-					resultSet.getDate("TimeInserted"), resultSet.getInt("SensorValue"));
+					resultSet.getLong("TimeInserted"), resultSet.getInt("SensorValue"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -229,7 +236,7 @@ public class projectDAO {
 			   ptmt.setString(6, h.getLight().getColour().getGreen());
 			   ptmt.setBoolean(7, h.getLight().isOnOff());
 			   ptmt.setBoolean(8, h.getLight().isAutomaticStatus());
-			   ptmt.setInt(9, h.getHomeId());
+			   ptmt.setInt(9, 1);
 			   ptmt.executeUpdate();					   
 			 		   			   			   
 		}	catch (SQLException e) {
@@ -251,15 +258,15 @@ public class projectDAO {
 	}
 	
 	public void InsertNest(Nest n){
-		
+		LocalDateTime now = LocalDateTime.now();
 		try{
 		   String Mysql = "Insert into nest(Temperature, Lastupdated, automaticStatus, HouseId) values (?,?,?,?);";
 		   openConnection();
 		   ptmt = conn.prepareStatement(Mysql);
-		   ptmt.setInt(1, n.getTemperature());
-		   ptmt.setDate(2, n.getLastUpdated());
-		   ptmt.setBoolean(3, n.getAutomaticStatus());
-		   ptmt.setInt(4, n.getHomeID());
+		   ptmt.setInt(1, n.getTargetTemperatureC());
+		   ptmt.setDate(2,ourJavaDateObject );
+		   ptmt.setBoolean(3, n.getAutomated());
+		   ptmt.setInt(4, 2);
 		   ptmt.executeUpdate();					   
 		 		   			   			   
 	}	catch (SQLException e) {
@@ -280,48 +287,112 @@ public class projectDAO {
 
 }
 	
-public void insertSensors(Sensor s){
-		
-		try{
-			
-            String Mysql = String.format("Insert Into sensors (SensorId, SensorName, SensorMethod, PortNumber, TimeInserted)"
-                    + "VALUES (%d, \"%s\", \"%s\", %d, \"%s\", \"%s\")"
-                    + " ON DUPLICATE KEY UPDATE "
-                    + " SensorName = VALUES(SensorName),"
-                    + " SensorMethod = VALUES(SensorMethod),"
-                    + " PortNumber = VALUES(PortNumber),"
-                    + " TimeInserted = VALUES(TimeInserted)",
-                    s.getSensorId(), s.getSensorName(),
-                    s.getSensorMethodType(), s.getSensorPort(), s.getUpdateTimestamp());
-            		ptmt.executeUpdate(Mysql);
-		 
-		   String Value = "Insert into sensorValue(SensorValue, SensorID) values (?,?);";
-		   openConnection();
-		   ptmt = conn.prepareStatement(Value);
-		   ptmt.setInt(1, s.getSensorValue());
-		   ptmt.setInt(2, s.getSensorId());		   
-		   ptmt.executeUpdate();	
-		   
-		 		   			   			   
-	}	catch (SQLException e) {
-		e.printStackTrace();
-		
-	} finally {
-		try {
-			if (stmt != null)
-				stmt.close();
-			if (conn != null)
-				closeConnection();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+public void insertSensors(Sensor s) {
 
+    try {
+
+
+        String Mysql = String.format("Insert Into sensors (SensorId, SensorName, SensorMethod, PortNumber, TimeInserted, HouseID)"
+                        + "VALUES (\"%s\", \"%s\", \"%s\", %d, \"%s\", %d)"
+                        + " ON DUPLICATE KEY UPDATE "
+                        + " SensorName = VALUES(SensorName),"
+                        + " SensorMethod = VALUES(SensorMethod),"
+                        + " PortNumber = VALUES(PortNumber),"
+                        + " TimeInserted = VALUES(TimeInserted),"
+                        + " HouseID = VALUES(HouseID)",
+                s.getSensorId(), s.getSensorName(), s.getSensorMethodType(), s.getSensorPort(), s.getUpdateTimestamp(), 1);
+
+        openConnection();
+        ptmt = conn.prepareStatement(Mysql);
+        ptmt.executeUpdate(Mysql);
+
+        String Value = "Insert into sensorValues(SensorValue, SensorID) values (?,?);";
+        ptmt = conn.prepareStatement(Value);
+        ptmt.setInt(1, s.getSensorValue());
+        ptmt.setString(2, s.getSensorId());
+        ptmt.executeUpdate(Value);
+
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+
+    } finally {
+        try {
+            if (stmt != null)
+                stmt.close();
+            if (conn != null)
+                closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
-		
 
+    public void InsertLightPreference(LightPref Light){
+
+        try{
+            String Mysql = "Insert into PrefLighting(Brightness, Saturation, Red, Blue, Green, actionMethod, actionPriority, UserID) values (?,?,?,?,?,?,?,?);";
+            openConnection();
+            ptmt = conn.prepareStatement(Mysql);
+            ptmt.setString(1, Light.getBrightness());
+            ptmt.setString(2, Light.getSaturation());
+            ptmt.setString(3, Light.getColour().getRed());
+            ptmt.setString(4, Light.getColour().getBlue());
+            ptmt.setString(5, Light.getColour().getGreen());
+            ptmt.setString(6, Light.getActionMethod());
+            ptmt.setString(7, Light.getActionPriority());
+            ptmt.setInt(8, 1);
+            ptmt.executeUpdate();
+
+        }	catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (stmt != null)
+                    stmt.close();
+                if (conn != null)
+                    closeConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public void InsertHeatPreference(HeatingPreference Heat){
+
+        try{
+            String Mysql = "Insert into PrefTemp(TargetTemp, actionMethod, actionPriority, UserID) values (?,?,?,?)";
+            openConnection();
+            ptmt = conn.prepareStatement(Mysql);
+            ptmt.setInt(1, Heat.getTargetTemp());
+            ptmt.setString(2, Heat.getAutomationType());
+            ptmt.setInt(3, Heat.getActionPriority());
+            ptmt.setInt(4, 2);
+            ptmt.executeUpdate();
+
+        }	catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (stmt != null)
+                    stmt.close();
+                if (conn != null)
+                    closeConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 	public projectDAO() {
 		// TODO Auto-generated constructor stub
 	}

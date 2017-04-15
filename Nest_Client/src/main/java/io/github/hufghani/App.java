@@ -12,6 +12,7 @@ public class App {
     }
 
     public App() {
+        System.out.println("strtup");
         NestProperties nestProperties = new NestProperties();
         NestService nestService = new NestService();
         Nest_Publish nest_publish = new Nest_Publish();
@@ -21,10 +22,10 @@ public class App {
 
         for (;;){
             try {
-                Thread.sleep(60000);
+                Thread.sleep(30000);
                 nest_publish.publish(nestService.getAllString());
                 nest_subscribe.subscribe();
-                nestService.setNestTemputure(nest_subscribe.getTemperature(),nest_subscribe.getautomated());
+                nestService.setNestTemputure(nest_subscribe.getTemperature(), nest_subscribe.getautomated());
             }catch (Exception e){
                 e.printStackTrace();
             }

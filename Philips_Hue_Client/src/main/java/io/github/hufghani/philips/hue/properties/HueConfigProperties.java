@@ -10,14 +10,14 @@ import java.util.Map;
  * Created by hamzaghani on 15/02/2017.
  */
 @JsonPropertyOrder({
-        "houseID",
+        "houseId",
         "usersname",
         "hueLightIP"
 })
 public class HueConfigProperties implements Serializable {
 
-    @JsonProperty("houseID")
-    private String houseID;
+    @JsonProperty("houseId")
+    private String houseId;
     @JsonProperty("usersname")
     private String usersname;
     @JsonProperty("hueLightIP")
@@ -29,21 +29,21 @@ public class HueConfigProperties implements Serializable {
         super();
     }
 
-    public HueConfigProperties(String houseID, String usersname, String hueLightIP) {
+    public HueConfigProperties(String houseId, String usersname, String hueLightIP) {
         super();
-        this.houseID = houseID;
+        this.houseId = houseId;
         this.usersname = usersname;
         this.hueLightIP = hueLightIP;
     }
 
     @JsonProperty("houseID")
     public String getHouseID() {
-        return houseID;
+        return houseId;
     }
 
     @JsonProperty("houseID")
     public void setHouseID(String houseID) {
-        this.houseID = houseID;
+        this.houseId = houseId;
     }
 
     @JsonProperty("usersname")
@@ -79,7 +79,7 @@ public class HueConfigProperties implements Serializable {
     @Override
     public String toString() {
         return "{" +
-                "houseID='" + houseID + '\'' +
+                "houseId='" + houseId + '\'' +
                 ", usersname='" + usersname + '\'' +
                 ", hueLightIP='" + hueLightIP + '\'' +
                 '}';

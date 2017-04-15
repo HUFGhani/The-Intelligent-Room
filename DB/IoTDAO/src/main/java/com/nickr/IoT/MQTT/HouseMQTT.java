@@ -44,7 +44,7 @@ public class HouseMQTT implements MqttCallback {
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         String jsonData = new String(mqttMessage.getPayload());
-//        H nest = gson.fromJson(jsonData, Nest.class);
+//        Nest nest = gson.fromJson(jsonData, Nest.class);
 //        projectDAO.InsertNest(nest);
     }
 
