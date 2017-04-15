@@ -306,7 +306,7 @@ public void insertSensors(Sensor s) {
         ptmt = conn.prepareStatement(Mysql);
         ptmt.executeUpdate(Mysql);
 
-        String Value = "Insert into sensorValues(SensorValue, SensorID) values (?,?);";
+        String Value = "Insert into sensorValues(SensorValue, SensorID) values (?,?)";
         ptmt = conn.prepareStatement(Value);
         ptmt.setInt(1, s.getSensorValue());
         ptmt.setString(2, s.getSensorId());
