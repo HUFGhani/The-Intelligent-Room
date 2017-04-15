@@ -12,7 +12,7 @@ function getUser() {
     function onConnectUsersub() {
         // Once a connection has been made, make a subscription and send a message.
         console.log("Connect user sub");
-        client.subscribe("houseID123/user1/preference");
+        client.subscribe("houseID123/1/preference");
     }
 
 // called when the client loses its connection
