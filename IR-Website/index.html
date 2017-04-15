@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>SmartHome</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -15,12 +15,33 @@
 
     </head>
     <body>
+        
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">SmartHome</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="index.html">Home</a></li>
+              <li><a href="#" data-toggle="modal" onclick="getNest();" data-target="#myModal">Nest</a></li>
+              <li><a href="#" data-toggle="modal" onclick="getHue();" data-target="#myModal1">Hue</a></li>
+              <li><a href="#" data-toggle="modal" onclick="getUser();" data-target="#userModal">User Preferences</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#">Logout</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
 
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" onclick="getNest();" data-target="#myModal">
-Nest
-</button>
-
-  <!-- Modal -->
+<!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -52,11 +73,6 @@ Nest
     </div>
 </div>
 
-  <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" onclick="getHue();" data-target="#myModal1">
-  Hue
-</button>
-
 <!-- Modal -->
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -87,16 +103,16 @@ Nest
             });
         </script>
         <div>
-            <h4>Brightness</h4><input id="briNew" data-slider-id='briSlider' type="text" data-slider-min="0" data-slider-max="255" data-slider-step="5" data-slider-value="200"/>        
+            <h4>Brightness</h4><input id="briNew" data-slider-id='briSlider' type="text" data-slider-min="0" data-slider-max="255" data-slider-step="5" data-slider-value="125"/>        
         </div>
           <hr>
           <div>
-            <h4>Saturation</h4><input id="satNew" data-slider-id='satSlider' type="text" data-slider-min="0" data-slider-max="255" data-slider-step="5" data-slider-value="155"/>        
+            <h4>Saturation</h4><input id="satNew" data-slider-id='satSlider' type="text" data-slider-min="0" data-slider-max="255" data-slider-step="5" data-slider-value="125"/>        
         </div>
           <hr>
           <h4>Current Settings</h4>
           <div class="row">
-            <div class="col-md-6"></div>
+            <div class="col-md-6"></div><br>
                 Red:   <label id="routput"></label><br>
                 Green: <label id="goutput"></label><br>
                 Blue:  <label id="boutput"></label><br>
@@ -106,7 +122,7 @@ Nest
       <hr>
           <h4>New Settings</h4>
           <div class="row">
-            <div class="col-md-6"></div>
+            <div class="col-md-6"></div><br>
                 Red:   <label id="red"></label><br>
                 Green: <label id="green"></label><br>
                 Blue:  <label id="blue"></label><br>
@@ -128,9 +144,6 @@ Nest
   </div>
 </div>
       
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" onclick="getUser();" data-target="#userModal">
-User Preferences
-</button>
   <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
