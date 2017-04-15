@@ -21,7 +21,8 @@ function sendHue() {
     json+= "\"automated\":" + auto + "}}";
 
 
-    client = new Paho.MQTT.Client("localhost", 1884, "clientId1");
+    //client = new Paho.MQTT.Client("localhost", 1884, "clientId1");
+    client = new Paho.MQTT.Client("ec2-52-56-203-226.eu-west-2.compute.amazonaws.com", 1884, "clientId1");
 // connect the client
     client.connect({onSuccess: onConnectHuePub});
 }
