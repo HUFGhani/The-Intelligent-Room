@@ -10,7 +10,7 @@ function sendHue() {
     var auto = document.getElementById("automationHue").value;
 
     json = "{\"light:{";
-    json+= "\"name\":\"test\",";
+    json+= "\"name\":\"Hue color lamp 1\",";
     json+="\"on/off\":"+ true +",";
     json+= "\"colour\":{" ;
     json+= "\"red\":"+ red +",";
