@@ -200,8 +200,6 @@ public class Controller implements PHSDKListener {
                 lightState.setBrightness(bri);
                 lightState.setSaturation(sat);
 
-            } else if (isOnorOff == false) {
-                lightState.setOn(isOnorOff);
             }
 
             phHueSDK.getSelectedBridge().updateLightState(lightIdentifer, lightState, null);
