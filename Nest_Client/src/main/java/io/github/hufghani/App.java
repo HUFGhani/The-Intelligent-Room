@@ -22,7 +22,7 @@ public class App {
 
         for (;;){
             try {
-                Thread.sleep(30000);
+                Thread.sleep(60000);
                 nest_publish.publish(nestService.getAllString());
                 nest_subscribe.subscribe();
                 nestService.setNestTemputure(nest_subscribe.getTemperature(), nest_subscribe.getautomated());
