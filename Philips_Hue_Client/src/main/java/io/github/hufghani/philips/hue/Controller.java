@@ -194,6 +194,7 @@ public class Controller implements PHSDKListener {
                     checkSaturationValue(sat)) {
 
                 lightState.setOn(isOnorOff);
+                System.out.println(isOnorOff + "@@@@@@@@@@@@@@@@");
                 float xy[] = PHUtilities.calculateXYFromRGB(red, green, blue, null);
                 lightState.setX(xy[0]);
                 lightState.setY(xy[1]);
