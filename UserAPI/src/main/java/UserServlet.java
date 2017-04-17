@@ -1,8 +1,6 @@
 import com.google.gson.Gson;
-import com.nickr.IoT.user.model.LogInRegisterResponse;
-import com.nickr.IoT.user.model.LogInRequest;
-import com.nickr.IoT.user.model.RegistrationRequest;
-import com.nickr.IoT.userDAO.projectDAO;
+import model.LogInRegisterResponse;
+import model.RegistrationRequest;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,12 +18,15 @@ import java.io.PrintWriter;
 public class UserServlet extends HttpServlet {
 
 
+        projectDAO dao = new projectDAO();
+
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         BufferedReader reader = request.getReader();
-        LogInRequest logInRequest = new Gson().fromJson(reader, LogInRequest.class);
+        //LogInRequest logInRequest = new Gson().fromJson(reader, LogInRequest.class);
 
-        LogInRegisterResponse logInResponse = new projectDAO().logIn(logInRequest.getEmail(), logInRequest.getPassword());
+//        LogInRegisterResponse logInResponse = new projectDAO().logIn(logInRequest.getEmail(), logInRequest.getPassword());
+          LogInRegisterResponse logInResponse =  dao.logIn("nick12345@hotmail.co.uk","User123");
 
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
