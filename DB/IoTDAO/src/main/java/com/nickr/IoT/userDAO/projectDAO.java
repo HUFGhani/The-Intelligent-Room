@@ -373,16 +373,16 @@ public void insertSensors(Sensor s) {
 
     }
 
-    public void InsertHeatPreference(HeatingPreference Heat){
+    public void InsertHeatPreference(UserPreference Heat){
 
         try{
             String Mysql = "Insert into PrefTemp(TargetTemp, actionMethod, actionPriority, UserID) values (?,?,?,?)";
             openConnection();
             ptmt = conn.prepareStatement(Mysql);
-            ptmt.setInt(1, Heat.getTargetTemp());
-            ptmt.setString(2, Heat.getAutomationType());
-            ptmt.setInt(3, Heat.getActionPriority());
-            ptmt.setInt(4, 2);
+            ptmt.setInt(1, Heat.getTmpPref().getTargetTemp());
+            ptmt.setString(2, Heat.getTmpPref().getAutomationType());
+            ptmt.setInt(3, Heat.getTmpPref().getActionPriority());
+            ptmt.setInt(4, Heat.getUserId());
             ptmt.executeUpdate();
 
         }	catch (SQLException e) {

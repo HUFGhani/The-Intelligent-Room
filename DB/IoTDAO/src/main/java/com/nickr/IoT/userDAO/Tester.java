@@ -23,7 +23,7 @@ public class Tester {
 //		
 //		System.out.println(dao.getHouseId("nick12345@hotmail.co.uk", "User123"));
 		
-		System.out.println(dao.logIn("karl12345@hotmail.co.uk", "User123"));
+		System.out.println(dao.logIn("nick12345@hotmail.co.uk", "User123"));
 		
 
 		
