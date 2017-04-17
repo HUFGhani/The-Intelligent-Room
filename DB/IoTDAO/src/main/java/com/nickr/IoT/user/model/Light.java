@@ -60,4 +60,13 @@ public class Light {
         this.brightness = brightness;
     }
 
+    @Override
+    public String toString() {
+        return "Light{" +
+                "name='" + name + '\'' +
+                ", colour=" + colour +
+                ", saturation=" + saturation +
+                ", brightness=" + brightness +
+                '}';
+    }
 }

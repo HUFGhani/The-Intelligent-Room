@@ -48,4 +48,13 @@ public class LightPref implements Serializable {
         this.actionPriority = actionPriority;
     }
 
+
+    @Override
+    public String toString() {
+        return "LightPref{" +
+                "light=" + light +
+                ", actionMethod='" + actionMethod + '\'' +
+                ", actionPriority=" + actionPriority +
+                '}';
+    }
 }

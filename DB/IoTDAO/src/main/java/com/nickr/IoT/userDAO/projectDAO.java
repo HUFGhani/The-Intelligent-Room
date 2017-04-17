@@ -338,7 +338,7 @@ public void insertSensors(Sensor s) {
     }
 }
 
-    public void InsertLightPreference(UserPreference UserPref){
+    public void InsertLightPreference(String UserPref){
 
         try{
             String Mysql = "Insert into PrefLighting(Lightname, Brightness, Saturation, Red, Blue, Green, actionMethod, actionPriority, UserID) values (?,?,?,?,?,?,?,?,?);";

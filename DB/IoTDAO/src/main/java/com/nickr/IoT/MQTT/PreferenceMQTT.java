@@ -1,7 +1,7 @@
 package com.nickr.IoT.MQTT;
 
 import com.google.gson.Gson;
-import com.nickr.IoT.user.model.PreferenceBase;
+import com.nickr.IoT.user.model.UserPreference;
 import com.nickr.IoT.userDAO.projectDAO;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
@@ -45,8 +45,8 @@ public class PreferenceMQTT implements MqttCallback {
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         String jsonData = new String(mqttMessage.getPayload());
-        PreferenceBase preferenceBase = gson.fromJson(jsonData, PreferenceBase.class);
-//       projectDAO;
+        UserPreference userPreference = gson.fromJson(jsonData, UserPreference.class);
+        projectDAO.InsertLightPreference(userPreference.getLightPref().getLight().toString());
 
     }
 
