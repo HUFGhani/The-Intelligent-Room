@@ -186,7 +186,7 @@ public class Controller implements PHSDKListener {
         PHLightState lightState = new PHLightState();
 //        int r = 0,g = 0,b = 0,br = 0, sa = 0;
 
-        if (r != red || g != green || b != blue || br != bri || sa != sat ) {
+        if (r != red && g != green && b != blue || br != bri || sa != sat || isOnOff != isOnorOff) {
             if (checkRedValue(red) &&
                     checkGreenValue(green) &&
                     checkBlueValue(blue) &&
@@ -194,18 +194,17 @@ public class Controller implements PHSDKListener {
                     checkSaturationValue(sat)) {
 
                 lightState.setOn(isOnorOff);
-                System.out.println(isOnorOff + "@@@@@@@@@@@@@@@@");
                 float xy[] = PHUtilities.calculateXYFromRGB(red, green, blue, null);
                 lightState.setX(xy[0]);
                 lightState.setY(xy[1]);
                 lightState.setBrightness(bri);
                 lightState.setSaturation(sat);
-                phHueSDK.getSelectedBridge().updateLightState(lightIdentifer, lightState, null);
 
-
+            } else if (isOnorOff == false) {
+                lightState.setOn(isOnorOff);
             }
 
-//            phHueSDK.getSelectedBridge().updateLightState(lightIdentifer, lightState, null);
+            phHueSDK.getSelectedBridge().updateLightState(lightIdentifer, lightState, null);
             // null is passed here as we are not interested in the response from the Bridge.
 
             r = red;
