@@ -89,9 +89,14 @@ public class App {
 //            "actionMethod":"location",
 //                    "actionPriority":"1"
 //        }
-        }//          String jsonData = "{\"target_temperature_c\":26,\"actionMethod\":Location,\"actionPriority\":3}";
+
+//          String jsonData = "{\"target_temperature_c\":26,\"actionMethod\":Location,\"actionPriority\":3}";
 //          HeatingPreference Hpref = gson.fromJson(jsonData, HeatingPreference.class);
 //          System.out.println(Hpref.getTargetTemp() + " " + Hpref.getAutomationType() + " " + Hpref.getActionPriority());
 //          projectDAO.InsertHeatPreference(Hpref);
-//    }
+//
+//  }
+
+   }
+
 }
