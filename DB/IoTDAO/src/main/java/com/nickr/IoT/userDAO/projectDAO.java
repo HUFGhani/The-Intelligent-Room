@@ -400,7 +400,7 @@ public void insertSensors(Sensor s) {
 
     }
 
-	public void insertSensorConfiguration(HouseConfiguration s) {
+	public void insertHouseConfiguration(HouseConfiguration s) {
 
 		try {
 			String house = "Insert Into house (HouseId) values (?)";
