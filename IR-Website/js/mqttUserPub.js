@@ -18,8 +18,8 @@ function sendUser() {
     
     
     json = "{\"userId\":\"1\",";
-    json+= "\"firstName\":" + first +",";
-    json+= "\"lastName\":" + last +",";
+    json+= "\"firstName\":\"" + first + "\",";
+    json+= "\"lastName\":\"" + last + "\",";
     json+= "\"priority\":" + prio +",";
     json+= "\"lightPref\":{" ;
     json+= "\"light\":{" ;
@@ -29,13 +29,13 @@ function sendUser() {
     json+= "\"green\":" + green + ",";
     json+= "\"blue\":" + blue +"},";
     json+= "\"saturation\":" + satur +",";
-    json+= "\"brightness\":" + bright +",";
-    json+= "\"actionMethod\":" + lact +",";
+    json+= "\"brightness\":" + bright +"},";
+    json+= "\"actionMethod\":\"" + lact +"\",";
     json+= "\"actionPriority\":" + lactp +"},";
     json+= "\"tmpPref\":{" ;
     json+= "\"nest\":{" ;
-    json+= "\"target_temperature_c\":" + temp +",";
-    json+= "\"actionMethod\":" + tact +",";
+    json+= "\"target_temperature_c\":" + temp +"},";
+    json+= "\"actionMethod\":\"" + tact +"\",";
     json+= "\"actionPriority\":" + tactp +"}}";
     
 //    client = new Paho.MQTT.Client("localhost", 1884, "clientId1");
@@ -49,6 +49,8 @@ function onConnectUserPub() {
     // Once a connection has been made, make a subscription and send a message.
     console.log("onConnect user pub");
     message = new Paho.MQTT.Message(json);
+    message.qos = 2;
     message.destinationName = "houseID123/1/preference";
+    message.retained = true;
     client.send(message);
 }

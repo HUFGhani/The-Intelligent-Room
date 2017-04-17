@@ -1,4 +1,29 @@
-<!DOCTYPE html>
+<?php
+
+if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    }
+    else
+    {
+        session_destroy();
+        session_start(); 
+    }    
+
+$UserID = '';
+
+ if(isset($_SESSION['UserID'])){
+     $UserID = $_SESSION['UserID'];
+     $Email = $_SESSION['Email'];
+//     $studentPassword=$_SESSION['student_password'];
+ }   
+
+else{
+   $UserID = 'Logged Out'; 
+}
+
+?>
+    
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -35,7 +60,7 @@
               <li><a href="#" data-toggle="modal" onclick="getUser();" data-target="#userModal">User Preferences</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">Logout</a></li>
+             <li><a href="logout.php">Sign Out</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -228,7 +253,6 @@
         </div>
             <div>
                 Action Method:    <select id="tempActPrefEdit" class="form-control" name="tam">
-                                    <option value="light">Light</option>
                                     <option value="motion">Motion</option>
                                     <option value="location">Location</option>
                                   </select>
@@ -266,4 +290,5 @@
     <script src="js/mqttUserPub.js" type="text/javascript"></script>
     <script src="js/colorpicker.js" type="text/javascript"></script>
   </body>
-</html>
+</html
+

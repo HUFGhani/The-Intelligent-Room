@@ -19,7 +19,9 @@ function onConnectNestPub() {
     // Once a connection has been made, make a subscription and send a message.
     console.log("onConnect nest pub");
     message = new Paho.MQTT.Message(nestInput);
+    message.qos = 2;
     message.destinationName = "houseID123/actuator/nest";
+    message.retained = true;
     client.send(message);
 }
 
@@ -29,5 +31,4 @@ $("#automation").on('change', function() {
                       } else {
                         $(this).attr('value', 'false');
                       }
-
                     });

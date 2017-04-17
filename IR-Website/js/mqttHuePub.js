@@ -9,7 +9,7 @@ function sendHue() {
     var sat = document.getElementById("satNew").value;
     var auto = document.getElementById("automationHue").value;
 
-    json = "{\"light:{";
+    json = "{\"light\":{ ";
     json+= "\"name\":\"Hue color lamp 1\",";
     json+="\"on/off\":"+ true +",";
     json+= "\"colour\":{" ;
@@ -32,8 +32,9 @@ function onConnectHuePub() {
     // Once a connection has been made, make a subscription and send a message.
     console.log("onConnect hue pub");
     message = new Paho.MQTT.Message(json);
+    message.qos = 2;
     message.destinationName = "houseID123/actuator/hue";
-    message.retained(true);
+    message.retained = true;
     client.send(message);
 }
 
