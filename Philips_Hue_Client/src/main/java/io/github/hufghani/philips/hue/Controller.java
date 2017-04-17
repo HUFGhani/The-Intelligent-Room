@@ -186,7 +186,7 @@ public class Controller implements PHSDKListener {
         PHLightState lightState = new PHLightState();
 //        int r = 0,g = 0,b = 0,br = 0, sa = 0;
 
-        if (r != red && g != green && b != blue || br != bri || sa != sat && isOnOff != isOnorOff) {
+        if (r != red && g != green && b != blue || br != bri || sa != sat ) {
             if (checkRedValue(red) &&
                     checkGreenValue(green) &&
                     checkBlueValue(blue) &&
