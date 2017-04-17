@@ -45,11 +45,8 @@ public class HueMQTT implements MqttCallback{
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         String jsonData = new String(mqttMessage.getPayload());
-      System.out.println(jsonData + "£££££££££££");
         Hue hue = gson.fromJson(jsonData, Hue.class);
-        System.out.println(hue.isOnOff() + "!!!!!!!!!!!!!!!!!!!!!1");
-
-//        projectDAO.InsertPhilipsHue(hue);
+        projectDAO.InsertPhilipsHue(hue);
 
     }
 

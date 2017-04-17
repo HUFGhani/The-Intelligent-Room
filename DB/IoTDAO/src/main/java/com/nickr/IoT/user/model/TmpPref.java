@@ -16,14 +16,21 @@ public class TmpPref extends PreferenceBase{
     @Expose
     private Nest nest;
 
-    @SerializedName("target_temperature_c")
-    private int targetTemp;
+    @SerializedName("nest")
 
-    public int getTargetTemp() {
-        return targetTemp;
+    public Nest getNest() {
+        return nest;
     }
 
-    public void setTargetTemp(int targetTemp) {
-        this.targetTemp = targetTemp;
+    public TmpPref setNest(Nest nest) {
+        this.nest = nest;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "TmpPref{" +
+                "nest=" + nest +
+                '}';
     }
 }

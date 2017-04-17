@@ -17,7 +17,7 @@ public class ConfigurationMQTT implements MqttCallback {
     String clientId     = "hue";
     MemoryPersistence persistence = new MemoryPersistence();
     Gson gson = new Gson();
-    com.nickr.IoT.userDAO.projectDAO projectDAO = new projectDAO();
+    projectDAO projectDAO = new projectDAO();
 
 
     public ConfigurationMQTT() {
@@ -46,6 +46,7 @@ public class ConfigurationMQTT implements MqttCallback {
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         String jsonData = new String(mqttMessage.getPayload());
         HouseConfiguration houseConfiguration = gson.fromJson(jsonData, HouseConfiguration.class);
+        projectDAO.
 
     }
 

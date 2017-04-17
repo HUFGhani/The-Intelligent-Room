@@ -44,8 +44,8 @@ public class NestMQTT implements MqttCallback {
 
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
-//        String jsonData = new String(mqttMessage.getPayload());
-        String jsonData = "{\"target_temperature_c\":30, \"automated\":true}";
+        String jsonData = new String(mqttMessage.getPayload());
+//        String jsonData = "{\"target_temperature_c\":30, \"automated\":true}";
         Nest nest = gson.fromJson(jsonData, Nest.class);
         projectDAO.InsertNest(nest);
     }

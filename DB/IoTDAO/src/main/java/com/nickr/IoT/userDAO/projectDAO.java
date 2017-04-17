@@ -4,11 +4,8 @@ import com.nickr.IoT.user.model.*;
 
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import static javafx.scene.input.KeyCode.L;
 
 public class projectDAO {
 
@@ -338,7 +335,7 @@ public void insertSensors(Sensor s) {
     }
 }
 
-    public void InsertLightPreference(String UserPref){
+    public void InsertLightPreference(UserPreference UserPref){
 
         try{
             String Mysql = "Insert into PrefLighting(Lightname, Brightness, Saturation, Red, Blue, Green, actionMethod, actionPriority, UserID) values (?,?,?,?,?,?,?,?,?);";
@@ -379,7 +376,7 @@ public void insertSensors(Sensor s) {
             String Mysql = "Insert into PrefTemp(TargetTemp, actionMethod, actionPriority, UserID) values (?,?,?,?)";
             openConnection();
             ptmt = conn.prepareStatement(Mysql);
-            ptmt.setInt(1, Heat.getTmpPref().getTargetTemp());
+            ptmt.setInt(1, Heat.getTmpPref().getNest().getTargetTemperatureC());
             ptmt.setString(2, Heat.getTmpPref().getAutomationType());
             ptmt.setInt(3, Heat.getTmpPref().getActionPriority());
             ptmt.setInt(4, Heat.getUserId());
