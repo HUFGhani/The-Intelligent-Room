@@ -46,8 +46,7 @@ public class ConfigurationMQTT implements MqttCallback {
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         String jsonData = new String(mqttMessage.getPayload());
         HouseConfiguration houseConfiguration = gson.fromJson(jsonData, HouseConfiguration.class);
-
-
+        projectDAO.insertSensorConfiguration(houseConfiguration);
     }
 
     @Override
