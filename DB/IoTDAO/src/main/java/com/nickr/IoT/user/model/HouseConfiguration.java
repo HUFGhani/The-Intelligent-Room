@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-public class HouseConfiguration {
+public class HouseConfiguration extends Sensor {
     private String houseId;
     private ArrayList<Sensor> sensors;
     private boolean hasNest;

@@ -93,5 +93,5 @@ public class App {
 //          HeatingPreference Hpref = gson.fromJson(jsonData, HeatingPreference.class);
 //          System.out.println(Hpref.getTargetTemp() + " " + Hpref.getAutomationType() + " " + Hpref.getActionPriority());
 //          projectDAO.InsertHeatPreference(Hpref);
-    }
+//    }
 }

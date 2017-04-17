@@ -399,6 +399,56 @@ public void insertSensors(Sensor s) {
         }
 
     }
+
+	public void insertSensorConfiguration(HouseConfiguration s) {
+
+		try {
+			String house = "Insert Into house (HouseId) values (?)";
+			ptmt = conn.prepareStatement(house);
+			ptmt.setString(1, s.getHouseId());
+			System.out.println(ptmt.toString());
+			ptmt.executeUpdate();
+
+
+			String Mysql = String.format("Insert Into sensors (SensorId, SensorName, SensorMethod, PortNumber, TimeInserted, HouseID)"
+							+ "VALUES (%d, \"%s\", \"%s\", %d, \"%s\", \"%s\")"
+							+ " ON DUPLICATE KEY UPDATE "
+							+ " SensorName = VALUES(SensorName),"
+							+ " SensorMethod = VALUES(SensorMethod),"
+							+ " PortNumber = VALUES(PortNumber),"
+							+ " TimeInserted = VALUES(TimeInserted),"
+							+ " HouseID = VALUES(HouseID)",
+					s.getSensorId(), s.getSensorName(), s.getSensorMethodType(), s.getSensorPort(), s.getUpdateTimestamp(), "houseID123");
+
+			openConnection();
+			ptmt = conn.prepareStatement(Mysql);
+			ptmt.executeUpdate();
+
+			String Value = "Insert into sensorValues(SensorValue, SensorID) values (?,?)";
+			ptmt = conn.prepareStatement(Value);
+			ptmt.setInt(1, s.getSensorValue());
+			ptmt.setInt(2, s.getSensorId());
+			System.out.println(ptmt.toString());
+			ptmt.executeUpdate();
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+				if (conn != null)
+					closeConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	public projectDAO() {
 		// TODO Auto-generated constructor stub
 	}
