@@ -200,10 +200,12 @@ public class Controller implements PHSDKListener {
                 lightState.setY(xy[1]);
                 lightState.setBrightness(bri);
                 lightState.setSaturation(sat);
+                phHueSDK.getSelectedBridge().updateLightState(lightIdentifer, lightState, null);
+
 
             }
 
-            phHueSDK.getSelectedBridge().updateLightState(lightIdentifer, lightState, null);
+//            phHueSDK.getSelectedBridge().updateLightState(lightIdentifer, lightState, null);
             // null is passed here as we are not interested in the response from the Bridge.
 
             r = red;
