@@ -1,3 +1,14 @@
+<?php
+
+include 'Connection.php';
+//include 'checkLogin.php';
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,11 +24,13 @@
   </head> 
 
 <div class="wrapper">
-    <form class="form-signin">       
+    <form action="checkLogin.php" method="post">    
       <h2 class="form-signin-heading">Please login</h2>
-      <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
-      <input type="password" class="form-control" name="password" placeholder="Password" required=""/>      
-  
-      <button class="btn btn-lg btn-primary btn-block" type="submit" >Login</button>   
+      <input type="text" class="form-control" name="Email" placeholder="Email Address" required="" autofocus="" />
+      <input type="password" class="form-control" name="UserPassword" placeholder="Password" required=""/>      
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   
     </form>
   </div>
+
+    
+    
