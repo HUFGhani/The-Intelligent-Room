@@ -137,7 +137,7 @@ public class projectDAO {
 
 		String selectSQL = "Select s.SensorID, s.SensorName, s.SensorMethod, s.TimeInserted, s.PortNumber, sv.SensorValue "
 				+ "from sensors s " + "left join sensorValues sv on s.SensorID = sv.SensorID " + "Where s.HouseID = "
-				+ houseId;
+				+ "'" + houseId + "'";
 		
 		openConnection();
 		try {
@@ -338,21 +338,21 @@ public void insertSensors(Sensor s) {
     }
 }
 
-    public void InsertLightPreference(LightPref Light){
+    public void InsertLightPreference(UserPreference UserPref){
 
         try{
             String Mysql = "Insert into PrefLighting(Lightname, Brightness, Saturation, Red, Blue, Green, actionMethod, actionPriority, UserID) values (?,?,?,?,?,?,?,?,?);";
             openConnection();
             ptmt = conn.prepareStatement(Mysql);
-            ptmt.setString(1, Light.getLight().getName());
-            ptmt.setInt(2, Light.getLight().getBrightness());
-            ptmt.setInt(3, Light.getLight().getSaturation());
-            ptmt.setInt(4, Light.getLight().getColour().getRed());
-            ptmt.setInt(5, Light.getLight().getColour().getBlue());
-            ptmt.setInt(6, Light.getLight().getColour().getGreen());
-            ptmt.setString(7, Light.getActionMethod());
-            ptmt.setInt(8, Light.getActionPriority());
-            ptmt.setInt(9, 1);
+            ptmt.setString(1, UserPref.getLightPref().getLight().getName());
+            ptmt.setInt(2, UserPref.getLightPref().getLight().getBrightness());
+            ptmt.setInt(3, UserPref.getLightPref().getLight().getSaturation());
+            ptmt.setInt(4, UserPref.getLightPref().getLight().getColour().getRed());
+            ptmt.setInt(5, UserPref.getLightPref().getLight().getColour().getBlue());
+            ptmt.setInt(6, UserPref.getLightPref().getLight().getColour().getGreen());
+            ptmt.setString(7, UserPref.getLightPref().getActionMethod());
+            ptmt.setInt(8, UserPref.getLightPref().getActionPriority());
+            ptmt.setInt(9, UserPref.getUserId());
             ptmt.executeUpdate();
 
         }	catch (SQLException e) {
