@@ -68,33 +68,12 @@ public class App {
 //          System.out.println(Lpref.getLightPref().getLight().getName()+ " " + Lpref.getLightPref().getLight().getColour().getRed() + " " + Lpref.getLightPref().getLight().getColour().getGreen() + " " + Lpref.getLightPref().getLight().getColour().getBlue() + " " + Lpref.getLightPref().getLight().getSaturation() + " " + Lpref.getLightPref().getLight().getBrightness() + " " + Lpref.getLightPref().getActionMethod() + " " + Lpref.getLightPref().getActionPriority());
 //          projectDAO.InsertLightPreference(Lpref);
 
-//        "{\"userId\":1,\"firstName\":\"testuserfnam\",\"lastName\":\"testuserlname\",\"priority\":1,\"lightPref\":{
-//            "light":{
-//                "name":"Hue color lamp 1",
-//                        "colour":{
-//                    "red":"0",
-//                            "green":"0",
-//                            "blue":"150"
-//                },
-//                "saturation":"200",
-//                        "brightness":"200"
-//            },
-//            "actionMethod":"location",
-//                    "actionPriority":"2"
-//        },
-//            "tmpPref":{
-//            "nest":{
-//                "target_temperature_c":"10"
-//            },
-//            "actionMethod":"location",
-//                    "actionPriority":"1"
-//        }
-
-//          String jsonData = "{\"target_temperature_c\":26,\"actionMethod\":Location,\"actionPriority\":3}";
-//          HeatingPreference Hpref = gson.fromJson(jsonData, HeatingPreference.class);
-//          System.out.println(Hpref.getTargetTemp() + " " + Hpref.getAutomationType() + " " + Hpref.getActionPriority());
-//          projectDAO.InsertHeatPreference(Hpref);
-//
+        String jsonData = "{\"userId\":1,\"firstName\":\"testuserfnam\",\"lastName\":\"testuserlname\",\"priority\":1,\"lightPref\":{\"light\":{\"name\":\"Hue color lamp 1\",\"colour\":{\"red\":0,\"green\":0,\"blue\":150},\"saturation\":200,\"brightness\":200},\"actionMethod\":\"location\",\"actionPriority\":2},\"tmpPref\":{\"nest\":{\"target_temperature_c\":10},\"actionMethod\":\"location\",\"actionPriority\":1}";
+//        String jsonData = "{\"target_temperature_c\":26,\"actionMethod\":Location,\"actionPriority\":3}";
+          UserPreference Hpref = gson.fromJson(jsonData, UserPreference.class);
+          System.out.println(Hpref.getTmpPref().getNest().getTargetTemperatureC() + " " + Hpref.getTmpPref().getAutomationType() + " " + Hpref.getTmpPref().getActionPriority());
+          projectDAO.InsertHeatPreference(Hpref);
+          projectDAO.InsertLightPreference(Hpref);
 //  }
 
    }
