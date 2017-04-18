@@ -10,15 +10,7 @@ public class Sensor {
 		private int sensorPort; 
 		private Long updateTimestamp;
 		private int sensorValue;
-//		private int sensorValueID;
 
-//	public int getSensorValueID() {
-//		return sensorValueID;
-//	}
-
-//	public void setSensorValueID(int sensorValueID) {
-//		this.sensorValueID = sensorValueID;
-//	}
 
 	public Sensor() {
 		// TODO Auto-generated constructor stub

@@ -134,7 +134,8 @@ public class projectDAO {
 
 		String selectSQL = "Select s.SensorID, s.SensorName, s.SensorMethod, s.TimeInserted, s.PortNumber, sv.SensorValue "
 				+ "from sensors s " + "left join sensorValues sv on s.SensorID = sv.SensorID " + "Where s.HouseID = "
-				+ "'" + houseId + "'";
+				+ "'" + houseId + "' GROUP BY s.sensorID";
+
 		
 		openConnection();
 		try {
@@ -184,8 +185,27 @@ public class projectDAO {
 		}
 		return "0";
 	}
-	
-	
+
+	public int getPriority(String houseid){
+		int maxPriority = 0;
+
+		String selectSQL = "Select max(Priority) FROM users WHERE HouseId = " + "'" + houseid + "'";
+
+		openConnection();
+		try {
+			ResultSet resultSet = stmt.executeQuery(selectSQL);
+
+			if (resultSet.next()) {
+				maxPriority = resultSet.getInt(1);
+			}
+			stmt.close();
+			closeConnection();
+		} catch (SQLException se) {
+			System.out.println(se);
+		}
+		return maxPriority + 1;
+	}
+
 	public LogInRegisterResponse register(RegistrationRequest request){
 		try{
 			String selectSQL = "Select HouseID " + "From house h " + "Where h.HouseID = '" + request.getHomeId() 
@@ -195,14 +215,14 @@ public class projectDAO {
 			 ResultSet resultSet = stmt.executeQuery(selectSQL);
 			 
 			 if (resultSet != null){
-				 String Mysql = "Insert into users(Firstname, Lastname, Email, UserPassword, UserPriority, HouseId) values (?,?,?,?,?,?);";
+				 String Mysql = "Insert into users(Firstname, Lastname, Email, UserPassword, Priority, HouseId) values (?,?,?,?,?,?);";
 				   openConnection();
 				   ptmt = conn.prepareStatement(Mysql);
 				   ptmt.setString(1, request.getFirstName());
 				   ptmt.setString(2, request.getLastName());
 				   ptmt.setString(3, request.getEmail());
 				   ptmt.setString(4, request.getUserPassword());
-				   ptmt.setString(5, request.getUserPriority());
+				   ptmt.setInt(5, getPriority(request.getHomeId()));
 				   ptmt.setString(6, request.getHomeId());
 				   ptmt.executeUpdate();		
 			 } 
