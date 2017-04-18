@@ -134,7 +134,7 @@ public class projectDAO {
 
 		String selectSQL = "Select s.SensorID, s.SensorName, s.SensorMethod, s.TimeInserted, s.PortNumber, sv.SensorValue "
 				+ "from sensors s " + "left join sensorValues sv on s.SensorID = sv.SensorID " + "Where s.HouseID = "
-				+ houseId;
+				+ "'" + houseId + "' GROUP BY s.sensorID";
 		
 		openConnection();
 		try {
