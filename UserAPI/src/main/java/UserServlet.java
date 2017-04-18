@@ -1,5 +1,6 @@
 import com.google.gson.Gson;
 import model.LogInRegisterResponse;
+import model.LogInRequest;
 import model.RegistrationRequest;
 
 import javax.servlet.ServletException;
@@ -14,19 +15,25 @@ import java.io.PrintWriter;
 /**
  * Created by hamzaghani on 17/04/2017.
  */
-@WebServlet("/test1")
+@WebServlet("/users")
 public class UserServlet extends HttpServlet {
-
-
-        projectDAO dao = new projectDAO();
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        BufferedReader reader = request.getReader();
-        //LogInRequest logInRequest = new Gson().fromJson(reader, LogInRequest.class);
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
 
-//        LogInRegisterResponse logInResponse = new projectDAO().logIn(logInRequest.getEmail(), logInRequest.getPassword());
-          LogInRegisterResponse logInResponse =  dao.logIn("nick12345@hotmail.co.uk","User123");
+        LogInRegisterResponse logInResponse = new LogInRegisterResponse();
+
+        if (email == null || password == null) {
+            logInResponse.setError("Bad Request");
+        } else {
+            LogInRequest logInRequest = new LogInRequest(email, password);
+            logInResponse = new projectDAO().logIn(logInRequest.getEmail(), logInRequest.getPassword());
+            if (logInResponse.getHouseConfiguration() == null || logInResponse.getUserPreference() == null) {
+                logInResponse.setError("Invalid email/password combination");
+            }
+        }
 
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
