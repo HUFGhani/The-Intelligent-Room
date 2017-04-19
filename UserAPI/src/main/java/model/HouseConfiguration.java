@@ -3,9 +3,10 @@ package model;
 
 import com.google.gson.Gson;
 
+
 import java.util.ArrayList;
 
-public class HouseConfiguration {
+public class HouseConfiguration{
     private String houseId;
     private ArrayList<Sensor> sensors;
     private boolean hasNest;
@@ -64,4 +65,6 @@ public class HouseConfiguration {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
+
+
 }

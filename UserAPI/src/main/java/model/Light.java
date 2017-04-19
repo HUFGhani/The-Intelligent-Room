@@ -19,7 +19,7 @@ public class Light {
     @SerializedName("colour")
     @Expose
     private Colour colour;
-    @SerializedName("Saturation")
+    @SerializedName("saturation")
     @Expose
     private int saturation;
     @SerializedName("brightness")
@@ -60,4 +60,13 @@ public class Light {
         this.brightness = brightness;
     }
 
+    @Override
+    public String toString() {
+        return "Light{" +
+                "name='" + name + '\'' +
+                ", colour=" + colour +
+                ", saturation=" + saturation +
+                ", brightness=" + brightness +
+                '}';
+    }
 }

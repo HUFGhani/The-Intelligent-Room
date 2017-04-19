@@ -35,4 +35,11 @@ public class Nest {
         this.targetTemperatureC = targetTemperatureC;
     }
 
+    @Override
+    public String toString() {
+        return "Nest{" +
+                "targetTemperatureC=" + targetTemperatureC +
+                ", automaticStatus=" + automaticStatus +
+                '}';
+    }
 }

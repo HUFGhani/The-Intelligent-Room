@@ -16,4 +16,21 @@ public class TmpPref extends PreferenceBase{
     @Expose
     private Nest nest;
 
+    @SerializedName("nest")
+
+    public Nest getNest() {
+        return nest;
+    }
+
+    public TmpPref setNest(Nest nest) {
+        this.nest = nest;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "tmpPref{" +
+                "nest=" + nest +
+                '}';
+    }
 }
