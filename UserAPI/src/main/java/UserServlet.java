@@ -45,7 +45,13 @@ public class UserServlet extends HttpServlet {
         BufferedReader reader = request.getReader();
         RegistrationRequest registrationRequest = new Gson().fromJson(reader, RegistrationRequest.class);
 
-        LogInRegisterResponse registrationResponse = new projectDAO().register(registrationRequest);
+        LogInRegisterResponse registrationResponse = new LogInRegisterResponse();
+
+        if (registrationRequest == null) {
+            registrationResponse.setError("Bad Request");
+        } else {
+            registrationResponse = new projectDAO().register(registrationRequest);
+        }
 
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
