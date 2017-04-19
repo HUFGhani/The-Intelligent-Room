@@ -3,6 +3,7 @@ package com.nickr.IoT.userDAO;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.nickr.IoT.user.model.LogInRegisterResponse;
 import com.nickr.IoT.user.model.RegistrationRequest;
 import com.nickr.IoT.user.model.Sensor;
 
@@ -29,18 +30,18 @@ public class Tester {
 
 // System.out.println(dao.getPriority("houseID123"));
 
-//		System.out.println(dao.logIn("nick12345@hotmail.co.uk", "User123"));
+//		System.out.println(dao.logIn("Tom@test.com", "User123"));
 
 //		RegistrationRequest request = new RegistrationRequest();
 //		request.setHomeId("houseID123");
 //		request.setHomePassword("Home123");
 //		request.setFirstName("Tom");
 //		request.setLastName("Roberts");
-//		request.setEmail("Nick@test.com");
+//		request.setEmail("Jack@test.com");
 //		request.setUserPassword("User123");
 //
-//		dao.register(request);
-		
+//		LogInRegisterResponse response = dao.register(request);
+//		System.out.println(response.getUserPreference());
 		
 		
 		

@@ -69,6 +69,10 @@ public class App {
 //                  Hpref.getTmpPref().getNest().getTargetTemperatureC() + " " + Hpref.getTmpPref().getAutomationType() + " " + Hpref.getTmpPref().getActionPriority());
 //          projectDAO.InsertUserPreference(Hpref);
 
+            String jsonData = "{\"houseId\":\"houseID123\",\"houseIP\":\"testip\",\"sensors\":{\"sensorName\":\"motionSensor\",\"sensorMethodType\":\"onChanged\",\"sensorId\":1,\"updateTimestamp\":1486231894065,\"sensorPort\":0,\"sensorValue\":0}}";
+            HouseConfiguration Hc = gson.fromJson(jsonData, HouseConfiguration.class);
+            System.out.println(Hc.getHouseId());
+            projectDAO.insertHouseConfiguration(Hc);
 //  }
 
    }

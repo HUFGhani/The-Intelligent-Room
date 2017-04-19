@@ -6,9 +6,7 @@ import com.nickr.IoT.userDAO.projectDAO;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
-/**
- * Created by hamzaghani on 06/04/2017.
- */
+
 public class ConfigurationMQTT implements MqttCallback {
 
     String topic = "houseID123/+/inHouse";
