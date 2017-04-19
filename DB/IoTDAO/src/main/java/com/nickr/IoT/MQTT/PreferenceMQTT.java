@@ -46,10 +46,8 @@ public class PreferenceMQTT implements MqttCallback {
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         String jsonData = new String(mqttMessage.getPayload());
         UserPreference userPreference = gson.fromJson(jsonData, UserPreference.class);
-        projectDAO.InsertLightPreference(userPreference);
-        projectDAO.InsertHeatPreference(userPreference);
-
-    }
+        projectDAO.InsertUserPreference(userPreference);
+        }
 
     @Override
     public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {

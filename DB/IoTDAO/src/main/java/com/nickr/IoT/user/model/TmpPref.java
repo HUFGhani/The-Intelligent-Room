@@ -29,7 +29,7 @@ public class TmpPref extends PreferenceBase{
 
     @Override
     public String toString() {
-        return "TmpPref{" +
+        return "tmpPref{" +
                 "nest=" + nest +
                 '}';
     }

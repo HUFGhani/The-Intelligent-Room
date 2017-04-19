@@ -19,7 +19,7 @@ public class Light {
     @SerializedName("colour")
     @Expose
     private Colour colour;
-    @SerializedName("Saturation")
+    @SerializedName("saturation")
     @Expose
     private int saturation;
     @SerializedName("brightness")

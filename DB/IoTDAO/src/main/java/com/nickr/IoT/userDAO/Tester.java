@@ -25,7 +25,9 @@ public class Tester {
 //		
 //		System.out.println(dao.getHouseId("nick12345@hotmail.co.uk", "User123"));
 
-//		System.out.println(dao.getPriority("houseID123"));
+//		System.out.println(dao.getUserID("nick12345@hotmail.co.uk", "User123"));
+
+// System.out.println(dao.getPriority("houseID123"));
 
 //		System.out.println(dao.logIn("nick12345@hotmail.co.uk", "User123"));
 
@@ -34,7 +36,7 @@ public class Tester {
 //		request.setHomePassword("Home123");
 //		request.setFirstName("Tom");
 //		request.setLastName("Roberts");
-//		request.setEmail("roberts@test.com");
+//		request.setEmail("Nick@test.com");
 //		request.setUserPassword("User123");
 //
 //		dao.register(request);
