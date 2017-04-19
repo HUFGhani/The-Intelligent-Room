@@ -117,8 +117,6 @@ public class projectDAO {
                         resultSet.getDouble("Longitude")
                 );
                 configuration.setLocation(location);
-                configuration.setHasLights(((resultSet.getInt("philipsHueId") > 0) ? true : false));
-                configuration.setHasNest(((resultSet.getInt("NestId") > 0) ? true : false));
             }
             stmt.close();
             closeConnection();
@@ -436,10 +434,9 @@ public class projectDAO {
 
         try {
 
-            String house = "Insert Into house (HouseId) values (?)";
-            ptmt = conn.prepareStatement(house);
+            String House = "Insert Into house (HouseId) values (?)";
+            ptmt = conn.prepareStatement(House);
             ptmt.setString(1, s.getHouseId());
-            System.out.println(ptmt.toString());
             ptmt.executeUpdate();
 
             for (Sensor sensor: s.getSensors()) {

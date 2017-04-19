@@ -3,6 +3,7 @@ package com.nickr.IoT.userDAO;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.nickr.IoT.user.model.HouseConfiguration;
 import com.nickr.IoT.user.model.LogInRegisterResponse;
 import com.nickr.IoT.user.model.RegistrationRequest;
 import com.nickr.IoT.user.model.Sensor;
@@ -37,12 +38,16 @@ public class Tester {
 //		request.setHomePassword("Home123");
 //		request.setFirstName("Tom");
 //		request.setLastName("Roberts");
-//		request.setEmail("Jack@test.com");
+//		request.setEmail("Jim@test.com");
 //		request.setUserPassword("User123");
 //
 //		LogInRegisterResponse response = dao.register(request);
 //		System.out.println(response.getUserPreference());
-		
+
+		HouseConfiguration configuration= new HouseConfiguration();
+		configuration.setHouseId("houseID123");
+		configuration.setSensors(Sensor(1, "moitonSensor","onChanged",0, 221423423,0));
+
 		
 		
 	
