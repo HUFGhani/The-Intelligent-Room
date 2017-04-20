@@ -17,8 +17,12 @@ $UserID = '';
  }   
 
 else{
-   $UserID = 'Logged Out';
+   $UserID = 'Logged Out'; 
 }
+?>
+    
+<?php 
+echo $UserID;
 ?>
 
 <html lang="en">
@@ -31,18 +35,12 @@ else{
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.3/css/bootstrap-slider.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
-  </head> 
-    
-<?php
-    if($UserID != "Logged Out"){
-?>
-
-<body>
+    </head>
+    <body>
         
       <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -57,7 +55,7 @@ else{
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="index.php">Home</a></li>
+              <li><a href="main.php">Home</a></li>
               <li><a href="#" data-toggle="modal" onclick="getNest();" data-target="#myModal">Nest</a></li>
               <li><a href="#" data-toggle="modal" onclick="getHue();" data-target="#myModal1">Hue</a></li>
               <li><a href="#" data-toggle="modal" onclick="getUser();" data-target="#userModal">User Preferences</a></li>
@@ -180,19 +178,20 @@ else{
           <h4 class="modal-title" id="myModalLabel">User Preferences</h4>
         </div>
         <div id="modal-body" class="modal-body">
-            First Name:   <label id="fName"></label><br>
-            Last Name: <label id="lName"></label><br>
-            Priority:  <label id="priority"></label><br>
-            Red:   <label id="redPref"></label><br>
-            Green: <label id="greenPref"></label><br>
-            Blue:  <label id="bluePref"></label><br>
-            Saturation:   <label id="satPref"></label><br>
-            Brightness: <label id="briPref"></label><br>
-            Action Method:   <label id="lightActPref"></label><br>
-            Action Priority:   <label id="lightActPriorityPref"></label><br>
-            Temperature:  <label id="tempPref"></label><br>
-            Action Method:   <label id="tempActPref"></label><br>
-            Action Priority:   <label id="tempActPriorityPref"></label><br>
+            
+                First Name:   <label id="fName"></label><br>
+                Last Name: <label id="lName"></label><br>
+                Priority:  <label id="priority"></label><br>
+                Red:   <label id="redPref"></label><br>
+                Green: <label id="greenPref"></label><br>
+                Blue:  <label id="bluePref"></label><br>
+                Saturation:   <label id="satPref"></label><br>
+                Brightness: <label id="briPref"></label><br>
+                Action Method:   <label id="lightActPref"></label><br>
+                Action Priority:   <label id="lightActPriorityPref"></label><br>
+                Temperature:  <label id="tempPref"></label><br>
+                Action Method:   <label id="tempActPref"></label><br>
+                Action Priority:   <label id="tempActPriorityPref"></label><br>
         </div>
     
         <div class="modal-footer">
@@ -213,14 +212,15 @@ else{
         </div>
         <div id="modal-body" class="modal-body">
             <div>
-            First Name:  <input id="fNameEdit"><br>
-            Last Name:   <input id="lNameEdit"><br>
-            Priority:    <select id="priorityEdit" class="form-control" name="color">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                  </select>
+                First Name:  <input id="fNameEdit"><br>
+                Last Name:   <input id="lNameEdit"><br>
+                Priority:    <select id="priorityEdit" class="form-control" name="color">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                              </select>
             </div>
+            
         
             <div>
             <p>Red</p><input id="redPrefEdit" data-slider-id='redSlider' type="text" data-slider-min="0" data-slider-max="255" data-slider-step="5" data-slider-value="100"/>        
@@ -270,23 +270,10 @@ else{
           <button type="button" onclick="sendUser();" data-dismiss="modal" class="btn btn-primary">Save changes</button>
         </div>
       </div>
-    </div>        
-<?php
-}
-else {
-?>   
-<div class="wrapper">
-    <form action="checkLogin.php" method="post">    
-      <h2 class="form-signin-heading">Please login</h2>
-      <input type="text" class="form-control" name="Email" placeholder="Email Address" required="" autofocus="" />
-      <input type="password" class="form-control" name="UserPassword" placeholder="Password" required=""/>      
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   
-    </form>
-  </div>
+    </div>
 </div>
-<?php
-}
-?>
+      
+    
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -303,6 +290,6 @@ else {
     <script src="js/mqttUserSub.js" type="text/javascript"></script>
     <script src="js/mqttUserPub.js" type="text/javascript"></script>
     <script src="js/colorpicker.js" type="text/javascript"></script>
-    </body>
-</html>
-    
+  </body>
+</html
+

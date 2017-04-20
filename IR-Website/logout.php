@@ -3,6 +3,6 @@
 session_start();
 session_destroy(); // Destroying All Sessions
 
-header('Location: login.php'); 
+header('Location: index.php'); 
 
 ?>

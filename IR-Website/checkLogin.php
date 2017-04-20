@@ -10,6 +10,7 @@
         session_start(); 
     }
 
+$UserID = isset($_POST['UserID']) ? $_POST['UserID'] : '';
 $Email = isset($_POST['Email']) ? $_POST['Email'] : '';
 $UserPassword = isset($_POST['UserPassword']) ? $_POST['UserPassword'] : '';
 
@@ -30,16 +31,15 @@ $result = $stmt->get_result();
 
 while ($row = $result->fetch_assoc()) {
     $_SESSION['Email'] = $row["Email"];
-    $_SESSION['Firstname'] = $row["Firstname"];
-    $_SESSION['Lastname'] = $row["Lastname"];
+    $_SESSION['UserID'] = $row["UserID"];
     
     if ($row >0){
         header('Location: index.php');  
     } 
 }
 
-//echo $Email;
-//echo $UserPassword;
+echo $Email;
+echo $UserPassword;
 
 
 
