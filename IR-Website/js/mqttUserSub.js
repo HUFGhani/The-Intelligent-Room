@@ -1,7 +1,7 @@
 
 function getUser() {
 
-        //client = new Paho.MQTT.Client("localhost", 1884, "clientId");
+//        client = new Paho.MQTT.Client("localhost", 1884, "clientId");
         client = new Paho.MQTT.Client("ec2-52-56-203-226.eu-west-2.compute.amazonaws.com", 1884, "clientIdUserSub");
         client.onConnectionLost = onConnectionLostUsersub;
         client.onMessageArrived = onMessageArrivedUserSub;
@@ -31,14 +31,14 @@ function getUser() {
         document.getElementById("fName").innerHTML= suboutput.firstName;
         document.getElementById("lName").innerHTML= suboutput.lastName;
         document.getElementById("priority").innerHTML= suboutput.priority;
-        document.getElementById("redPref").innerHTML= suboutput.lightPref.colour.red;
-        document.getElementById("greenPref").innerHTML= suboutput.lightPref.colour.green;
-        document.getElementById("bluePref").innerHTML= suboutput.lightPref.colour.blue;
-        document.getElementById("satPref").innerHTML= suboutput.lightPref.saturation;
-        document.getElementById("briPref").innerHTML= suboutput.lightPref.brightness;
+        document.getElementById("redPref").innerHTML= suboutput.lightPref.light.colour.red;
+        document.getElementById("greenPref").innerHTML= suboutput.lightPref.light.colour.green;
+        document.getElementById("bluePref").innerHTML= suboutput.lightPref.light.colour.blue;
+        document.getElementById("satPref").innerHTML= suboutput.lightPref.light.saturation;
+        document.getElementById("briPref").innerHTML= suboutput.lightPref.light.brightness;
         document.getElementById("lightActPref").innerHTML= suboutput.lightPref.actionMethod;
         document.getElementById("lightActPriorityPref").innerHTML= suboutput.lightPref.actionPriority;
-        document.getElementById("tempPref").innerHTML= suboutput.tempPref.target_temperature_c;
-        document.getElementById("tempActPref").innerHTML= suboutput.tempPref.actionMethod;
-        document.getElementById("tempActPriorityPref").innerHTML= suboutput.tempPref.actionPriority;
+        document.getElementById("tempPref").innerHTML= suboutput.tmpPref.nest.target_temperature_c;
+        document.getElementById("tempActPref").innerHTML= suboutput.tmpPref.actionMethod;
+        document.getElementById("tempActPriorityPref").innerHTML= suboutput.tmpPref.actionPriority;s
 }
