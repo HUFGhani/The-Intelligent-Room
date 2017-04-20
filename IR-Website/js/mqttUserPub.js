@@ -38,8 +38,8 @@ function sendUser() {
     json+= "\"actionMethod\":\"" + tact +"\",";
     json+= "\"actionPriority\":" + tactp +"}}";
     
-    client = new Paho.MQTT.Client("localhost", 1884, "clientId1");
-//    client = new Paho.MQTT.Client("ec2-52-56-203-226.eu-west-2.compute.amazonaws.com", 1884, "clientIdUserPub");
+//    client = new Paho.MQTT.Client("localhost", 1884, "clientId1");
+    client = new Paho.MQTT.Client("ec2-52-56-203-226.eu-west-2.compute.amazonaws.com", 1884, "clientIdUserPub");
 // connect the client
     client.connect({onSuccess: onConnectUserPub});
 }
