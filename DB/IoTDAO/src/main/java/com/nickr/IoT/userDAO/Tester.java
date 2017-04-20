@@ -44,9 +44,9 @@ public class Tester {
 //		LogInRegisterResponse response = dao.register(request);
 //		System.out.println(response.getUserPreference());
 
-		HouseConfiguration configuration= new HouseConfiguration();
-		configuration.setHouseId("houseID123");
-		configuration.setSensors(Sensor(1, "moitonSensor","onChanged",0, 221423423,0));
+//		HouseConfiguration configuration= new HouseConfiguration();
+//		configuration.setHouseId("houseID123");
+//		configuration.setSensors(Sensor(1, "moitonSensor","onChanged",0, 221423423,0));
 
 		
 		
