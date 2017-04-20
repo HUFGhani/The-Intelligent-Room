@@ -1,5 +1,6 @@
 package heating;
 
+import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import com.google.gson.Gson;
 import sensors.GeneralPhidSensor;
@@ -16,6 +17,7 @@ public class TmpActionMethod extends PahoClientSub {
 	private TemperaturePref temp;
 	private Nest currTemp;
 	private String houseId = null;
+	private String actionTopic = "";
 
 	public TmpActionMethod(String houseId, String clientId) {
 		super(serverURI, clientId);
@@ -53,7 +55,9 @@ public class TmpActionMethod extends PahoClientSub {
 		this.currTemp = new Nest(currTemp);
 		// check against light pref and change light if needed
 		if (this.temp != null && !this.temp.getNest().equals(currTemp)) {
+
 			tempAction(this.temp, this.sensor);
+
 		} else {
 			if (this.temp == null) {
 				System.out.println(">>>>TA_LOG: TEMP PREF IS NULL");
@@ -62,7 +66,9 @@ public class TmpActionMethod extends PahoClientSub {
 				System.out.println(">>>>TA_LOG: TEMP IS ALREADY SET");
 			}
 		}
+
 		System.out.println(">>>>TA_LOG: END SET CURR TEMP");
+
 	}
 
 	public void tempAction(TemperaturePref temp, GeneralPhidSensor sensor) {
@@ -88,8 +94,7 @@ public class TmpActionMethod extends PahoClientSub {
 				break;
 			case "motion":
 				// check motion if update in last min turn on.
-				if (!temp.getNest().equals(currTemp) && currTemp.isAutomated()
-						&& motionDetected(3600000, sensor)) {
+				if (!temp.getNest().equals(currTemp) && currTemp.isAutomated() && motionDetected(3600000, sensor)) {
 					// turn hue on
 					System.out.println("MOT: TURNING NEST ON");
 					MqttUtils.mqttPublish(new Gson().toJson(new Nest(temp.getNest())), topic);
@@ -107,6 +112,7 @@ public class TmpActionMethod extends PahoClientSub {
 				break;
 			}
 		}
+
 		System.out.println("TEMP ACTION END");
 
 	}
@@ -122,9 +128,9 @@ public class TmpActionMethod extends PahoClientSub {
 	}
 
 	private void getHouseConfig() {
-		if (house == null) 
+		if (house == null)
 			this.house = MqttUtils.getHouseConfiguration(this.houseId);
-	
+
 	}
 
 	@Override
@@ -143,32 +149,51 @@ public class TmpActionMethod extends PahoClientSub {
 	}
 
 	public void setTemperaturePref(TemperaturePref tmp) {
-		System.out.println(">>>>TA_LOG: SETTING TEMP PREF");
-		System.out.println(">>>>TA_LOG: New Tmp Pref: " + tmp.toString());
+		if (tmp == null) {
+			this.temp = null;
+			if (actionTopic != "") {
+				try {
+					System.out.println(">>>>TA_LOG: START ACTION METHOD UNSUBSCRIBE - " + actionTopic);
 
-		if (tmp.getActionMethod().equals("location")) {
-			System.out.println(">>>>TA_LOG: START LOCATION TEMP ACTION");
-			tempAction(tmp, new GeneralPhidSensor());
-
-		} else if (this.temp == null || tmp.getActionMethod() != this.temp.getActionMethod()) {
-			getHouseConfig();
-			System.out.println(">>>>TA_LOG: motion or light action method.");
-
-			for (GeneralPhidSensor generalPhidSensor : house.getSensors()) {
-				System.out.println(">>>>TA_LOG: LOOP sensor type: " + generalPhidSensor.getSensorName()
-						+ " Action method: " + tmp.getActionMethod());
-				if (generalPhidSensor.getSensorName().contains(tmp.getActionMethod())) {
-					setTopic(houseId + "/sensor/" + generalPhidSensor.getSensorId());
-					break;
+					client.unsubscribe(actionTopic);
+					System.out.println(">>>>TA_LOG: END ACTION METHOD UNSUBSCRIBE - " + actionTopic);
+				} catch (MqttException e) {
+					e.printStackTrace();
 				}
 			}
 
+			System.out.println(">>>>TA_LOG: SETTING PREF TO NULL");
 		} else {
-			System.out.println(">>>>TA_LOG: NO PREF SET");
+
+			System.out.println(">>>>TA_LOG: SETTING TEMP PREF");
+			System.out.println(">>>>TA_LOG: New Tmp Pref: " + tmp.toString());
+
+			if (tmp.getActionMethod().equals("location")) {
+				System.out.println(">>>>TA_LOG: START LOCATION TEMP ACTION");
+				tempAction(tmp, new GeneralPhidSensor());
+
+			} else if (this.temp == null || tmp.getActionMethod() != this.temp.getActionMethod()) {
+				getHouseConfig();
+				System.out.println(">>>>TA_LOG: motion or light action method.");
+
+				for (GeneralPhidSensor generalPhidSensor : house.getSensors()) {
+					System.out.println(">>>>TA_LOG: LOOP sensor type: " + generalPhidSensor.getSensorName()
+							+ " Action method: " + tmp.getActionMethod());
+					if (generalPhidSensor.getSensorName().contains(tmp.getActionMethod())) {
+						actionTopic = houseId + "/sensor/" + generalPhidSensor.getSensorId();
+						setTopic(actionTopic);
+						break;
+
+					}
+				}
+
+			} else {
+				System.out.println(">>>>TA_LOG: NO PREF SET");
+			}
+
+			this.temp = new TemperaturePref(tmp);
+			System.out.println(">>>>TA_LOG: TEMP PREF SET");
+
 		}
-
-		this.temp = new TemperaturePref(tmp);
-		System.out.println(">>>>TA_LOG: TEMP PREF SET");
-
 	}
 }

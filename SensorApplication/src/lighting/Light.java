@@ -1,13 +1,12 @@
 package lighting;
 
 import java.io.Serializable;
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Light implements Serializable {
 
 	@SerializedName("name")
-	private String name = null;
+	private String name = "Hue color lamp 1";
 	@SerializedName("on/off")
 	private boolean onOff = true;
 	@SerializedName("colour")
