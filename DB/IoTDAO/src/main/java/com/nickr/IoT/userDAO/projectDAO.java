@@ -14,8 +14,8 @@ public class projectDAO {
     Connection conn = null;
     Statement stmt = null;
     PreparedStatement ptmt = null;
-    public static final String userid = "root";
-    public static final String userpass = "TwN20nDwuJGB";
+    public static final String userid = "robertsn";
+    public static final String userpass = "ensteLas6";
     Calendar calendar = Calendar.getInstance();
     java.sql.Date ourJavaDateObject = new java.sql.Date(calendar.getTime().getTime());
 
@@ -30,7 +30,7 @@ public class projectDAO {
         // connecting to database
         try {
 
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + "iot" + "?user="
+            conn = DriverManager.getConnection("jdbc:mysql://mudfoot.doc.stu.mmu.ac.uk:3306/" + userid + "?user="
                     + userid + "&password=" + userpass);
             stmt = conn.createStatement();
         } catch (SQLException se) {

@@ -31,7 +31,7 @@ public class Tester {
 
 // System.out.println(dao.getPriority("houseID123"));
 
-//		System.out.println(dao.logIn("Tom@test.com", "User123"));
+		System.out.println(dao.logIn("Tom@test.com", "User123"));
 
 //		RegistrationRequest request = new RegistrationRequest();
 //		request.setHomeId("houseID123");
