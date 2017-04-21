@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="0.0">io.github.hufghani.nest.ThermostatElements</node>
+    <node x="812.0" y="1549.0">io.github.hufghani.nest.properties.NestConfigProperties</node>
+    <node x="1061.0" y="2240.0">io.github.hufghani.App</node>
+    <node x="1403.5" y="1806.0">io.github.hufghani.mqtt.Nest_Subscribe</node>
+    <node x="433.0" y="1313.0">io.github.hufghani.nest.Thermostats</node>
+    <node x="863.5" y="1927.5">io.github.hufghani.nest.properties.NestProperties</node>
+    <node x="462.5" y="1872.0">io.github.hufghani.nest.NestService</node>
+    <node x="513.5" y="1571.0">io.github.hufghani.nest.NestThermostat</node>
+    <node x="1119.5" y="1894.0">io.github.hufghani.mqtt.Nest_Publish</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="io.github.hufghani.nest.NestThermostat" target="io.github.hufghani.nest.Thermostats">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="io.github.hufghani.nest.properties.NestProperties" target="io.github.hufghani.nest.properties.NestConfigProperties">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="io.github.hufghani.App" target="io.github.hufghani.nest.NestService">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="io.github.hufghani.App" target="io.github.hufghani.mqtt.Nest_Publish">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="io.github.hufghani.nest.NestService" target="io.github.hufghani.nest.NestThermostat">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="io.github.hufghani.App" target="io.github.hufghani.mqtt.Nest_Subscribe">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="io.github.hufghani.nest.Thermostats" target="io.github.hufghani.nest.ThermostatElements">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="io.github.hufghani.App" target="io.github.hufghani.nest.properties.NestProperties">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.2892030848329049" x="914.0" y="1157.0" />
+  <SelectedNodes>
+    <node>io.github.hufghani.nest.ThermostatElements</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

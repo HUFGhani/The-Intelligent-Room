@@ -30,8 +30,8 @@ public class HueRGBTEST {
      philipsHue.setLight(light);
      light.setName("Hue color lamp 1");
      light.setOnOff(true);
-     light.setBrightness(240);
-     light.setSaturation(240);
+     light.setBrightness(254);
+     light.setSaturation(254);
      light.setColour(colour);
      colour.setRed(255);
      colour.setGreen(0);

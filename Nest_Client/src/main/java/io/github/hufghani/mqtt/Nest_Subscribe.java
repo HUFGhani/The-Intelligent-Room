@@ -70,7 +70,9 @@ public class Nest_Subscribe implements MqttCallback{
     }
 
     public Nest_Subscribe setTemperature(double temperature) {
-        this.temperature = temperature;
+        if (temperature >= 9 && temperature <= 32 ) {
+            this.temperature = temperature;
+        }
         return this;
     }
 
