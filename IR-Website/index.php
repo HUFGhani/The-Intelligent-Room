@@ -14,6 +14,7 @@ $UserID = '';
 
  if(isset($_SESSION['UserID'])){
      $UserID = $_SESSION['UserID'];
+     $FName = $_SESSION['Firstname'];
  }   
 
 else{
@@ -43,7 +44,6 @@ else{
 ?>
 
 <body>
-        
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -57,7 +57,7 @@ else{
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="index.php">Home</a></li>
+              <li><a>Welcome User <?php echo $UserID; ?></a></li>
               <li><a href="#" data-toggle="modal" onclick="getNest();" data-target="#myModal">Nest</a></li>
               <li><a href="#" data-toggle="modal" onclick="getHue();" data-target="#myModal1">Hue</a></li>
               <li><a href="#" data-toggle="modal" onclick="getUser();" data-target="#userModal">User Preferences</a></li>
