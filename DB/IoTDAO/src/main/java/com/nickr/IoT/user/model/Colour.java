@@ -1,51 +1,50 @@
+
 package com.nickr.IoT.user.model;
 
-import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Colour implements Serializable
-{
+import java.io.Serializable;
+
+public class Colour implements Serializable {
 
     @SerializedName("red")
     @Expose
-    private String red;
+    private Integer red;
     @SerializedName("green")
     @Expose
-    private String green;
+    private Integer green;
     @SerializedName("blue")
     @Expose
-    private String blue;
-    private final static long serialVersionUID = 5964208011969454554L;
+    private Integer blue;
 
-    public Colour(String red, String green, String blue) {
-		super();
-		this.red = red;
-		this.green = green;
-		this.blue = blue;
-	}
+    public Colour(Integer red, Integer green, Integer blue) {
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
+    }
 
-	public String getRed() {
+    public Integer getRed() {
         return red;
     }
 
-    public void setRed(String red) {
+    public void setRed(Integer red) {
         this.red = red;
     }
 
-    public String getGreen() {
+    public Integer getGreen() {
         return green;
     }
 
-    public void setGreen(String green) {
+    public void setGreen(Integer green) {
         this.green = green;
     }
 
-    public String getBlue() {
+    public Integer getBlue() {
         return blue;
     }
 
-    public void setBlue(String blue) {
+    public void setBlue(Integer blue) {
         this.blue = blue;
     }
 

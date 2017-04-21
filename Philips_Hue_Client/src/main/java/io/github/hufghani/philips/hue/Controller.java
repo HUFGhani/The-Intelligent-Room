@@ -22,6 +22,7 @@ public class Controller implements PHSDKListener {
     private  ObjectMapper mapper = new ObjectMapper();
     private Boolean automated;
     int r = 0,g = 0,b = 0,br = 0, sa = 0;
+    boolean isOnOff = false;
 
     public Controller( ) {
         super();
@@ -184,8 +185,8 @@ public class Controller implements PHSDKListener {
         lightIdentifer = allLights.get(0).getIdentifier();
         PHLightState lightState = new PHLightState();
 //        int r = 0,g = 0,b = 0,br = 0, sa = 0;
-        boolean on = false;
-        if (r != red && g != green && b != blue || br != bri || sa != sat || on != isOnorOff) {
+
+        if (r != red || g != green || b != blue || br != bri || sa != sat || isOnOff != isOnorOff) {
             if (checkRedValue(red) &&
                     checkGreenValue(green) &&
                     checkBlueValue(blue) &&
@@ -199,8 +200,7 @@ public class Controller implements PHSDKListener {
                 lightState.setBrightness(bri);
                 lightState.setSaturation(sat);
 
-            } else if (isOnorOff == false) {
-                lightState.setOn(isOnorOff);
+
             }
 
             phHueSDK.getSelectedBridge().updateLightState(lightIdentifer, lightState, null);
@@ -211,7 +211,7 @@ public class Controller implements PHSDKListener {
             b= blue;
             br= bri;
             sa = sat;
-            on = isOnorOff;
+            isOnOff = isOnorOff;
         }
     }
 

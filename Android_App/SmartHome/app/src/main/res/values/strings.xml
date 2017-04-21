@@ -1,0 +1,94 @@
+<resources>
+    <string name="app_name">Smart Home</string>
+
+    <!--Shared preference keys-->
+    <string name="preference_file_key">com.project.smarthome.PREFERENCE_FILE_KEY</string>
+    <string name="preference_house_configuration">SAVED_HOUSE_CONFIGURATION</string>
+    <string name="preference_user_preference">SAVED_USER_PREFERENCE</string>
+    <string name="preference_heating_device">SAVED_HEATING_DEVICE</string>
+    <string name="preference_lighting_device">SAVED_LIGHTING_DEVICE</string>
+    <string name="preference_last_post_recieved">SAVED_POST_RECIEVED</string>
+    <string name="preference_in_house">SAVED_IN_HOUSE_STATUS</string>
+
+    <!--Common Words and Phrases-->
+    <string name="home_id">Home Id: </string>
+    <string name="submit">Submit</string>
+    <string name="all_devices">All Devices</string>
+    <string name="degrees_celsius">%d\u2103</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="log_out">Log Out</string>
+    <string name="automation">Automation</string>
+    <string name="brightness">Brightness</string>
+    <string name="last_updated">Last Updated: %s</string>
+    <string name="value">Value: %s</string>
+    <string name="saved">Saved</string>
+
+
+    <!--Log In and Registration-->
+    <string name="log_in">Log In</string>
+    <string name="register">Register</string>
+    <string name="home_password">Home Password</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="user_password">User Password</string>
+
+
+    <!--QRScannerFragment-->
+    <string name="qr_scanning_how_to">Scan the QR code on your hub or enter it manually below.</string>
+
+
+    <!--Validation-->
+    <string name="error_invalid_name">Invalid Name</string>
+    <string name="error_invalid_email">Invalid Email</string>
+    <string name="error_invalid_password">Password must contain at least 5 characters</string>
+
+
+    <!--Categories-->
+    <string name="category_lighting">Lighting</string>
+    <string name="category_heating">Heating</string>
+
+
+    <!--Navigation Drawer Headings-->
+    <string name="heading_devices">Devices</string>
+    <string name="heading_home_management">Home Management</string>
+
+
+    <!--Home Management-->
+    <string name="manage_devices">Manage Devices</string>
+    <string name="manage_location">Manage Location</string>
+    <string name="manage_preferences">Manage Preferences</string>
+    <string name="home_location_updated">Home location updated</string>
+    <string name="no_location_set_up">You do not have a home location set up. Set this up now?</string>
+    <string name="update_preferences">Update Preferences</string>
+
+    <!--Accessibility-->
+    <string name="logo">logo</string>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="close_drawer">Close Drawer</string>
+
+
+    <!--Permission Explanations-->
+    <string name="geofencing_explanation">For location based triggers to work, you need to enable the location permission.</string>
+
+
+    <!--Add Location Fragment-->
+    <string name="add_location_how_to">Hold down the icon and drag it to your new location.</string>
+    <string name="update_location">Update Location</string>
+
+
+    <!-- Manage Sensor Dialog-->
+    <string name="manage_sensor_title">Manage Sensor</string>
+    <string name="label_sensor_id">Sensor Id: %d</string>
+    <string name="input_sensor_name">Sensor Name</string>
+    <string name="input_sensor_method_type">Sensor Method Type</string>
+    <string name="input_sensor_port">Sensor Port</string>
+
+
+    <!--Errors-->
+    <string name="error_logging_in">Unable to log in, please check your email and password.</string>
+    <string name="error_failure_getting_saved_configs">An error occurred. Please sign back in.</string>
+
+</resources>

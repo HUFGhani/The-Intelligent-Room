@@ -6,18 +6,16 @@ import com.nickr.IoT.userDAO.projectDAO;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
-/**
- * Created by hamzaghani on 06/04/2017.
- */
+
 public class ConfigurationMQTT implements MqttCallback {
 
     String topic = "houseID123/+/inHouse";
     int qos             = 2;
     String broker       = "tcp://localhost:1883";
-    String clientId     = "hue";
+    String clientId     = "configMQTT";
     MemoryPersistence persistence = new MemoryPersistence();
     Gson gson = new Gson();
-    com.nickr.IoT.userDAO.projectDAO projectDAO = new projectDAO();
+    projectDAO projectDAO = new projectDAO();
 
 
     public ConfigurationMQTT() {
@@ -46,7 +44,7 @@ public class ConfigurationMQTT implements MqttCallback {
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         String jsonData = new String(mqttMessage.getPayload());
         HouseConfiguration houseConfiguration = gson.fromJson(jsonData, HouseConfiguration.class);
-
+        projectDAO.insertHouseConfiguration(houseConfiguration);
     }
 
     @Override

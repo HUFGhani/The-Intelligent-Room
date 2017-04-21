@@ -14,7 +14,7 @@ public class HueMQTT implements MqttCallback{
     String topic = "houseID123/actuator/hue";
     int qos             = 2;
     String broker       = "tcp://localhost:1883";
-    String clientId     = "hue";
+    String clientId     = "hueMQTT";
     MemoryPersistence persistence = new MemoryPersistence();
     Gson gson = new Gson();
     com.nickr.IoT.userDAO.projectDAO projectDAO = new projectDAO();
@@ -45,11 +45,8 @@ public class HueMQTT implements MqttCallback{
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         String jsonData = new String(mqttMessage.getPayload());
-      System.out.println(jsonData + "£££££££££££");
         Hue hue = gson.fromJson(jsonData, Hue.class);
-        System.out.println(hue.getLight().isOnOff() + "!!!!!!!!!!!!!!!!!!!!!1");
-
-//        projectDAO.InsertPhilipsHue(hue);
+        projectDAO.InsertPhilipsHue(hue);
 
     }
 

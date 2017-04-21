@@ -96,11 +96,9 @@ public class SensorInterfaceKit implements SensorChangeListener, InputChangeList
 						for (int i = 0; i < sensors.size(); i++) {
 							if (sensors.get(i).getSensorType().equals("average")) {
 								ServerComs.sendToServer(sensors.get(i),
-										phidget.getSensorValue(sensors.get(i).getSensorValue()), houseId);
-
+										phidget.getSensorValue(sensors.get(i).getSensorPort()), houseId);
 							}
 						}
-
 					}
 
 					if (prefs == null) {
@@ -113,9 +111,9 @@ public class SensorInterfaceKit implements SensorChangeListener, InputChangeList
 						}
 						ServerComs.turnHueOff(houseId);
 						ServerComs.turnNestOff(houseId);
-						//prefs.addLightActionMethod();
-						prefs.addTempActionMethod();
-			
+					    prefs.addLightActionMethod();
+					    prefs.addTempActionMethod();
+
 						System.out.println(">>STARTUP_LOG: SETTING UP HUE / NEST FINISH...............");
 
 					}
@@ -127,7 +125,6 @@ public class SensorInterfaceKit implements SensorChangeListener, InputChangeList
 						ServerComs.sendToServer(sensors, sensorValues, houseId);
 						secondCounter = 0;
 						sensorValues = new HashMap();
-
 						// Initialise sensor ArrayList to check if new sensors
 						// have been added
 						sensors = getSensors(houseId);

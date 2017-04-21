@@ -2,17 +2,30 @@ package com.nickr.IoT.user.model;
 
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 
 import java.util.ArrayList;
 
-public class HouseConfiguration {
+public class HouseConfiguration{
+
+    public HouseConfiguration(String houseId, ArrayList<Sensor> sensors) {
+        this.houseId = houseId;
+        this.sensors = sensors;
+    }
+
+    @SerializedName("houseId")
+    @Expose
     private String houseId;
+    @SerializedName("sensors")
+    @Expose
     private ArrayList<Sensor> sensors;
-    private boolean hasNest;
-    private boolean hasLights;
+
     private Location location;
-    
+
+
+
     public HouseConfiguration(){
     	
     }
@@ -33,36 +46,20 @@ public class HouseConfiguration {
         }
     }
 
-    public void setSensors(ArrayList<Sensor> sensors) {
-        this.sensors = sensors;
-    }
-
-    public boolean isHasNest() {
-        return hasNest;
-    }
-
-    public void setHasNest(boolean hasNest) {
-        this.hasNest = hasNest;
-    }
-
-    public boolean isHasLights() {
-        return hasLights;
-    }
-
-    public void setHasLights(boolean hasLights) {
-        this.hasLights = hasLights;
-    }
-
-    @Override
     public String toString() {
         return new Gson().toJson(this);
     }
 
-	public Location getLocation() {
+    public void setSensors(ArrayList<Sensor> sensors) {
+        this.sensors = sensors;
+    }
+
+    public Location getLocation() {
 		return location;
 	}
 
 	public void setLocation(Location location) {
 		this.location = location;
 	}
+
 }

@@ -1,30 +1,45 @@
+
 package com.nickr.IoT.user.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Nest{
+public class Nest {
+    public Nest(int targetTemperatureC) {
+        this.targetTemperatureC = targetTemperatureC;
+        this.automaticStatus = automaticStatus;
+    }
+
     @SerializedName("target_temperature_c")
     @Expose
-    private Integer targetTemperatureC;
+    private int targetTemperatureC;
+
     @SerializedName("automated")
     @Expose
-    private Boolean automated;
+    private Boolean automaticStatus;
 
-    public Integer getTargetTemperatureC() {
+
+    public Boolean getAutomaticStatus() {
+        return automaticStatus;
+    }
+
+    public void setAutomaticStatus(Boolean automaticStatus) {
+        this.automaticStatus = automaticStatus;
+    }
+
+    public int getTargetTemperatureC() {
         return targetTemperatureC;
     }
 
-    public void setTargetTemperatureC(Integer targetTemperatureC) {
+    public void setTargetTemperatureC(int targetTemperatureC) {
         this.targetTemperatureC = targetTemperatureC;
     }
 
-    public Boolean getAutomated() {
-        return automated;
+    @Override
+    public String toString() {
+        return "Nest{" +
+                "targetTemperatureC=" + targetTemperatureC +
+                ", automaticStatus=" + automaticStatus +
+                '}';
     }
-
-    public void setAutomated(Boolean automated) {
-        this.automated = automated;
-    }
-
 }

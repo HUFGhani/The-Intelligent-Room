@@ -68,6 +68,7 @@ public class AutomatedPreferences extends PahoClientSub {
 		} else if (lightActionMethodClient != null) {
 			System.out.println(">>>AP_LOG:  users null");
 			// Turn hue off
+			lightActionMethodClient.setLightPref(null);
 			ServerComs.turnHueOff(houseId);
 
 		} else {
@@ -84,6 +85,7 @@ public class AutomatedPreferences extends PahoClientSub {
 		} else if (tmpActionMethodClient != null) {
 			System.out.println(">>>AP_LOG:  users null");
 			// Turn nest off
+			tmpActionMethodClient.setTemperaturePref(null);
 			ServerComs.turnNestOff(houseId);
 	
 		} else {

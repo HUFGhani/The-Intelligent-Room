@@ -1,0 +1,60 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/manage_devices_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:scrollbars="none" />
+
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            fab:fab_addButtonColorNormal="@color/colorAccent"
+            fab:fab_addButtonColorPressed="@color/colorAccent"
+            fab:fab_addButtonPlusIconColor="@color/colorWhite"
+            fab:fab_addButtonSize="normal">
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/add_heating_device"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/colorAccent"
+                fab:fab_size="mini"
+                fab:fab_title="Heating"
+                fab:fab_icon="@drawable/heating"
+                fab:fab_colorPressed="@color/colorWhite"/>
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/add_lighting_device"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/colorAccent"
+                fab:fab_size="mini"
+                fab:fab_title="Lighting"
+                fab:fab_icon="@drawable/lightbulb"
+                fab:fab_colorPressed="@color/colorWhite"/>
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/add_sensor_device"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/colorAccent"
+                fab:fab_size="mini"
+                fab:fab_title="Sensor"
+                fab:fab_icon="@drawable/sensor"
+                fab:fab_colorPressed="@color/colorWhite"/>
+
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+    </RelativeLayout>
+
+</layout>

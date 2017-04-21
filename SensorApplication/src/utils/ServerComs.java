@@ -67,6 +67,7 @@ public class ServerComs {
 
 		Light light = new Light();
 		light.setColour(new Colour());
+		light.setOnOff(false);
 		Hue hue = new Hue(light);
 
 		MqttUtils.mqttPublish(new Gson().toJson(hue), houseId + "/actuator/hue");

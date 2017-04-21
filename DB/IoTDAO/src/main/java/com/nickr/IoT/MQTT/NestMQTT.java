@@ -14,7 +14,7 @@ public class NestMQTT implements MqttCallback {
     String topic = "houseID123/actuator/nest";
     int qos             = 2;
     String broker       = "tcp://localhost:1883";
-    String clientId     = "hue";
+    String clientId     = "NestMQTT";
     MemoryPersistence persistence = new MemoryPersistence();
     Gson gson = new Gson();
     com.nickr.IoT.userDAO.projectDAO projectDAO = new projectDAO();
@@ -44,8 +44,8 @@ public class NestMQTT implements MqttCallback {
 
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
-//        String jsonData = new String(mqttMessage.getPayload());
-        String jsonData = "{\"target_temperature_c\":30, \"automated\":true}";
+        String jsonData = new String(mqttMessage.getPayload());
+//        String jsonData = "{\"target_temperature_c\":30, \"automated\":true}";
         Nest nest = gson.fromJson(jsonData, Nest.class);
         projectDAO.InsertNest(nest);
     }

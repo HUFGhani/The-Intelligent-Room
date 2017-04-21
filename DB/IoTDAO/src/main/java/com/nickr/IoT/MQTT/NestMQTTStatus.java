@@ -14,7 +14,7 @@ public class NestMQTTStatus implements MqttCallback {
     String topic = "houseID123/actuator/nest/status";
     int qos             = 2;
     String broker       = "tcp://localhost:1883";
-    String clientId     = "database";
+    String clientId     = "NestMQTTStatus";
     MemoryPersistence persistence = new MemoryPersistence();
     Gson gson = new Gson();
     com.nickr.IoT.userDAO.projectDAO projectDAO = new projectDAO();

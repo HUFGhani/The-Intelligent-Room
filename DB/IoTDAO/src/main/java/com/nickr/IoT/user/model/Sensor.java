@@ -1,24 +1,31 @@
 package com.nickr.IoT.user.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class Sensor {
 
+		@SerializedName("sensorId")
+		@Expose
 		private int sensorId;
+		@SerializedName("sensorName")
+		@Expose
 		private String sensorName;
-		private String sensorMethodType; 
-		private int sensorPort; 
+		@SerializedName("sensorMethodType")
+		@Expose
+		private String sensorMethodType;
+		@SerializedName("sensorPort")
+		@Expose
+		private int sensorPort;
+		@SerializedName("updateTimestamp")
+		@Expose
 		private Long updateTimestamp;
+		@SerializedName("sensorValue")
+		@Expose
 		private int sensorValue;
-//		private int sensorValueID;
 
-//	public int getSensorValueID() {
-//		return sensorValueID;
-//	}
-
-//	public void setSensorValueID(int sensorValueID) {
-//		this.sensorValueID = sensorValueID;
-//	}
 
 	public Sensor() {
 		// TODO Auto-generated constructor stub
@@ -84,4 +91,15 @@ public class Sensor {
 		this.sensorValue = sensorValue;
 	}
 
+	@Override
+	public String toString() {
+		return "sensors{" +
+				"sensorId=" + sensorId +
+				", sensorName='" + sensorName + '\'' +
+				", sensorMethodType='" + sensorMethodType + '\'' +
+				", sensorPort=" + sensorPort +
+				", updateTimestamp=" + updateTimestamp +
+				", sensorValue=" + sensorValue +
+				'}';
+	}
 }

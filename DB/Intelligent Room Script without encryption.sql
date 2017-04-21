@@ -36,7 +36,7 @@ Lastupdated timeStamp default current_timestamp,
 automaticStatus boolean, 
 HouseId varchar(20), 
 PRIMARY KEY (NestId), 
-FOREIGN KEY (HouseId) REFERENCES House(HouseId)
+FOREIGN KEY (HouseId) REFERENCES house(HouseId)
 );
 
 
@@ -75,6 +75,7 @@ FOREIGN KEY (HouseId) REFERENCES house(HouseId)
 );
 
 CREATE TABLE PrefLighting(
+Lightname varchar(30),
 Brightness integer(3),
 Saturation integer(3), 
 Red integer(3), 

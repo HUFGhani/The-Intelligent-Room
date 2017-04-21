@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sensor_method_types">
+        <item>average</item>
+        <item>onChanged</item>
+    </string-array>
+
+    <string-array name="sensor_full_names">
+        <item>Motion Sensor</item>
+        <item>Light Sensor</item>
+        <item>Touch Sensor</item>
+    </string-array>
+    <string-array name="sensor_real_names">
+        <item>motionSensor</item>
+        <item>lightSensor</item>
+        <item>touchSensor</item>
+    </string-array>
+
+    <string-array name="heating_automation_types">
+        <item>Location</item>
+        <item>Motion</item>
+    </string-array>
+
+    <string-array name="lighting_automation_types">
+        <item>Location</item>
+        <item>Motion</item>
+        <item>Lighting</item>
+    </string-array>
+</resources>

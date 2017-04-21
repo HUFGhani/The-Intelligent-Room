@@ -19,7 +19,8 @@ public class PhilipsHue_Publish {
     private String broker       = "tcp://localhost:1883";
     private String clientId     = "hue_status";
     private MemoryPersistence persistence = new MemoryPersistence();
-
+    private String temp = "";
+    MqttMessage message;
     public PhilipsHue_Publish() {
         super();
     }
@@ -36,16 +37,20 @@ public class PhilipsHue_Publish {
 
     public void publish(String jsonPayload){
         try {
+
             MqttClient client = new MqttClient(broker, clientId, persistence);
             MqttConnectOptions conn = new MqttConnectOptions();
             conn.setCleanSession(true);
             client.connect(conn);
-            MqttMessage message = new MqttMessage(jsonPayload.getBytes());
+            if (!temp.equals(jsonPayload)) {
+                 message = new MqttMessage(jsonPayload.getBytes());
+            }
             message.setQos(qos);
             message.setRetained(true);
             client.publish(getTopic()+"/actuator/hue/status",message);
             System.out.println("publish"+getTopic()+"/actuator/hue/status");
             System.out.println("publish" + message);
+            temp = jsonPayload;
 //            client.disconnect();
         }catch (MqttException e){
             e.printStackTrace();

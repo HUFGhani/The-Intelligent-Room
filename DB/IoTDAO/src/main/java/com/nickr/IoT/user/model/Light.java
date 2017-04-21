@@ -1,65 +1,54 @@
+
 package com.nickr.IoT.user.model;
 
-import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Light implements Serializable
-{
+import java.io.Serializable;
+
+public class Light implements Serializable {
 
     @SerializedName("name")
     @Expose
     private String name;
     @SerializedName("on/off")
     @Expose
-    private boolean onOff;
+    private Boolean onOff;
     @SerializedName("colour")
     @Expose
     private Colour colour;
     @SerializedName("brightness")
     @Expose
-    private String brightness;
-    @SerializedName("Saturation")
+    private Integer brightness;
+    @SerializedName("saturation")
     @Expose
-    private String saturation;
-    
-    public boolean isAutomaticStatus() {
-		return automaticStatus;
-	}
-
-	public void setAutomaticStatus(boolean automaticStatus) {
-		this.automaticStatus = automaticStatus;
-	}
-
-	@SerializedName("AutomaticStatus")
+    private Integer saturation;
+    @SerializedName("automated")
     @Expose
-    private boolean automaticStatus;
-    
-    public Light(String name, boolean onOff, Colour colour, String brightness, String saturation,
-			boolean automaticStatus) {
-		super();
-		this.name = name;
-		this.onOff = onOff;
-		this.colour = colour;
-		this.brightness = brightness;
-		this.saturation = saturation;
-		this.automaticStatus = automaticStatus;
-	}
+    private Boolean automated;
 
-	private final static long serialVersionUID = 4897633775422404008L;
+    public Light(String name, Colour colour, Integer brightness, Integer saturation) {
+        this.name = name;
+        this.onOff = onOff;
+        this.colour = colour;
+        this.brightness = brightness;
+        this.saturation = saturation;
+
+    }
 
     public String getName() {
         return name;
     }
-	public void setName(String name) {
+
+    public void setName(String name) {
         this.name = name;
     }
 
-    public boolean isOnOff() {
+    public Boolean getOnOff() {
         return onOff;
     }
 
-    public void setOnOff(boolean onOff) {
+    public void setOnOff(Boolean onOff) {
         this.onOff = onOff;
     }
 
@@ -71,20 +60,29 @@ public class Light implements Serializable
         this.colour = colour;
     }
 
-    public String getBrightness() {
+    public Integer getBrightness() {
         return brightness;
     }
 
-    public void setBrightness(String brightness) {
+    public void setBrightness(Integer brightness) {
         this.brightness = brightness;
     }
 
-    public String getSaturation() {
+    public Integer getSaturation() {
         return saturation;
     }
 
-    public void setSaturation(String saturation) {
+    public void setSaturation(Integer saturation) {
         this.saturation = saturation;
     }
+
+    public Boolean getAutomated() {
+        return automated;
+    }
+
+    public void setAutomated(Boolean automated) {
+        this.automated = automated;
+    }
+
 
 }
