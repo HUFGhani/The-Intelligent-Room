@@ -7,8 +7,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import static java.lang.System.in;
-
 public class projectDAO {
 
     Connection conn = null;
@@ -287,8 +285,8 @@ public class projectDAO {
             ptmt.setInt(4, h.getLight().getColour().getRed());
             ptmt.setInt(5, h.getLight().getColour().getBlue());
             ptmt.setInt(6, h.getLight().getColour().getGreen());
-            ptmt.setBoolean(7, h.isOnOff());
-            ptmt.setBoolean(8, h.getAutomaticStatus());
+            ptmt.setBoolean(7, h.getLight().getOnOff());
+            ptmt.setBoolean(8, h.getLight().getAutomated());
             ptmt.setString(9, "houseID123");
             ptmt.executeUpdate();
 

@@ -14,7 +14,7 @@ public class HueMQTT implements MqttCallback{
     String topic = "houseID123/actuator/hue";
     int qos             = 2;
     String broker       = "tcp://localhost:1883";
-    String clientId     = "hue";
+    String clientId     = "hueMQTT";
     MemoryPersistence persistence = new MemoryPersistence();
     Gson gson = new Gson();
     com.nickr.IoT.userDAO.projectDAO projectDAO = new projectDAO();

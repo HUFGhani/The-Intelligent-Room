@@ -4,29 +4,37 @@ package com.nickr.IoT.user.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Light {
+import java.io.Serializable;
 
-    public Light(String name, Colour colour, int saturation, int brightness) {
-        this.name = name;
-        this.colour = colour;
-        this.saturation = saturation;
-        this.brightness = brightness;
-    }
+public class Light implements Serializable {
 
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("on/off")
+    @Expose
+    private Boolean onOff;
     @SerializedName("colour")
     @Expose
     private Colour colour;
-    @SerializedName("saturation")
-    @Expose
-    private int saturation;
     @SerializedName("brightness")
     @Expose
-    private int brightness;
+    private Integer brightness;
+    @SerializedName("saturation")
+    @Expose
+    private Integer saturation;
+    @SerializedName("automated")
+    @Expose
+    private Boolean automated;
 
+    public Light(String name, Colour colour, Integer brightness, Integer saturation) {
+        this.name = name;
+        this.onOff = onOff;
+        this.colour = colour;
+        this.brightness = brightness;
+        this.saturation = saturation;
 
+    }
 
     public String getName() {
         return name;
@@ -34,6 +42,14 @@ public class Light {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getOnOff() {
+        return onOff;
+    }
+
+    public void setOnOff(Boolean onOff) {
+        this.onOff = onOff;
     }
 
     public Colour getColour() {
@@ -44,29 +60,29 @@ public class Light {
         this.colour = colour;
     }
 
-    public int getSaturation() {
-        return saturation;
-    }
-
-    public void setSaturation(int saturation) {
-        this.saturation = saturation;
-    }
-
-    public int getBrightness() {
+    public Integer getBrightness() {
         return brightness;
     }
 
-    public void setBrightness(int brightness) {
+    public void setBrightness(Integer brightness) {
         this.brightness = brightness;
     }
 
-    @Override
-    public String toString() {
-        return "Light{" +
-                "name='" + name + '\'' +
-                ", colour=" + colour +
-                ", saturation=" + saturation +
-                ", brightness=" + brightness +
-                '}';
+    public Integer getSaturation() {
+        return saturation;
     }
+
+    public void setSaturation(Integer saturation) {
+        this.saturation = saturation;
+    }
+
+    public Boolean getAutomated() {
+        return automated;
+    }
+
+    public void setAutomated(Boolean automated) {
+        this.automated = automated;
+    }
+
+
 }

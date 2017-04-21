@@ -2,18 +2,16 @@ package com.nickr.IoT;
 
 import com.google.gson.Gson;
 import com.nickr.IoT.MQTT.*;
-import com.nickr.IoT.user.model.*;
 import com.nickr.IoT.userDAO.projectDAO;
-import com.sun.scenario.effect.light.*;
 
 public class App {
     Gson gson = new Gson();
-    com.nickr.IoT.userDAO.projectDAO projectDAO = new projectDAO();
+   com.nickr.IoT.userDAO.projectDAO projectDAO = new projectDAO();
     public static void main(String[] args) {
         new App();
     }
 
-    public App() {
+   public App() {
 
         HueMQTT hueMQTT = new HueMQTT();
         HueMQTTStatus hueMQTTStatus =  new HueMQTTStatus();
@@ -43,12 +41,12 @@ public class App {
 
 
 // TEST STATEMENTS
-
-//       String jsonData = "{\"light\":{\"name\":test4,\"on/off\":true,\"colour\":{\"red\":5,\"green\":255,\"blue\":6},\"brightness\":255,\"saturation\":255,\"automated\":true}}";
-//       Hue Hue = gson.fromJson(jsonData, Hue.class);
-//       System.out.println(Hue.getLight().getName() + " " + Hue.isOnOff() + " " + Hue.getLight().getColour().getRed() + " " +
+//
+//       String jsonData = "{\"light\":{ \"name\":\"Hue color lamp 1\",\"on/off\":true,\"colour\":{\"red\":246,\"green\":39,\"blue\":179},\"brightness\":254,\"saturation\":125,\"automated\":false}}";
+//        Hue Hue = gson.fromJson(jsonData, Hue.class);
+//       System.out.println(Hue.getLight().getName() + " " + Hue.getLight().getOnOff() + " " + Hue.getLight().getColour().getRed() + " " +
 //                Hue.getLight().getColour().getGreen() + " " + Hue.getLight().getColour().getBlue() + " " +
-//                Hue.getLight().getBrightness() + " " + Hue.getLight().getSaturation() + " " + Hue.getAutomaticStatus());
+//                Hue.getLight().getBrightness() + " " + Hue.getLight().getSaturation() + " " + Hue.getLight().getAutomated());
 //       projectDAO.InsertPhilipsHue(Hue);
 
 //        String jsonData = "{\"target_temperature_c\":26, \"automated\":false}";

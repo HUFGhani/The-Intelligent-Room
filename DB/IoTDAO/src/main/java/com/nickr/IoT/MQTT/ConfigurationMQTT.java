@@ -12,7 +12,7 @@ public class ConfigurationMQTT implements MqttCallback {
     String topic = "houseID123/+/inHouse";
     int qos             = 2;
     String broker       = "tcp://localhost:1883";
-    String clientId     = "hue";
+    String clientId     = "configMQTT";
     MemoryPersistence persistence = new MemoryPersistence();
     Gson gson = new Gson();
     projectDAO projectDAO = new projectDAO();

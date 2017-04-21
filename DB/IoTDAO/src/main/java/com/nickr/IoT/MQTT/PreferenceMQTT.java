@@ -14,7 +14,7 @@ public class PreferenceMQTT implements MqttCallback {
     String topic = "houseID/+/preference";
     int qos             = 2;
     String broker       = "tcp://localhost:1883";
-    String clientId     = "hue";
+    String clientId     = "PreferenceMQTT";
     MemoryPersistence persistence = new MemoryPersistence();
     Gson gson = new Gson();
     com.nickr.IoT.userDAO.projectDAO projectDAO = new projectDAO();
@@ -45,6 +45,7 @@ public class PreferenceMQTT implements MqttCallback {
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         String jsonData = new String(mqttMessage.getPayload());
+        System.out.println(jsonData);
         UserPreference userPreference = gson.fromJson(jsonData, UserPreference.class);
         projectDAO.InsertUserPreference(userPreference);
         }

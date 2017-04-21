@@ -4,7 +4,9 @@ package com.nickr.IoT.user.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UserPreference {
+import java.io.Serializable;
+
+public class UserPreference implements Serializable {
     public UserPreference(int userId, String firstName, String lastName, int priority, LightPref lightPref, TmpPref tmpPref) {
         this.userId = userId;
         this.firstName = firstName;
