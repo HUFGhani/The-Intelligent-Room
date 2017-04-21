@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="sensor" type="com.project.smarthome.smarthome.Model.Devices.Sensors.SensorDevice"/>
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding_small">
+
+        <!--Title-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/manage_sensor_title"
+            android:layout_marginBottom="@dimen/input_bottom_margin"
+            android:textSize="@dimen/manage_devices_title_size"/>
+
+        <!--Sensor Id-->
+        <TextView
+            android:id="@+id/sensor_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/input_bottom_margin"/>
+
+        <!-- Sensor Name -->
+        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            android:id="@+id/sensor_name_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/input_bottom_margin"
+            android:hint="@string/input_sensor_name"
+            android:textColor="@color/colorDarkGrey"
+            app:met_floatingLabel="normal"/>
+
+        <!--Sensor Method Type-->
+        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            android:id="@+id/sensor_method_type_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/input_bottom_margin"
+            android:hint="@string/input_sensor_method_type"
+            android:textColor="@color/colorDarkGrey"
+            app:met_floatingLabel="normal"/>
+
+        <!--Sensor Port-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_sensor_port"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorDarkGrey"
+            app:errorEnabled="false"
+            android:layout_marginBottom="@dimen/input_bottom_margin">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/sensor_port"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/input_sensor_port"
+                android:inputType="number"
+                android:textColor="@color/colorDarkGrey"
+                android:text="@={`` + sensor.port}"
+                />
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+</layout>
