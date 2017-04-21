@@ -20,7 +20,15 @@ public class NestServiceTest {
     public void Temp2(){
         NestService nestService = new NestService() ;
         nestService.setNestTemputure(9,true);
-        Assert.assertNotEquals("{ \"target_temperature_c\":30.0,\"automated\":true}",nestService.getAllString());
+
+        Assert.assertEquals("{ \"target_temperature_c\":9.0,\"automated\":true}",nestService.getAllString());
     }
 
+    @Test
+    public void Temp3(){
+        NestService nestService = new NestService() ;
+        nestService.setNestTemputure(50,true);
+        Assert.assertNotEquals("{ \"target_temperature_c\":50.0,\"automated\":true}",
+                nestService.getAllString());
+    }
 }

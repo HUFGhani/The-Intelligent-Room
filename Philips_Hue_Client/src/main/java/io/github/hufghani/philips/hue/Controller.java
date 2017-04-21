@@ -237,7 +237,7 @@ public class Controller implements PHSDKListener {
                 Colour colour = new Colour();
                 philipsHue.setLight(light);
                 light.setName(hue.getName());
-                light.setOnOff(state.isOn());
+                light.setOnOff(isOnOff);
                 light.setBrightness(state.getBrightness());
                 light.setSaturation(state.getSaturation());
                 light.setColour(colour);

@@ -7,22 +7,20 @@ import org.junit.Test;
 import java.io.IOException;
 
 /**
- * Created by hamzaghani on 15/04/2017.
+ * Created by hamzaghani on 18/04/2017.
  */
-public class HueMQTTTest implements MqttCallback {
+public class NestWebServiceMQTT implements MqttCallback {
     private String topic;
     private int qos             = 2;
     private String broker       = "tcp://localhost:1883";
     MqttClient clientMQTT1;
     MqttClient clientMQTT2;
-    private String clientId1     = "hue_TEST";
-    private String clientId2     = "hue_status_Test";
+    private String clientId1     = "nest_TEST";
+    private String clientId2     = "nest_status_Test";
 
     private volatile boolean expectConnectionFailure;
 
-    String json = "{\"light\":{\"name\":\"light1\",\"on/off\":true,\"colour\":" +
-            "{\"red\":254,\"green\":254,\"blue\":254},\"brightness\":254,\"saturation\":254,\"automated\":true}}";
-
+    String json = "{ \"target_temperature_c\":20.0,\"automated\":true}";
     String jsonData;
 
     @Test
@@ -34,14 +32,14 @@ public class HueMQTTTest implements MqttCallback {
         clientMQTT1.connect(connOpts);
         MqttMessage message = new MqttMessage(json.getBytes());
         message.setQos(qos);
-        clientMQTT1.publish("test/actuator/hue/status",message);
+        clientMQTT1.publish("test/actuator/nest/status",message);
         clientMQTT1.disconnect();
 
         clientMQTT2 = new MqttClient(broker, clientId2, null);
         MqttConnectOptions connOpts1 = new MqttConnectOptions();
         clientMQTT2.setCallback(this);
         clientMQTT2.connect(connOpts1);
-        clientMQTT2.subscribe("test/actuator/hue/status");
+        clientMQTT2.subscribe("test/actuator/nest/status");
 
         clientMQTT2.disconnect();
 
@@ -56,7 +54,7 @@ public class HueMQTTTest implements MqttCallback {
 
     @Override
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
-         jsonData = new String(mqttMessage.getPayload());
+        jsonData = new String(mqttMessage.getPayload());
 
     }
 
@@ -65,3 +63,4 @@ public class HueMQTTTest implements MqttCallback {
 
     }
 }
+
