@@ -10,9 +10,11 @@ import java.io.IOException;
 public class App
 {
 
+
     private  boolean auto;
     int r = 0,g = 0,b = 0,br = 0, sa = 0;
     boolean isOnOff = true;
+
 
     public static void main( String[] args ) throws IOException {
         new App();
@@ -35,6 +37,7 @@ public class App
                 if (r != philipsHue_subscribe.getRed() || g != philipsHue_subscribe.getGreen()
                         || b != philipsHue_subscribe.getBlue()
                         || br != philipsHue_subscribe.getBrightness()
+
                         || sa != philipsHue_subscribe.getSaturation() || isOnOff != philipsHue_subscribe.isOnoff()
                         || auto != philipsHue_subscribe.isAutomated()) {
 
@@ -43,7 +46,6 @@ public class App
                             philipsHue_subscribe.getSaturation(), philipsHue_subscribe.isOnoff(),
                             philipsHue_subscribe.isAutomated());
 
-
                 }
 
                 if (r != philipsHue_subscribe.getRed() || g != philipsHue_subscribe.getGreen()
@@ -51,6 +53,7 @@ public class App
                         || br != philipsHue_subscribe.getBrightness()
                         || sa != philipsHue_subscribe.getSaturation() || isOnOff != philipsHue_subscribe.isOnoff() ||
                         auto != philipsHue_subscribe.isAutomated()) {
+
                     philipsHue_Publish.publish(controller.getStatus());
                 }
 
@@ -60,6 +63,7 @@ public class App
                 br =philipsHue_subscribe.getBrightness();
                 sa = philipsHue_subscribe.getSaturation();
                 isOnOff = philipsHue_subscribe.isOnoff();
+
                 auto = philipsHue_subscribe.isAutomated();
 
                 Thread.sleep(1000);

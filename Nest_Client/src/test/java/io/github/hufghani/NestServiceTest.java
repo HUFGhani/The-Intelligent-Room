@@ -20,6 +20,7 @@ public class NestServiceTest {
     public void Temp2(){
         NestService nestService = new NestService() ;
         nestService.setNestTemputure(9,true);
+
         Assert.assertEquals("{ \"target_temperature_c\":9.0,\"automated\":true}",nestService.getAllString());
     }
 

@@ -22,6 +22,7 @@ public class HueMQTTTest implements MqttCallback {
 
     String json = "{\"light\":{\"name\":\"light1\",\"on/off\":true,\"colour\":" +
             "{\"red\":254,\"green\":254,\"blue\":254},\"brightness\":254,\"saturation\":254,\"automated\":true}}";
+
     String jsonData;
 
     @Test
