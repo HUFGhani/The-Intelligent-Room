@@ -38,7 +38,7 @@ else{
     <link href="css/style.css" rel="stylesheet">
 
   </head> 
-    
+     
 <?php
     if($UserID != "Logged Out"){
 ?>
